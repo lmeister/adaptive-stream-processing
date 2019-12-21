@@ -1,0 +1,82 @@
+% Entfernt Probleme durch Verwendung von Koma-Script Klassen (scrreport)
+\usepackage{scrhack}
+% Erlaubt Konfiguration von Header & Footer
+\usepackage[automark,headsepline,footsepline,plainheadsepline,plainfootsepline]{scrlayer-scrpage}
+
+% Anpassung an Sprache (deutsch)
+\usepackage[ngerman]{babel}
+
+% Umlaute
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp} % Euro-Zeichen etc.
+
+% Schrift
+\usepackage{lmodern}
+\usepackage{relsize}
+
+% Einbinden von JPG-Grafiken ermöglichen
+\usepackage[dvips,final]{graphicx}
+
+% Ermöglichen mathematischer Symbole
+\usepackage{amsmath,amsfonts}
+
+% Für die Definition der Zeilenabstände, Seitenränder etc.
+\usepackage{setspace}
+\usepackage{geometry}
+
+% URL-Unterstützung
+\usepackage{url}
+
+% Abkürzungsverzeichnis 
+% Alles weitere hierzu in: "Inhalt\Abkuerzungen.tex".
+\usepackage[intoc]{nomencl}
+\let\abbrev\nomenclature
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{.15\textwidth}
+
+% PDF-Optionen -----------------------------------------------------------------
+\usepackage[
+    bookmarks, % Es werden Bookmarks verwendet
+    bookmarksopen=true, % Farbe von Bookmarks
+    colorlinks=true, % Farbe von Verknüpfungen
+    linkcolor=black, % einfache interne Verknüpfungen
+    anchorcolor=black, % Ankertext
+    citecolor=black, % Verweise auf Literaturverzeichniseinträge im Text
+    filecolor=black, % Verknüpfungen, die lokale Dateien öffnen
+    menucolor=black, % Acrobat-Menüpunkte
+    urlcolor=black, % Farbe der URLs
+    plainpages=false, % zur korrekten Erstellung der Bookmarks
+    pdfpagelabels, % zur korrekten Erstellung der Bookmarks
+    hypertexnames=false, % zur korrekten Erstellung der Bookmarks
+    linktocpage, % Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
+    pdfusetitle % Ermöglicht das Setzen der Meta-Daten des erzeugten PDFs
+]{hyperref}
+% \renewcommand{\theHsection}{\thepart.section.\thesection}
+% \hypersetup{
+%     %pdftitle={\titel \untertitel},
+%     pdfauthor={\autor},
+%     pdfcreator={\autor}
+%     %pdfsubject={\titel \untertitel},
+%    % pdfkeywords={\titel \untertitel}
+% }
+
+% Wird für Teile der Formatierung des Deckblatts und die Verwendung von
+% Aufzählungen benötigt
+\usepackage{listings}
+\usepackage{xcolor} 
+
+
+% fortlaufendes Durchnummerieren der Fußnoten
+\usepackage{chngcntr}
+
+% bei der Definition eigener Befehle benötigt
+\usepackage{ifthen}
+
+% sorgt dafür, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
+\usepackage{xspace}
+
+% Für das Erstellen eines Glossars
+\usepackage[toc, automake, nonumberlist]{glossaries}
+
+\usepackage[figure,table,lstlisting]{totalcount}

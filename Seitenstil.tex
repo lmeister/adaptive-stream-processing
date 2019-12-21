@@ -1,0 +1,100 @@
+% Zeilenabstand: einfach 
+\newcommand{\zeilenabstandHauptteil}{1.0}
+\newcommand{\zeilenabstandAnhang}{1.0}
+
+% Seitenränder
+\setlength{\topskip}{\ht\strutbox} % behebt Warnung von geometry
+% Initiales Papierformat, wird nach dem Deckblatt teilwiese geändert 
+\geometry{paper=a4paper,left=3.5cm, right=2.5cm, top=2.5cm, bottom=2.9cm, headsep=.6cm}
+
+%% Einstellen der Schriftgrößen der Überschriften
+\setkomafont{chapter}{\LARGE\bfseries\rmfamily}
+\setkomafont{section}{\Large\bfseries\rmfamily}
+\setkomafont{subsection}{\large\bfseries\rmfamily}
+\setkomafont{subsubsection}{\large\mdseries\rmfamily}
+\setkomafont{pageheadfoot}{\normalfont}
+
+%% Einstellen der Abstände vor und nach den Überschriften
+\RedeclareSectionCommand[
+  %runin=false,
+  afterindent=false,
+  beforeskip=0pt,
+  afterskip=.05\baselineskip]{chapter}
+\RedeclareSectionCommand[
+  %runin=false,
+  afterindent=false,
+  beforeskip=0pt,
+  afterskip=.05\baselineskip]{section}
+\RedeclareSectionCommand[
+  %runin=false,
+  afterindent=false,
+  beforeskip=0pt,
+  afterskip=.05\baselineskip]{subsection}
+\RedeclareSectionCommand[
+  %runin=false,
+  afterindent=false,
+  beforeskip=0pt,
+  afterskip=.05\baselineskip]{subsubsection}
+
+% Header & Footer konfigurieren
+\renewcommand*{\chaptermarkformat}{} % Keine Nummerierung im Header
+\clearpairofpagestyles % Voreinstellungen löschen
+% E = Even page  (Gerade Seitennummer)
+% O = Odd page   (Ungerade Seitennummer)
+% L = Left side	 (Linker Teil der Seite)
+% C = Centered   (Mittlerer Teil der Seite)
+% R = Right side (Rechter Teil der Seite)
+% Auf ungeraden Seiten: Kapitelüberschrift, oben rechts
+\rohead[\leftmark]{\leftmark}
+% Auf geraden Seiten: Titel der Arbeit, oben links
+\lehead[\titel]{\titel}
+% Seitenzahlen in der Mitte eines Zweiseitigenausdrucks
+\rofoot[\thepage]{\thepage}
+\lefoot[\thepage]{\thepage}
+
+\ifthenelse{\boolean{final}}{% Keine besondere Aktion in der finalen Fassung
+  } {
+		%Versionsnummer für Draft
+		\lohead[Version vom \today~(Vor Abgabe entfernen)]{Version vom \today~(Vor Abgabe entfernen)}
+		\rehead[Version vom \today~(Vor Abgabe entfernen)]{Version vom \today~(Vor Abgabe entfernen)}
+		\lofoot[Version vom \version~(Vor Abgabe entfernen)]{Version vom \version~(Vor Abgabe entfernen)}
+		\refoot[Version vom \version~(Vor Abgabe entfernen)]{Version vom \version~(Vor Abgabe entfernen)}
+	}
+
+% erzeugt ein wenig mehr Platz hinter einem Punkt
+\frenchspacing 
+
+% Schusterjungen und Hurenkinder vermeiden
+\clubpenalty = 10000
+\widowpenalty = 10000 
+\displaywidowpenalty = 10000
+
+% Quellcode-Ausgabe formatieren
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
+\lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
+
+% Fußnoten fortlaufend durchnummerieren
+\counterwithout{footnote}{chapter}
+
+% Einstellungen für Listings
+\definecolor{hellgelb}{rgb}{1,1,0.9}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+\lstset{
+    float=hbp,
+    columns=flexible,
+    tabsize=2,
+    frame=single,
+    extendedchars=true,
+    showspaces=false,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    breakautoindent=true,
+    xleftmargin=0.6cm,
+    xrightmargin=0.1cm,
+    captionpos=b
+}

@@ -1,0 +1,49 @@
+% Erzeugt das Deckblatt
+%   Bei zu langem Arbeitstitel müssen die vertikalen Abstände (\vspace)
+%   angepasst werden, damit das Deckblatt weiterhin auf eine Seite passt.
+\begin{titlepage}
+\newgeometry{top=2cm,bottom=2cm,left=2cm,right=2cm}
+\begin{figure}
+    \includegraphics[scale=0.22]{Bilder/SSE_logo_2000_resized.pdf}
+		\hfill
+		\includegraphics[scale=0.25]{Bilder/St_Uni-Logo-9-2003-eps-converted-to.pdf}
+\end{figure}
+\begin{center}
+    \vspace*{0cm}
+    \huge{\textbf{\art~im Studiengang \studiengang}}
+\end{center}
+\begin{center}
+    \vspace{1cm}
+    \Huge{\textbf{\titel}}
+    \vspace{1cm}
+\end{center}
+\ifthenelse{\boolean{final}}{}{
+    \begin{center}
+        \version ~vom \today\\
+        (Vor Abgabe entfernen)
+    \end{center}
+}
+\begin{center}
+    \vspace{1cm}
+    \huge{\textbf{\autor\\}}
+    \vspace{1cm}
+    \LARGE{\matnr\\}
+    \vspace{0,5cm}
+    \LARGE{\email}
+\end{center}
+\vspace{1cm}
+\begin{center}
+    \centering
+    \LARGE{\textbf{Betreuer:}} \\
+    \LARGE{\erstgutachter} \\
+    \LARGE{\zweitgutachter} ~\\
+\end{center}
+\vspace{0.5cm}
+\begin{flushright}
+\end{flushright}
+\begin{center}
+    \small{\arbeitsgruppe \ \textbullet \ \institut \\ Universität Hildesheim
+    \textbullet \ Universitätsplatz 1 \textbullet \ D-31134 Hildesheim}
+\end{center}
+\end{titlepage}
+\restoregeometry

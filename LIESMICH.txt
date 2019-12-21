@@ -1,0 +1,172 @@
+#################################################################################################
+####  Formatvorlage für studentische Arbeiten der           #####################################
+####  Arbeitsgruppe Software Systems Engineering am         #####################################
+####  Institut für Informatik der Universität Hildesheim    #####################################
+#################################################################################################                                                                                                
+####  erstellt von Christopher Voges, 28.04.2016                                             ####
+####  https://sse.uni-hildesheim.de/studium-lehre/richtlinien-fuer-ausarbeitungen/vorlagen/  ####
+#################################################################################################
+
+##############################
+#  I. Bearbeiten des Inhalts #
+##############################
+
+1. Meta.tex
+Hier hinterlegen Sie Ihre persönlichen Daten, den Titel und die Art der Arbeit
+und die Namen Ihrer Betreuer.
+Weiterhin finden Sie hier zwei boolesche Variablen,
+welche sich auf die Formatierung der Arbeit auswirken:
+- 'projektarbeit' gibt an, ob die Eigenständigkeitserklärung 
+  entfernt werden soll, da diese in Projektarbeiten nicht benötigt wird.
+- 'final' gibt an, ob Leerseiten für den zweiseitigen Druck,
+  eingefügt werden sollen. 
+  Spätestens für die finale Abgabe muss diese Variable auf 'true' gesetzt werden.
+
+2. Erklaerung.tex
+Die hier befindliche Eigenständigkeitserklärung sollten Sie, wenn Sie keine 
+Projektarbeit schreiben, mit Ihrer Prüfungsordnung abstimmen und ggf. ersetzen.
+
+3. Deckblatt.tex
+Das Deckblatt wird aus den Angaben in Meta.tex generiert.
+Bei besonders langen Titeln kann es jedoch sein, 
+dass das Deckblatt über mehrere Seiten geht.
+In diesem Fall können Sie die in den '\vspace{}'s definierten 
+vertikalen Abstände reduzieren, damit das Deckblatt auf eine Seite passt.
+
+4. Inhalt.tex
+Über diese Datei wird bestimmt, welche anderen Tex-Dateien 
+den Hauptteil der Arbeit bilden.
+
+5. Anhang.tex
+Über diese Datei wird bestimmt, welche anderen Tex-Dateien 
+den Anhang der Arbeit bilden. Ist kein Anhang vorhanden, müssen folgende
+Zeilen in 'Arbeit.tex' auskommentiert/entfernt werden:
+\begin{spacing}{\zeilenabstandAnhang}
+\begin{appendix}
+    \chapter{Anhang}
+    \label{sec:Anhang}
+    \input{Anhang}
+\end{appendix}
+\end{spacing}
+
+6. Inhalt/
+In diesem Ordner befindet sich der eigentliche Inhalt der Arbeit in Form 
+von Tex-Dateien, welche über 'Inhalt.tex' und 'Anhang.tex' inkludiert werden. 
+Ausnahmen hierzu finden sich unter 7. und 8. .
+
+7. Inhalt/Abkuerzungen.tex
+Hier können Abkürzungen hinterlegt werden, aus den das Abkürzungsverzeichnis
+generiert wird. Ist diese Datei leer (oder alles auskommentiert) wird kein 
+Abkürzungsverzeichnis erzeugt. Eine weitere Anpassung für das Erzeugen des 
+Abkürzungsverzeichnisses ist nicht nötig. 
+
+8. Inhalt/Glossar.tex
+Hier können Glossareinträge hinterlegt werden, aus denen das Glossar
+generiert wird. Ist diese Datei leer (oder alles auskommentiert) wird kein 
+Glossar erzeugt. Das gilt auch, wenn kein Glossareintrag referenziert wird.
+Eine weitere Anpassung für das Erzeugen des Glossars ist nicht nötig.
+
+9. Bibliographie.bib
+Hier werden die BibTex-Einträge der verwendeten Literatur hinterlegt.
+Aus den referenzierten Einträgen wird das Literaturverzeichnis erzeugt.
+Der Stil der Zitate und des Literaturverzeichnis kann am Ende von 
+Arbeit.tex eingestellt werden.
+Wird kein Eintrag referenziert, wird kein Literaturverzeichnis erstellt.
+
+10. Befehle.tex
+Hier können Sie eigene LaTeX-Befehle hinterlegen.
+
+11. Packages.tex
+Über diese Datei werden benötigte Packages importiert. Sollte Sie weitere 
+Packages benötigen, können Sie diese am Ende dieser Datei anfügen.
+
+12. Seitenstil.tex
+Diese Datei gibt zusammen mit Teilen von 'Arbeit.tex' das Design der 
+Arbeit vor und muss/darf von Ihnen nicht verändert werden.
+
+13. Silbentrennung.tex
+Soll LaTeX bestimmte Wörter auf bestimmte Weise (bei einem Zelenumbruch) 
+trennen, so können Sie dies hier hinterlegen.
+
+14. Ordner/
+In diesem Ordner befinden sich die Originale Ihrer selbst erstellten Grafiken.
+Für das Importieren von Grafiken (selbst erstellt oder kopiert) bieten sich 
+die Dateiformate PDF und JPEG an. Diese Dateien können ebenfalls hier 
+hinterlegt werden.
+
+15. Listings/
+Hier können Sie Listings (Quellcode, Logdateien, ...) abspeichern 
+und als Listing in die Arbeit integrieren.
+
+16. Arbeit.tex
+Dies ist die Hauptdatei dieses Latex-Projekts. Sie bildet den Ausgang des 
+Build-Prozesses (s.u.) und darf bis auf die in 5. beschriebene Ausnahme 
+nicht verändert werden. 
+
+
+##############################
+# II. Erzeugen der PDF-Datei #
+##############################
+
+Je nach Editor müssen verschiedene Einstellungen für das korrekte Kompilieren vorgenommen werden.
+Hier folgt als Beispiel, welche Befehle zum Kompilieren 'per Hand' notwendig sind. 
+Zuvor muss in das Hauptverzeichnis des Latex-Projekts navigiert und 'MAIN' durch den Namen der 
+primären Tex-Datei ersetzt werden.
+Sollten Befehle nicht erkannt werden, 
+- ist der PATH nicht richtig gesetzt (Hier hilft das Verwenden der vollen Pfade zu den jeweiligen executables),
+- notwendige Pakete nicht installiert (Im Zweifel kann eine Latex-Distribution auch vollständig installiert werden) oder
+- wenn es nur 'makeglossaries' betrifft, kann es sein, dass muss PERL nachinstalliert werden muss.
+#######################################################################
+1. PDFLaTeX
+    pdflatex  -synctex=1 -interaction=nonstopmode --src-specials MAIN.tex
+2. Generieren der Bibliothek
+    bibtex MAIN
+3. Generieren des Abkürzungsverzeichnisses
+    makeindex MAIN.nlo -s nomencl.ist -o MAIN.nls
+4. Generieren des Glossars
+    makeglossaries MAIN
+5. Erneut PDFLaTeX (2mal!)
+    pdflatex  -synctex=1 -interaction=nonstopmode --src-specials MAIN.tex
+    pdflatex  -synctex=1 -interaction=nonstopmode --src-specials MAIN.tex
+6. Erneutes Generieren des Abkürzungsverzeichnisses
+    makeindex MAIN.nlo -s nomencl.ist -o MAIN.nls
+7. Ein letztes Mal PDFLaTeX
+    pdflatex  -synctex=1 -interaction=nonstopmode --src-specials MAIN.tex
+8. Temporäre Dateien entfernen
+#######################################################################
+Liste der Endungen von temporären Dateien:
+.blg
+.aux
+.idx
+.ind
+.toc
+.lof
+.lot
+.mpx
+.tex1
+.txt1
+.undo
+.bbl
+.brf
+.ilg
+.log
+.lol
+.nlo
+.nls
+.out
+.bak
+.glg
+.glo
+.gls
+.glsdefs
+.ist
+#######################################################################
+Es liegen zwei bat-Dateien im Projekt-Ordner, die diese Schritte unter 
+Windows durchführen (build.bat und clean.bat).
+build.bat erwartet als Argument den Namen der Hauptdatei (ohne '.tex').
+ACHTUNG: Diese müsssen zwingend mit einer Kommandozeile aus dem 
+Projektordner heraus aufgerufen werden! Es wird keinerlei Haftung für 
+die Auswirkungen dieser beiden Skripte übernommen.
+
+Ein Beispielaufruf wäre: 'build.bat Arbeit'
+#######################################################################
