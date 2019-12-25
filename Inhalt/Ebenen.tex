@@ -32,7 +32,7 @@ This chapter lays out the fundamental concepts that are needed in order to discu
         What are the requirements, why do they matter to us (Elaborate on this)
 
         Due to the nature of the fields in which SPS are used, there are important requirements that SPS should meet in order to be viable, 
-        which Stonebraker et al. point out in [SOURCE], of which the ones most important to us can be summarized as the following:
+        which Stonebraker et al. point out in \cite{Stonebraker:2005:RRS:1107499.1107504}, of which the ones most important to us can be summarized as the following:
         
         % Enumeration of requirements for SPS + explanations why they matter to us
         \begin{enumerate}
@@ -57,7 +57,7 @@ This chapter lays out the fundamental concepts that are needed in order to discu
     % Rough explanation of what it is, where it is used
     % explain different "stages" (m, a, p, e)
     % Explain -K extension
-    The MAPE-K Loop was first introduced by IBM's white paper `An architectural blueprint for autonomic computing` [SOURCE ibm paper p15]
+    The MAPE-K Loop was introduced by IBM \cite{Kephart:2003:VAC:642194.642200}
     and refers to a proposed solution for self-adaptive or autonomic systems.
     This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
@@ -73,7 +73,8 @@ This chapter lays out the fundamental concepts that are needed in order to discu
             If the choice to adapt the system has been made, the \textit{Plan} component then decides how to reconfigure the system.
             Once the decision has been made, the information is then forwarded to the \textit{Execute} component.
         \item \textbf{E}xecute: 
-            Given the \textit{Plan} component's decision, the \textit{Execute} component then executes said plan and the loop returns to the initial monitoring state.
+            Given the \textit{Plan} component's decision, the \textit{Execute} component then executes said plan and the loop 
+            returns to the initial monitoring state.
         \item \textbf{K}nowledge: 
             Represents the knowledge base, which is shared between the other components.
             This base is created by the \textit{Monitor} component and contains information in the form of metrics, policies, symptoms and logs.
@@ -83,7 +84,19 @@ This chapter lays out the fundamental concepts that are needed in order to discu
     \section{Self-Adaptive Systems}
     This subchapter should explain what self-adaptive systems are and how they function.
     What kind of self-adaptive systems are around?
+
+    % Definition of self-adaptive systems
+    % Architecture often based on mape in different patterns
+    % applied in xx industries
+    Cheng et al define self-adaptive systems as
+    \begin{quotation}
+        ``[...] systems that are able to adjust their behaviour in response to their perception of the environment and the
+        system itself [...]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
+    \end{quotation}
+
     
+
+
 
 
 
