@@ -39,6 +39,24 @@ followed by a brief explanation of self-adaptive systems to conclude this chapte
         \subsection{Data Stream Management Systems}
         what are dsms, why dsms as opposed to dbms
 
+        \begin{table}[h]
+            \centering
+            \label{tab:dbms-dsms}
+            \begin{tabular}{|c|c|c|} \hline
+                \textbf{Feature} & \textbf{DBMS} & \textbf{DSMS} \\ \hline
+                Model & Persistent data & Transient Data \\ \hline
+                Table & Set or bag of tuples & Infinite sequence of tuples \\ \hline
+                Updates & All & Append only \\ \hline
+                Queries & Transient & Persistent \\ \hline
+                Query answers & Exact & Often approximate \\ \hline
+                Query evaluation & Blocking and non-blocking & Non-blocking \\ \hline
+                Operators & Fixed & Adaptive \\ \hline
+                Data processing & Synchronous & Asynchronous \\ \hline
+                Concurrency overhead  & High & Low \\ \hline
+            \end{tabular}
+            \captionbelow{Functional comparison of DBMS and DSMS\cite{Panigati2015}} 
+        \end{table}
+
         % Subsection Requirements for Stream Processing Systems
         % Should quickly go over the requirements and explain why they matter to us
         \subsection{Requirements for Stream Processing Systems}
