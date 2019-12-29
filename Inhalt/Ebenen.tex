@@ -28,7 +28,7 @@ followed by a brief explanation of self-adaptive systems to conclude this chapte
         \label{fig:sps_parallel_normal}
         \end{figure}
 
-        \begin{figure}[h]
+        \begin{figure}
         \centering
         \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
         \caption{
@@ -36,8 +36,20 @@ followed by a brief explanation of self-adaptive systems to conclude this chapte
                 }
         \label{fig:stream-processing-system}
         \end{figure}
+
+
         \subsection{Data Stream Management Systems}
-        what are dsms, why dsms as opposed to dbms
+        A Data Stream Management is a system designed to manage continuous data streams.
+        Similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
+        and will be executed as long as it is uninstalled.
+        This leads to everchanging results, due to changing incoming data in contrast to querying a DBMS and receiving a static result.
+        
+        Another important difference is that the data being fed into the system is not saved like in DBMSs but instead only synopses, in 
+        an attempt to summarize the data.
+        
+        Most notably the data being fed into a DSMS varies greatly from the data being inserted into a DBMS; while a DBMS receives a finite predetermined amount 
+        of data, a DSMS could theoretically receive an infinite continuous stream.
+        There are a few more functional differences, which Panigati, Schreiber and Zaniolo highlight, as shown in table 2.1.
 
         \begin{table}[h]
             \centering
