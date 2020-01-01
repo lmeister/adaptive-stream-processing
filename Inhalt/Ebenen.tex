@@ -58,32 +58,32 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
         Conversely, if there is little input, it may also reduce the amount of replicas in order to save or free up additional resources, as shown in \ref{fig:sps_parallel_normal}.
 
         \begin{figure}
+        \label{fig:filter}
         \centering
         \includegraphics[width=1.0\textwidth]{Bilder/filter.png}
         \caption{
                 Stream being processed by SPS with a single filter operator, then being output for further processing
                 }
-        \label{fig:filter}
         \end{figure}
 
-        % \begin{figure}[h]
-        % \centering
-        % \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
-        % \caption{
-        %         Left: An example for an SPS displayed as a directed acyclic graph. 
-        %         Right: Same SPS with introduced parallelity in one operator, marked gray for visibility. 
-        %         Circles are input/outputs, squares are operators, arrows are streams.
-        %         }
-        % \label{fig:sps_parallel_normal}
-        % \end{figure}
+        \begin{figure}[h]
+        \label{fig:sps_parallel_normal}
+        \centering
+        \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
+        \caption{
+                Left: An example for an SPS displayed as a directed acyclic graph. 
+                Right: Same SPS with introduced parallelity in one operator, marked gray for visibility. 
+                Circles are input/outputs, squares are operators, arrows are streams.
+                }
+        \end{figure}
 
         \begin{figure}
+        \label{fig:stream-processing-system}
         \centering
         \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
         \caption{
                 Overview of a basic Stream Processing System
                 }
-        \label{fig:stream-processing-system}
         \end{figure}
 
 
@@ -130,6 +130,7 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
         
         % Enumeration of requirements for SPS + explanations why they matter to us
         \begin{enumerate}
+        \label{enum:requirements}
             \item \textbf{Keep the Data Moving:} 
                 In order to minimize latency, data must not be stored, as these are costly operations.
             \item \textbf{Handle Stream Imperfections:} 
@@ -156,6 +157,7 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
     This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
     \begin{enumerate}
+    \label{enum:mape}
         \item \textbf{M}onitor: 
             The \textit{Monitor} component gathers data about the system and its environment, aggregates and filters it.
             As soon as a symptom is encountered that needs to be analyzed, the information is forwarded to the \textit{Analyze} component.
@@ -195,33 +197,42 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
 
 
 \chapter{Approaches for Self-Adaptive Architectures in Stream Processing}
+\label{cha:approaches}
 Explain that this chapter showcases a few select strategies, which are then elaborated on further in the subchapters
 Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control pattern (Both MAPE based)?
 \textbf{Add and explain a few more MAPE Based architectures}
 
     \section{Dhalion}
+    \label{sec:dhalion}
     Quick Introduction to Dhalion, this chapter will deal with the Dhalion paper.
 
         \subsection{An Outline of Heron}
+        \label{sub:heron-outline}
         Small outline of Heron, as Dhalion is built on top of Twitter's Heron.
 
         \subsection{Dhalion's Architecture}
+        \label{sec:dhalion-architecture}
         Explanation of Dhalion's Architecture \textbf{KERNPUNKT DER SECTION DHALION}
 
         \subsection{Discussion of Dhalion}
+        \label{sec:dhalion-discussion}
         Discuss the approach and compare it to the reference architecture (Mape?)
         \textbf{TODO: Maybe discuss how they evaluate, look at metrics relevant to architecture}
 
     \section{Hierarchical Control Architectures}
+    \label{sec:hierarchical}
     Quick Introduction to hierarchical control architectures, this chapter deals with the Cardellini
     paper (An example for such an architecture)
 
         \subsection{Elastic and Distributed DSP Framework}
+        \label{sec:edf}
         Explanation of the EDF Architecture, their approaches
 
         \subsection{Possible Solutions for Controlling the Adaptation of Data Stream Processing Operators}
+        \label{sec:solutions-controlling}
 
         \subsection{Discussion of EDF}
+        \label{sec:discussion-edf}
 
     \section{Title??}
     \textbf{TODO: Discuss among all of them, critical thinking..}
