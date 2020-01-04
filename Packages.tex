@@ -4,7 +4,7 @@
 \usepackage[automark,headsepline,footsepline,plainheadsepline,plainfootsepline]{scrlayer-scrpage}
 
 % Anpassung an Sprache (deutsch)
-\usepackage[ngerman]{babel}
+% \usepackage[ngerman]{babel}
 
 % Umlaute
 \usepackage[latin1]{inputenc}
@@ -15,42 +15,42 @@
 \usepackage{lmodern}
 \usepackage{relsize}
 
-% Einbinden von JPG-Grafiken ermöglichen
+% Einbinden von JPG-Grafiken ermï¿½glichen
 \usepackage[dvips,final]{graphicx}
 
-% Ermöglichen mathematischer Symbole
+% Ermï¿½glichen mathematischer Symbole
 \usepackage{amsmath,amsfonts}
 
-% Für die Definition der Zeilenabstände, Seitenränder etc.
+% Fï¿½r die Definition der Zeilenabstï¿½nde, Seitenrï¿½nder etc.
 \usepackage{setspace}
 \usepackage{geometry}
 
-% URL-Unterstützung
+% URL-Unterstï¿½tzung
 \usepackage{url}
 
-% Abkürzungsverzeichnis 
+% Abkï¿½rzungsverzeichnis 
 % Alles weitere hierzu in: "Inhalt\Abkuerzungen.tex".
 \usepackage[intoc]{nomencl}
 \let\abbrev\nomenclature
-\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\renewcommand{\nomname}{Abkï¿½rzungsverzeichnis}
 \setlength{\nomlabelwidth}{.15\textwidth}
 
 % PDF-Optionen -----------------------------------------------------------------
 \usepackage[
     bookmarks, % Es werden Bookmarks verwendet
     bookmarksopen=true, % Farbe von Bookmarks
-    colorlinks=true, % Farbe von Verknüpfungen
-    linkcolor=black, % einfache interne Verknüpfungen
+    colorlinks=true, % Farbe von Verknï¿½pfungen
+    linkcolor=black, % einfache interne Verknï¿½pfungen
     anchorcolor=black, % Ankertext
-    citecolor=black, % Verweise auf Literaturverzeichniseinträge im Text
-    filecolor=black, % Verknüpfungen, die lokale Dateien öffnen
-    menucolor=black, % Acrobat-Menüpunkte
+    citecolor=black, % Verweise auf Literaturverzeichniseintrï¿½ge im Text
+    filecolor=black, % Verknï¿½pfungen, die lokale Dateien ï¿½ffnen
+    menucolor=black, % Acrobat-Menï¿½punkte
     urlcolor=black, % Farbe der URLs
     plainpages=false, % zur korrekten Erstellung der Bookmarks
     pdfpagelabels, % zur korrekten Erstellung der Bookmarks
     hypertexnames=false, % zur korrekten Erstellung der Bookmarks
     linktocpage, % Seitenzahlen anstatt Text im Inhaltsverzeichnis verlinken
-    pdfusetitle % Ermöglicht das Setzen der Meta-Daten des erzeugten PDFs
+    pdfusetitle % Ermï¿½glicht das Setzen der Meta-Daten des erzeugten PDFs
 ]{hyperref}
 % \renewcommand{\theHsection}{\thepart.section.\thesection}
 % \hypersetup{
@@ -61,22 +61,22 @@
 %    % pdfkeywords={\titel \untertitel}
 % }
 
-% Wird für Teile der Formatierung des Deckblatts und die Verwendung von
-% Aufzählungen benötigt
+% Wird fï¿½r Teile der Formatierung des Deckblatts und die Verwendung von
+% Aufzï¿½hlungen benï¿½tigt
 \usepackage{listings}
 \usepackage{xcolor} 
 
 
-% fortlaufendes Durchnummerieren der Fußnoten
+% fortlaufendes Durchnummerieren der Fuï¿½noten
 \usepackage{chngcntr}
 
-% bei der Definition eigener Befehle benötigt
+% bei der Definition eigener Befehle benï¿½tigt
 \usepackage{ifthen}
 
-% sorgt dafür, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
+% sorgt dafï¿½r, dass Leerzeichen hinter parameterlosen Makros nicht als Makroendezeichen interpretiert werden
 \usepackage{xspace}
 
-% Für das Erstellen eines Glossars
+% Fï¿½r das Erstellen eines Glossars
 \usepackage[toc, automake, nonumberlist]{glossaries}
 
 \usepackage[figure,table,lstlisting]{totalcount}
