@@ -1,3 +1,6 @@
+\newboolean{wip} %Deklaration
+\setboolean{wip}{true} %Zuweisung
+
 \chapter{Fundamental Concepts}
 \label{cha:fundamentals}
 In this chapter I will lay out the fundamental concepts, which are necessary in order to understand the subsequent chapters.
@@ -13,6 +16,9 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
     
         \subsection{Stream Processing Systems}
         \label{sub:sps}
+        \ifbool{wip}{\textbf{\color{red}THIS IS NOT FINAL}
+        
+        }{}
         In this subsection I will explain what SPSs are, what their input looks like, what SPSs are able to do and give an example.
         In the end of this subsection I will also go over the challenges that SPSs face.
 
@@ -89,6 +95,9 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
 
         \subsection{Data Stream Management Systems}
         \label{sub:dsms}
+        \ifbool{wip}{\textbf{\color{green}THIS IS FINAL}
+        
+        }{}
         A Data Stream Management is a system designed to manage continuous data streams.
         Similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
         and will be executed as long as it is uninstalled.
@@ -123,7 +132,11 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
         % Should quickly go over the requirements and explain why they matter to us
         \subsection{Requirements for Stream Processing Systems}
         \label{sub:requirements}
-        What are the requirements, why do they matter to us (Elaborate on this)
+        \ifbool{wip}{\textbf{\color{red}THIS IS NOT FINAL}
+        
+        }{}
+
+        Notes: What are the requirements, why do they matter to us (Elaborate on this)
 
         Due to the nature of the fields in which SPS are used, there are important requirements that SPS should meet in order to be viable, 
         which Stonebraker et al. point out in \cite{Stonebraker:2005:RRS:1107499.1107504}, of which the ones most important to us can be summarized as the following:
@@ -149,6 +162,9 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
 
     \section{MAPE-K Loop}
     \label{sec:mape}
+    \ifbool{wip}{\textbf{\color{green}THIS IS FINAL}
+    
+    }{}
     % Explain the MAPE-K Loop as it is a valuable basis/reference architecture for many different approaches in adaptive systems
     % Rough explanation of what it is, where it is used
     % explain different "stages" (m, a, p, e)
@@ -179,6 +195,9 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
     
     \section{Self-Adaptive Systems}
     \label{sec:self-adaptive}
+    \ifbool{wip}{\textbf{\color{green}THIS IS FINAL?}
+    
+    }{}
     % Definition of self-adaptive systems
     % Architecture often based on mape in different patterns
     % applied in xx industries
