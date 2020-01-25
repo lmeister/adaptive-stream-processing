@@ -1,15 +1,15 @@
 \chapter{Fundamental Concepts}
 \label{cha:fundamentals}
 \textbf{TODO: I -> We, no need to always say will, sometimes use passive to switch it up}
-In this chapter I will lay out the fundamental concepts, which are necessary in order to understand the subsequent chapters.
-First I will explain Stream Processing in \ref{sec:stream-processing}, afterwards the concept of the MAPE-K Loop will be presented and explained in subchapter \ref{sec:mape} 
-followed by a brief explanation of self-adaptive systems in \ref{sec:self-adaptive} to conclude this chapter.
+In this chapter we lay out the fundamental concepts, which are necessary in order to understand the subsequent chapters.
+First we explain Stream Processing in \ref{sec:stream-processing}, afterwards the concept of the self-adaptive systems will be presented and explained in section \ref{sec:self-adaptive} 
+followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude this chapter.
 
     \section{Stream Processing}
     \label{sec:stream-processing}
-    In this section I will split the concept of Stream Processing into three further components.
-    In \ref{sub:sps} I will then define Stream Processing Systems, explain how they work and give examplary fields of application.
-    Afterwards in \ref{sub:dsms} I will then move onto the topic of Data Stream Management Systems and finally in \ref{sub:requirements} I will talk about
+    In this section we will split the concept of stream processing into three further components.
+    In \ref{sub:sps} we will then define stream processing systems, explain how they work and give examplary fields of application.
+    Afterwards in \ref{sub:dsms} we will move onto the topic of data stream management systems and finally in \ref{sub:requirements} we talk about
     some requirements that SPSs should meet.
     
 
@@ -19,7 +19,7 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
         
         }
         \textbf{NOT CLEAR ENOUGH, EXPLAIN LATENCY, CREATE DIAGRAM TO SHOW DIFFERENCE DBMS DSMS}
-        A Data Stream Management is a system designed to manage continuous data streams.
+        A data stream management system is a tool designed to manage continuous data streams.
         Similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
         and will be executed as long as it is uninstalled.
         This leads to everchanging results, due to changing incoming data in contrast to querying a DBMS and receiving a static result.
@@ -55,8 +55,8 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
         
         }
         \textbf{TODO: Explain big data -> batch(latency low prio) and stream(latency high prio) }
-        In this subsection I will explain what SPSs are, what their input looks like, what SPSs are able to do and give an example.
-        In the end of this subsection I will also go over the challenges that SPSs face.
+        In this subsection we will explain what SPSs are, what their input looks like, what SPSs are able to do and give an example.
+        In the end of this subsection we will also go over the challenges that SPSs face.
 
         % 1. Mehrere Generatoren generieren datenstroeme
         % -> Wie sieht ein Stream aus (infinite amount of tuples? see literature)
@@ -77,7 +77,7 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
 
         % 2. Diese werden im SPS verarbeitet
         % -> Beispiel filtering        
-        Each element \textit{s} then is processed by one or more operators, each doing their own independent operation, e.g. filtering as shown in figure \ref{fig:filter} \textbf{(somehow ref wrong?)}
+        Each element \textit{s} then is processed by one or more operators, each doing their own independent operation, e.g. filtering.
         and then put out into the operator's outgoing stream.
 
         % -> Windows erklären (Tumbling, sliding) (grafiken zum Vergleich zeigen)
@@ -163,7 +163,25 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
     \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL?}
     
     }{}
+    
+    % \textbf{TODO: Needs more; e.g why self-adaptive(already mentioned in intro), Software engineering perspective on self adaptivity, challenges}
+    % Definition of self-adaptive systems
+    % Architecture often based on mape in different patterns
+    % applied in xx industries
+    Cheng et al. define self-adaptive systems as
+    \begin{quotation}
+        ``[...] systems that are able to adjust their behaviour in response to their perception of the environment and the
+        system itself [...]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
+    \end{quotation}
+    
+    Self-adaptive systems are oftentimes based on the \nameref{sub:mape} [p.\pageref{sub:mape}] pattern.
+    Adaptive Systems have a wide variety of possible application areas: adaptable user interfaces, autonomic computing, multi-agent systems \cite{Cheng:2009:SES:1573856.1573858}, 
+    biologically inspired computing, robotics \cite{10.1007/978-3-319-59480-4_44}, streaming applications and a lot more.
 
+    An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
+    and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
+
+    
     \subsection{MAPE-K Loop}
     \label{sub:mape}
     \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL (Maybe add something underneath enum if not sufficient)}
@@ -177,6 +195,14 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
     This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
     \textbf{TODO: Add a diagram, make this a subsection of self-adaptive systems}
+     \begin{figure}[hbt]
+        \label{fig:mape}
+        \centering
+        \includegraphics[width=0.45\textwidth]{Bilder/mape.png}
+        \caption{
+                Overview of the MAPE-K-Loop\cite{Kephart:2003:VAC:642194.642200}
+                }
+    \end{figure}  
     \begin{enumerate}
     \label{enum:mape}
         \item \textbf{M}onitor: 
@@ -195,25 +221,7 @@ followed by a brief explanation of self-adaptive systems in \ref{sec:self-adapti
             Represents the knowledge base, which is shared between the other components.
             This base is created by the \textit{Monitor} component and contains information in the form of metrics, policies, symptoms and logs.
     \end{enumerate}
-
-    
-
-    \textbf{Needs more; e.g why self-adaptive(already mentioned in intro), Software engineering perspective on self adaptivity, challenges}
-    % Definition of self-adaptive systems
-    % Architecture often based on mape in different patterns
-    % applied in xx industries
-    Cheng et al. define self-adaptive systems as
-    \begin{quotation}
-        ``[...] systems that are able to adjust their behaviour in response to their perception of the environment and the
-        system itself [...]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
-    \end{quotation}
-    
-    Self-adaptive systems are oftentimes based on the \nameref{sec:mape} [p.\pageref{sec:mape}] pattern.
-    Adaptive Systems have a wide variety of possible application areas: adaptable user interfaces, autonomic computing, multi-agent systems \cite{Cheng:2009:SES:1573856.1573858}, 
-    biologically inspired computing, robotics \cite{10.1007/978-3-319-59480-4_44}, streaming applications and a lot more.
-
-    An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
-    and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
+   
 
 
 \chapter{Approaches for Self-Adaptive Architectures in Stream Processing}
