@@ -17,5 +17,5 @@ makeindex $1.nlo -s nomencl.ist -o $1.nls
 #7. last PDFLaTeX
 pdflatex  -synctex=1 -interaction=nonstopmode --src-specials $1.tex
 #8. clean temp files
-find . -regextype posix-egrep -regex ".*\.(blg|aux|idx|ind|toc|lof|lot|mpx|tex1|txt1|undo|bbl|brf|ilg|log|lol|nlo|nls|out|bak|glg|glo|gls|glsdefs|ist)$" -type f -delete
+find . -regextype posix-egrep -regex ".*\.(blg|aux|idx|ind|toc|lof|lot|mpx|tex1|txt1|undo|bbl|brf|ilg|lol|nlo|nls|out|bak|glg|glo|gls|glsdefs|ist)$" -type f -delete
 
