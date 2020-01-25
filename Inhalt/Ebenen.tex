@@ -27,29 +27,30 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
             \centering
             \includegraphics[width=1.0\textwidth]{Bilder/dbms_dsms.png}
             \caption{
-                   left: architecture of a DBMS, right: architecture of a DSMS
+                   left: architecture of a DBMS; right: architecture of a DSMS
                    }
         \end{figure}
 
         A data stream management system is a tool designed to manage continuous data streams.
-        DSMSs are comparable to DBMS, however there are differences one must take note of.
+        DSMSs are comparable to DBMS, however, there are differences one must take note of.
 
         Most notably the data being fed into a DSMS varies greatly from the data being inserted into a DBMS; while a DBMS receives a finite predetermined amount 
-        of data, a DSMS could theoretically receive an infinite continuous stream.
+        of data, a DSMS can theoretically receive an infinite continuous stream.
 
         Secondly, DSMSs operate at a much greater speed than traditional DBMSs, because the data is processed immediately, while in the DBMS approach
         data is first saved to a disk and then queried before further processing can occur, leading to two I/O actions. This behavior, coupled with an incoming 
-        high velocity stream, might lead to lag or even failure to yield accurate results\cite{StreamBookQuality}. 
-        However, a DSMS might want to archive certain elements from the stream. There are two options that are considered;
+        high velocity stream, might lead to lags or even failure to yield accurate results\cite{StreamBookQuality}. 
+        However, a DSMS might want to archive certain elements from the stream. For this, there are two possibilities;
         Either data is being cached in memory, yielding much faster query results, or it is archived in additional databases parallel to the streaming process.
         Thus the DSMS architecture is superior to the DBMS architecture when measuring latency.
-        When data is stored, often only synopses are stored, in an attempt to summarize the data and utilize that knowledge in form of a state for the queries.
+        When data is stored, often only synopses are stored, in an attempt to summarize the data and utilize that knowledge in form of a \gls{state} for the queries.
         The difference in these architectures is also shown in figure \ref{fig:dbms_dsms}\cite{StreamBookQuality}.
 
         Thirdly, similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
         and will be executed as long as it is uninstalled and there are restrictions on which operations can be executed.
-        Since the system can not assume a finite amount of data, it will process each data item as it arrives, so operators that require the entirety of a data 
-        set, such as the \textit{join, aggregation} operators, prove problematic when it comes to streams, as they can only return a result once the stream has ended\cite[p.12]{StreamBookQuality}.
+        Since the system can not assume a finite amount of data, it processes each data item as it arrives, so operators that require the entirety of a data 
+        set, such as the \textit{join, aggregation} operators, prove problematic when it comes to streams, 
+        as they can only return a result once the stream has ended\cite[p.12]{StreamBookQuality}.
         These queries are refered to as \textit{blocking} queries. In order to use them, one must convert them into non-blocking queries.
         One solution for this has been introduced in the form of windows, which are explained in \ref{sub:sps} \nameref{sub:sps}.
 
