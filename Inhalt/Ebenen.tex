@@ -43,7 +43,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         However, a DSMS might want to archive certain elements from the stream. There are two options that are considered;
         Either data is being cached in memory, yielding much faster query results, or it is archived in additional databases parallel to the streaming process.
         Thus the DSMS architecture is superior to the DBMS architecture when measuring latency.
-        When data is stored, often only synopses are stored, in an attempt to summarize the data (and utilize that knowledge for the queries.)
+        When data is stored, often only synopses are stored, in an attempt to summarize the data and utilize that knowledge in form of a state for the queries.
         The difference in these architectures is also shown in figure \ref{fig:dbms_dsms}\cite{StreamBookQuality}.
 
         Thirdly, similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
@@ -131,8 +131,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
         \begin{figure}[h]
             \label{fig:sps_parallel_normal}
-            \centering
-            \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
+            \centeringraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
             \caption{
                     Left: An example for an SPS displayed as a directed acyclic graph. 
                     Right: Same SPS with introduced parallelity in one operator, marked gray for visibility. 
@@ -142,6 +141,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         \end{figure}
 
         \begin{figure}
+            \includeg
         \label{fig:stream-processing-system}
         \centering
         \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
