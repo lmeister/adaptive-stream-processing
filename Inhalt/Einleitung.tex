@@ -44,7 +44,7 @@ As it is no longer feasible to save all the data before then analyzing it (in ba
 a new approach was designed in order to handle data in a (near) real-time fashion, stream processing systems (SPS). 
 A stream processing system takes in a continuous stream of data and processes each element of said stream, and then puts out a stream of processed data.
 These systems will further be explained in \ref{sub:sps} \nameref{sub:sps}.
-
+\\
 However the rate in which data is being streamed fluctuates, so one comes to the logical conclusion that SPSs should adapt to the velocity and volume of the stream.
 Besides the stream, the computing environment might also fluctuate, e.g. a resource failing in a distributed computing environment, 
 and as such the system has to adapt. There are many different techniques of adaptation such a system might utilize, 
@@ -52,6 +52,7 @@ which can impact both the stream as well as the SPS. We will elaborate on this i
 
 In this thesis our goals are to define stream processing and to look at various adaptation techniques in stream processing. Furthermore we will clarify why
 self-adaptivity is needed in stream processing and what current architectures, that enable self-adaptivity in stream processing, look like.
+We will also discuss the impact of self-adaptivity on software engineering, especially in stream processing.
 
 
 \section{Structure}
@@ -61,14 +62,18 @@ self-adaptivity is needed in stream processing and what current architectures, t
 In chapter \ref{cha:Introduction} we will introduce the topic, and explain the motivation and structure of the thesis.
 
 In chapter \ref{cha:fundamentals} we will go over the fundamental concepts regarding the general topic of stream processing and adaptive systems.
+\\
 In section \ref{sec:stream-processing} stream processing will be explained by first clarifying data stream management systems and comparing them to database management systems 
 in \ref{sub:dsms}, afterwards we will look into steam processing systems and understand how they work and the challenges they're facing.
+\\
 In \ref{sub:requirements} we will then discuss requirements as formulated by Stonebraker et al. and explore how they influence our decisions when designing system architectures.
-In section \ref{sec:self-adaptive} we will then introduce the concept of self-adaptive systems and their design, including the MAPE-loop in \ref{sub:mape}.
-
+\\
+In section \ref{sec:self-adaptive} we will then introduce the concept of self-adaptive systems and their design, including the MAPE-loop in \ref{sub:mape}. 
+Furthermore, we will discuss self-adaptivity's impact on software engineering.
+\\
 In chapter \ref{cha:approaches} we then discuss several architectural approaches in designing self-adaptive stream processing systems, starting with Dhalion in \ref{sec:dhalion}, 
 followed by a decentralized approach by Cardellini et al. in \ref{sec:hierarchical}.
 Each subsection of this chapter will contain a thorough description of the approach's architecture followed by a discussion, 
 in which they will also be compared to their reference architecture, the MAPE-loop.
-
+\\
 Chapter \ref{cha:summary} will then provide a summary of our findings and conclude the thesis.
