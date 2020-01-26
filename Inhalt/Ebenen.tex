@@ -216,6 +216,24 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
     and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
 
+    Self-adaptivity however presents itself as challenging when looked at from a software engineering perspective.
+    Cheng et al. illustrates some of these challenges in \cite{Cheng:2009:SES:1573856.1573858}, which we will discuss in the following paragraphs for both the 
+    requirements engineering and the architecture disciplines.
+    \\
+    As the system adapts, it changes, and with it do the requirements. This leads to the fact, that language changes in requirements engineering.
+    Usually requirements are formulated in a strict manner `\textit{The system shall\ldots}`. This has to be relaxed and changed, Cheng et al. propose the following 
+    option amongst others: `\textit{The system may do this\ldots or it may do that\ldots}`.
+    \\
+    More importantly, requirements engineering must define exactly what is monitored as well as high-level goals, which need to be fulfilled at any given environmental condition.
+    In addition, one must also specify under which circumstance what kind of adaptation has to be performed and how said adaptation is realized.
+    Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, adding to the complexity.
+    \\
+    One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
+
+    
+    
+
+
     % Self adaptivitiy however challenging from a software engineering perspective
     % Requirements engineering has to deal with uncertainty, due to possible new requirements b/c of adaptations during runtime
     % -> Requirements must be formulated in another way (Cant be as strict anymore)
