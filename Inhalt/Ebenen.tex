@@ -229,8 +229,13 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     \\
     One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
 
-
+    \quad The complexity is also increased for engineers and architects, as there are new factors to consider as well.
+    Single MAPE-K loops do not scale efficiently for large systems, one must find a solution, often times multiple control loops are constructed. 
     
+    \quad Architects are faced with a number of decisions;\\
+    Is a centralized or decentralized architecture better to achieve one's goals? Are the control loops independent from one another?
+    Is a hierarchical approach appropriate? Good practice suggests using just a single control loop\cite{accidents}, so can the amount of control loops be scaled down?
+    TODO: Hier den Absatz zu Ende bringen irgendwie
 
 
     % Self adaptivitiy however challenging from a software engineering perspective
@@ -242,9 +247,10 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     % -> RE has to define a set of high-level goals that must always be maintained, no matter the adaptation
     % For architecture and engineering:
     % -> Centralized MAPE loop has bad scaling
+    % TODO: Ab hier weiter machen und so
     % -> frequent adaptations are bad, b/c of large overhead
     %     -> Possible solution would be feedback based (e.g. reinforcement learning, already a few implementations, see 2nd paper)
-    % -> Hard to manage multiple MAPE loops, which are good though, especially if independant
+    % -> Hard to manage multiple MAPE loops, which are good though, especially if independent
 
     
     \subsection{MAPE-K Loop}
