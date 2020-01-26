@@ -216,6 +216,19 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
     and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
 
+    % Self adaptivitiy however challenging from a software engineering perspective
+    % Requirements engineering has to deal with uncertainty, due to possible new requirements b/c of adaptations during runtime
+    % -> Requirements must be formulated in another way (Cant be as strict anymore)
+    % -> Requirements must contain constraints for adaptations
+    % -> Traceability from requirements to implementation a lot harder, since requirements change during runtime
+    % -> RE has to define what exactly has to be monitored (Check this one again)
+    % -> RE has to define a set of high-level goals that must always be maintained, no matter the adaptation
+    % For architecture and engineering:
+    % -> Centralized MAPE loop has bad scaling
+    % -> frequent adaptations are bad, b/c of large overhead
+    %     -> Possible solution would be feedback based (e.g. reinforcement learning, already a few implementations, see 2nd paper)
+    % -> Hard to manage multiple MAPE loops, which are good though, especially if independant
+
     
     \subsection{MAPE-K Loop}
     \label{sub:mape}
