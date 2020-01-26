@@ -36,8 +36,8 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
         \quad Most notably the data being fed into a DSMS varies greatly from the data being inserted into a DBMS; while a DBMS receives a finite predetermined amount 
         of data, a DSMS can theoretically receive an infinite continuous stream.
-
-        \quad Secondly, DSMSs operate at a much greater speed than traditional DBMSs, because the data is processed immediately, while in the DBMS approach
+        \\
+        Secondly, DSMSs operate at a much greater speed than traditional DBMSs, because the data is processed immediately, while in the DBMS approach
         data is first saved to a disk and then queried before further processing can occur, leading to two I/O actions. This behavior, coupled with an incoming 
         high velocity stream, might lead to lags or even failure to yield accurate results\cite{StreamBookQuality}. 
         However, a DSMS might want to archive certain elements from the stream. For this, there are two possibilities;
@@ -45,8 +45,8 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         Thus the DSMS architecture is superior to the DBMS architecture when measuring latency.
         When data is stored, often only synopses are stored, in an attempt to summarize the data and utilize that knowledge in form of a \gls{state} for the queries.
         The difference in these architectures is also shown in figure \ref{fig:dbms_dsms}\cite{StreamBookQuality}.
-
-        \quad Thirdly, similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
+        \\
+        Thirdly, similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
         and will be executed as long as it is uninstalled and there are restrictions on which operations can be executed.
         Since the system can not assume a finite amount of data, it processes each data item as it arrives, so operators that require the entirety of a data 
         set, such as the \textit{join, aggregation} operators, prove problematic when it comes to streams, 
@@ -94,8 +94,8 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         The data is fed to the system in form of streams, which are defined as an potentially infinite, countable amount of \textit{data tuples}. 
         The streams usually originate from a \texit{data source} which, for example, can be a type of sensor, e.g. a simple temperature sensor or more complex sensors, 
         such as an EEG-sensor, market orders or network traffic.
-
-        \quad A data tuple is an object whose internal structure is defined by a \texit{data scheme}. 
+        \\
+        A data tuple is an object whose internal structure is defined by a \texit{data scheme}. 
         Objects of a data stream share a common structure, also called \textit{stream schema}.
         Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations.\cite{fundamentals}
         Each individual data tuple is processed by one or more \textit{operators}.
@@ -103,10 +103,10 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         consisting of the processed tuples. Operators are able to perform various different operations, 
         as shown in \cite[p.49]{fundamentals}, some of which include: aggregation, splitting and merging streams, 
         logical and mathematical operations and custom data manipulations.
-
-        \quad The results of a streaming application is then fed into one or multiple \textit{data sinks}, which could for example be a data visualization engine 
+        \\
+        The results of a streaming application is then fed into one or multiple \textit{data sinks}, which could for example be a data visualization engine 
         or an automated stock trading engine.
-
+        
         \quad In order for a SPS to perform as fast as possible, it should have the ability to adapt to situations.
         There are many strategies of adaptation, which can be broken down into three subcategories; \textit{processing-}, \textit{data-} and 
         \textit{resource adaptation} \cite[p.8 f.]{QIN20191}. 
@@ -114,18 +114,17 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         where, if computational resources allow it, an operator may be replicated in order to process data faster by
         making use of the principle of parallelity. Technically, there should be a splitting operator placed before, 
         as well as a merging operator after the replicated note. These have been left out for the sake of brevity.
+        \\
         An example for data adaptation would be \textit{load shedding}, a strategy where some data tuples are dropped in order to free up computational resources.
         However, one must take into consideration that one possibly sacrifices accuracy for the sake of performance, as more data generally leads to more accurate results.
+        Furthermore, one must take note of the resource cost to calculate which tuples to drop in order to have the lowest impact on the quality of service.
         % TODO Maybe an example here for load shedding?
+        \\
         For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a stratey, in which the available computational 
         resources are constantly reassigned, so as to allocate the memory in the most efficient way. For example a node facing a high data load at the moment might 
         be allocated more RAM, GPU or CPU power in order to process its load faster. For this to work some resources have to be freed first, e.g. by deducting some
         computational power from a node facing less input at the time. With this strategy, one must take into consideration the resources and time spent calculating 
         the optimal allocation of resources.
-
-
-        
-
 
 
 
