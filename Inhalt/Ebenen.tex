@@ -80,13 +80,8 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         
         }
         \textbf{TODO: Explain big data -> batch(latency low prio) and stream(latency high prio) }
-        % Big data erklären??
-        % Wie sieht Data aus in SPS? Tupel erläutern (vergleich obj), infinite, structure (unstructured, semi-, structured)
-        % Data sinks, data generators? Terminologie klären
-        % Made up of operators?, Operators funktionen erklären 
         % Erklärung von Windows irgendwie einbringen (Hier noch überlegen wo am besten)
         % Erklären wozu SPS eingesetzt
-        % Erklärung Adaption, wieviele Arten von Adapation, welche Arten
         % Challenges, die SPSs facen
 
         % Topical sentence
@@ -113,10 +108,23 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         or an automated stock trading engine.
 
         \quad In order for a SPS to perform as fast as possible, it should have the ability to adapt to situations.
-        There are many strategies of adaptation, as listed by Qin et al in \cite[p.8f]{QIN20191}. An examplary adaptation would be a processing scaling adaptation,
-        as shown in figure \ref{fig:sps_parallel_normal}, where, if computational resources allow it, an operator may be replicated in order to process data faster by
-        making use of the principle of parallelity. Technically, there should be a splitting operator placed before the replicated node, as well as a merging operator
-        after the replicated note. These have been left out for the sake of brevity.
+        There are many strategies of adaptation, which can be broken down into three subcategories; \textit{processing-}, \textit{data-} and 
+        \textit{resource adaptation} \cite[p.8 f.]{QIN20191}. 
+        An examplary resource adaptation would be a \textit{processing scaling} adaptation, as shown in figure \ref{fig:sps_parallel_normal}, 
+        where, if computational resources allow it, an operator may be replicated in order to process data faster by
+        making use of the principle of parallelity. Technically, there should be a splitting operator placed before, 
+        as well as a merging operator after the replicated note. These have been left out for the sake of brevity.
+        An example for data adaptation would be \textit{load shedding}, a strategy where some data tuples are dropped in order to free up computational resources.
+        However, one must take into consideration that one possibly sacrifices accuracy for the sake of performance, as more data generally leads to more accurate results.
+        % TODO Maybe an example here for load shedding?
+        For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a stratey, in which the available computational 
+        resources are constantly reassigned, so as to allocate the memory in the most efficient way. For example a node facing a high data load at the moment might 
+        be allocated more RAM, GPU or CPU power in order to process its load faster. For this to work some resources have to be freed first, e.g. by deducting some
+        computational power from a node facing less input at the time. With this strategy, one must take into consideration the resources and time spent calculating 
+        the optimal allocation of resources.
+
+
+        
 
 
 
