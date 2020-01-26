@@ -151,15 +151,14 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
                     }
         \end{figure}
 
-        \begin{figure}
-
-        \label{fig:stream-processing-system}
-        \centering
-        \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
-        \caption{
-                Overview of a basic Stream Processing System
-                }
-        \end{figure}  
+        % \begin{figure}
+        % \label{fig:stream-processing-system}
+        % \centering
+        % \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
+        % \caption{
+        %         Overview of a basic Stream Processing System
+        %         }
+        % \end{figure}  
 
         % Subsection Requirements for Stream Processing Systems
         % Should quickly go over the requirements and explain why they matter to us
@@ -209,14 +208,14 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         system itself [...]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
     \end{quotation}
     
-    Self-adaptive systems are oftentimes based on the \nameref{sub:mape} [p.\pageref{sub:mape}] pattern.
+    \quad Self-adaptive systems are oftentimes based on the \nameref{sub:mape} [p.\pageref{sub:mape}] pattern.
     Adaptive Systems have a wide variety of possible application areas: adaptable user interfaces, autonomic computing, multi-agent systems \cite{Cheng:2009:SES:1573856.1573858}, 
     biologically inspired computing, robotics \cite{10.1007/978-3-319-59480-4_44}, streaming applications and a lot more.
 
-    An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
+    \quad An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
     and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
 
-    Self-adaptivity however presents itself as challenging when looked at from a software engineering perspective.
+    \quad Self-adaptivity however presents itself as challenging when looked at from a software engineering perspective.
     Cheng et al. illustrates some of these challenges in \cite{Cheng:2009:SES:1573856.1573858}, which we will discuss in the following paragraphs for both the 
     requirements engineering and the architecture disciplines.
     \\
@@ -230,7 +229,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     \\
     One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
 
-    
+
     
 
 
@@ -250,7 +249,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     
     \subsection{MAPE-K Loop}
     \label{sub:mape}
-    \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL (Maybe add something underneath enum if not sufficient)}
+    \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL)}
     
     }{}
     % Explain the MAPE-K Loop as it is a valuable basis/reference architecture for many different approaches in adaptive systems
@@ -260,7 +259,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     The MAPE-K Loop was introduced by IBM \cite{Kephart:2003:VAC:642194.642200} and refers to a proposed solution for self-adaptive or autonomic systems.
     This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
-    \textbf{TODO: Add a diagram, make this a subsection of self-adaptive systems}
      \begin{figure}[hbt]
         \label{fig:mape}
         \centering
