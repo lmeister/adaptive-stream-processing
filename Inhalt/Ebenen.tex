@@ -76,7 +76,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
         \subsection{Stream Processing Systems}
         \label{sub:sps}
-        \ifbool{final}{}{\textbf{\color{red}THIS IS NOT FINAL}
+        \ifbool{final}{}{\textbf{\color{red}THIS IS 90\% FINAL}
         
         }
         % TODO Erklärung von Windows irgendwie einbringen (Hier noch überlegen wo am besten)
@@ -131,7 +131,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         % Challenges
         \quad By virtue of the fields in which stream processing is applied, SPSs face a series of challenges.
         
-
         \quad As SPSs are used as a means to process big data in a (near) real-time fashion, we will take a system that predicts changes in stock values 
         of companies based on the public's opinion, which is extracted from tweets, as an examplary application.
         \\
@@ -194,7 +193,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
     \section{Self-Adaptive Systems}
     \label{sec:self-adaptive}
-    \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL?}
+    \ifbool{final}{}{\textbf{\color{green}THIS IS FINAL}
     
     }{}
     
@@ -297,6 +296,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
 
     \section{Dhalion}
     \label{sec:dhalion}
+    In this section we will explain Dhalion \cite{dhalion}
     Quick Introduction to Dhalion, this chapter will deal with the Dhalion paper.
     NOTE: Explain what Dhalion is, where its used
 
@@ -317,15 +317,57 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
     \section{Decentralized Self-Adaptation}
     \label{sec:hierarchical}
     \textbf{TODO: Incorporate same structure as above}
-    NOTE: In this section I will explain the hierarchical control architecture as decribed by Cardellini..
+    In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
+    \\
+    In \ref{sec:edf} we will briefly define the terms 'decentralized' and 'hierarchical', followed by a description of the proposed architecture.
+    \\
+    Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sec:discussion-edf}.
+
 
         \subsection{Elastic and Distributed DSP Framework}
         \label{sec:edf}
         \textbf{TODO: Possibly change title of this, add diagram, explain thoroughly (decentralized etc.), extract their design patterns}
+        % Explanation decentralized
+        % Explanation hierarchical
+        % Present architecture + diagram
+        % -> Single MAPE loop is bottleneck and bad for scalability [p. 4]&[cheng et al]
+        %    -> As per wayns et al [ref. 39] (patterns for multiple loops??)
+        % -> Organized according to hierarchical pattern for decentralized control
+        %   ->  Higher-level mape components control subordinate MAPE components (? Noch nicht so ganz klar)
+        % -> at lower level & faster time-scale: operator - and node manager
+        % -> Operator manager
+        %   -> in charge of controlling adaptation of a single operator using local MAPE loop
+        %   -> Operator Monitor (M) -> Local Reconfiguration Manager (A+P) -> Reconfiguration Actuator (E)
+        %   -> possible adaptations: Scale-in scale-out
+        % -> Node manager
+        %   -> per node
+        %   -> oversees working conditions of a computing resource
+        %   -> Task is to avoid over-utilizitation of computing resource
+        %       -> Migrates tasks/hosted operator repliclas to neighbors if necessary
+        % -> Both Managers issue a request for adaptation to higher layer
+
         Explanation of the EDF, their architecture for elastic DSP apps \textbf{KERNPUNKT DER SECTION}
 
         \subsection{Discussion of EDF}
         \label{sec:discussion-edf}
+        % Talk about their approach to finding the architecture for geo-distributed
+        % -> Master-slave pattern
+        %   -> Centralized Analyze & Plan component, rest decentralized and multiple instances
+        %   -> Easier design & reconfiguration [ref. 17]
+        %   -> However, centralized component is still a bottleneck, may introduce severe communication overhead when communicating with decentralized, geo-dsitributed components
+        % -> Coordinated control pattern
+        %   ->  As previously explained even a single centralized component can be non-feasible
+        %   ->  multiple decentralized mape loops, with each loop overseeing a certain part of system
+        %   ->  loops might need to interact/coordinate with one another to reach joint decisions
+        %   ->  Failure to communicate may lead to too frequent adaptation decisions
+        %   ->  conversely Communication too much reduces performance
+        %   ->  harder to design control policies due to decentralization
+        % -> Diagram to showcase master-slave and control pattern (MAPE loops)
+        % Talk about advantages of the architecture
+        % possible complications
+        % compare it to the reference architecture
+        % refer to cheng et al in self-adaptive systems chapter
+        % 
 
     \section{Some Other Architecture}
     \label{sec:soa}
