@@ -345,6 +345,14 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         %   -> Task is to avoid over-utilizitation of computing resource
         %       -> Migrates tasks/hosted operator repliclas to neighbors if necessary
         % -> Both Managers issue a request for adaptation to higher layer
+        % -> Higher level slower time scale: Application Manager
+        % -> Centralized entity that coordinates adaptation of the whole application through global mape loop
+        %   -> Application Monitor (M) -> GLobal Reconfiguration Manager (A+P) -> Global actuator (E)
+        % -> pause-and-resume approach (erklaeren) [40]
+        % -> stateful migration protocol (erklaeren) [17]
+        %   -> Downtime 
+        % -> General and no internal policies yet defined
+
 
         Explanation of the EDF, their architecture for elastic DSP apps \textbf{KERNPUNKT DER SECTION}
 
