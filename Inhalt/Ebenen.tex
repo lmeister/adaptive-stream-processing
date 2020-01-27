@@ -204,8 +204,8 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     % applied in xx industries
     Cheng et al. define self-adaptive systems as
     \begin{quotation}
-        ``[...] systems that are able to adjust their behaviour in response to their perception of the environment and the
-        system itself [...]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
+        ``[\ldots] systems that are able to adjust their behaviour in response to their perception of the environment and the
+        system itself [\ldots]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
     \end{quotation}
     
     \quad Self-adaptive systems are oftentimes based on the \nameref{sub:mape} [p.\pageref{sub:mape}] pattern.
@@ -230,28 +230,22 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
 
     \quad The complexity is also increased for engineers and architects, as there are new factors to consider as well.
-    Single MAPE-K loops do not scale efficiently for large systems, one must find a solution, often times multiple control loops are constructed. 
+    Single MAPE-K loops do not scale efficiently for large systems, one must find a solution, often times multiple control loops are constructed.
+    Good practice however suggests usiing just a single control loop\cite{accidents}, so one should try to minimize the amount of control loops used and
+    make them independent from one another.
     
-    \quad Architects are faced with a number of decisions;\\
+    
+    \quad Architects are faced with a number of new decisions;\\
     Is a centralized or decentralized architecture better to achieve one's goals? Are the control loops independent from one another?
     Is a hierarchical approach appropriate? Good practice suggests using just a single control loop\cite{accidents}, so can the amount of control loops be scaled down?
-    TODO: Hier den Absatz zu Ende bringen irgendwie
-
-
-    % Self adaptivitiy however challenging from a software engineering perspective
-    % Requirements engineering has to deal with uncertainty, due to possible new requirements b/c of adaptations during runtime
-    % -> Requirements must be formulated in another way (Cant be as strict anymore)
-    % -> Requirements must contain constraints for adaptations
-    % -> Traceability from requirements to implementation a lot harder, since requirements change during runtime
-    % -> RE has to define what exactly has to be monitored (Check this one again)
-    % -> RE has to define a set of high-level goals that must always be maintained, no matter the adaptation
-    % For architecture and engineering:
-    % -> Centralized MAPE loop has bad scaling
-    % TODO: Ab hier weiter machen und so
-    % -> frequent adaptations are bad, b/c of large overhead
-    %     -> Possible solution would be feedback based (e.g. reinforcement learning, already a few implementations, see 2nd paper)
-    % -> Hard to manage multiple MAPE loops, which are good though, especially if independent
-
+    \\
+    Research is needed to battle some of the issues that self-adaptive systems and control structures face, such as structural arrangements. 
+    It is therefore necessary to explore more architectures, an example will be shown in \ref{sec:hierarchical}, in which a decentralized hierarchical approach was
+    chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work, a possible area of research 
+    would be finding a way to 'inject' self-adaptivity into pre-existing systems.
+    
+    \quad Cheng et al propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation'\cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
+    Furthermore, they emphasize the importance of understanding control loops as the most important tool in self-adaptive systems in order to mature the research area of self-adaptive systems.
     
     \subsection{MAPE-K Loop}
     \label{sub:mape}
