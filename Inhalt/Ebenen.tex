@@ -145,7 +145,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
             \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
             \caption{
                     Left: An example for an SPS displayed as a directed acyclic graph;
-                    Right: Same SPS with introduced parallelity in one operator, marked gray for visibility;
+                    Right: Same SPS with introduced parallelity in one operator, also called scale-out adaptation, marked gray for visibility;
                     Circles on the left depict data sources, circled on the right depict data sinks, squares are operators/processors, and arrows are streams.
                     }
         \end{figure}
@@ -319,16 +319,35 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
     \textbf{TODO: Incorporate same structure as above}
     In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
     \\
-    In \ref{sec:edf} we will briefly define the terms 'decentralized' and 'hierarchical', followed by a description of the proposed architecture.
+    In \ref{sec:edf} we will present the proposed architecture and elaborate on its functionality in greater detail.
     \\
     Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sec:discussion-edf}.
 
 
         \subsection{Elastic and Distributed DSP Framework}
         \label{sec:edf}
-        \textbf{TODO: Possibly change title of this, add diagram, explain thoroughly (decentralized etc.), extract their design patterns}
-        % Explanation decentralized
-        % Explanation hierarchical
+        As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
+        Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
+        \\
+        The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
+        While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
+        \\
+        The MAPE loops are arranged in a hierarchical pattern, where higher-level loops are in charge of the decisions proposed by the lower-level loops.
+        \\
+        On the lower layer Cardellini et al introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
+        \\
+        The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
+        The local MAPE loop's components are split up into three further concepts;
+        \\
+        The \textit{operator monitor}, which is responsible for the monitoring the resource usage and performance of the operator.
+        \\
+        The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop, by first analyzing the collected information 
+        from the monitoring component, followed by planning the adaptation, which can either be a scale-in our scale-out, 
+        as shown in figure \ref{fig:sps_parallel_normal} adaptation for the operator.
+        Once the local reconfiguration manner has decided that a local adaptation is appropriate it will file an operator adaptation request to the higher layer.
+        \\
+        If the higher level control structur deems the reconfiguration request reasonable, it will notify the lower level's \textit{reconfiguration actuator}, which will then 
+        perform the scaling-in or -out operation.
         % Present architecture + diagram
         % -> Single MAPE loop is bottleneck and bad for scalability [p. 4]&[cheng et al]
         %    -> As per wayns et al [ref. 39] (patterns for multiple loops??)
