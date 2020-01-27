@@ -335,8 +335,8 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         The MAPE loops are arranged in a hierarchical pattern, where higher-level loops are in charge of the decisions proposed by the lower-level loops.
         \\
         On the lower layer Cardellini et al introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
-        \\
-        The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
+
+        \quad The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
         The local MAPE loop's components are split up into three further concepts;
         \\
         The \textit{operator monitor}, which is responsible for the monitoring the resource usage and performance of the operator.
@@ -348,6 +348,20 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \\
         If the higher level control structur deems the reconfiguration request reasonable, it will notify the lower level's \textit{reconfiguration actuator}, which will then 
         perform the scaling-in or -out operation.
+
+        \quad The node manager is an entity that manages a single node, whose task it is, to oversee the computing environment of said node.
+        Its ultimate goal is to prevent overuse of available resources.
+        Similar to the operator manager it utilizes a singular local MAPE loop to control the adaptation, 
+        which can be a migration of a hosted replicated operator to a neighboring node. 
+        \\
+        Analogous to the operator manager, it also consists of three further entities;
+        \\
+        The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage.
+        The collected data is then passed to the \textit{local reconfiguration manager}, which, similarly to the operator manager's local reconfiguration manager, then
+        analyzes the data and, if need be, plans a migration. 
+        \\
+        Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogous to the operator manager, the \textit{reconfiguration actuator} will perform
+        the adaptation if the higher layer authorizes the reconfiguration.
         % Present architecture + diagram
         % -> Single MAPE loop is bottleneck and bad for scalability [p. 4]&[cheng et al]
         %    -> As per wayns et al [ref. 39] (patterns for multiple loops??)
@@ -363,6 +377,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         %   -> oversees working conditions of a computing resource
         %   -> Task is to avoid over-utilizitation of computing resource
         %       -> Migrates tasks/hosted operator repliclas to neighbors if necessary
+        %   -> Resource Monitor (M) -> Local Reconfiguration Manager (A+P)-> Reconfiguration Actuator (E) 
         % -> Both Managers issue a request for adaptation to higher layer
         % -> Higher level slower time scale: Application Manager
         % -> Centralized entity that coordinates adaptation of the whole application through global mape loop
