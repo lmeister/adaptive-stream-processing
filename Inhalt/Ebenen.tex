@@ -150,15 +150,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
                     }
         \end{figure}
 
-        % \begin{figure}
-        % \label{fig:stream-processing-system}
-        % \centering
-        % \includegraphics[width=1.0\textwidth]{Bilder/stream-processing-system.png}
-        % \caption{
-        %         Overview of a basic Stream Processing System
-        %         }
-        % \end{figure}  
-
         % Subsection Requirements for Stream Processing Systems
         % Should quickly go over the requirements and explain why they matter to us
         \subsection{Requirements for Stream Processing Systems}
@@ -258,7 +249,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     The MAPE-K Loop was introduced by IBM \cite{Kephart:2003:VAC:642194.642200} and refers to a proposed solution for self-adaptive or autonomic systems.
     This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
-     \begin{figure}[hbt]
+    \begin{figure}[hbt]
         \label{fig:mape}
         \centering
         \includegraphics[width=0.45\textwidth]{Bilder/mape.png}
@@ -319,7 +310,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
     \textbf{TODO: Incorporate same structure as above}
     In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
     \\
-    In \ref{sec:edf} we will present the proposed architecture and elaborate on its functionality in greater detail.
+    In \ref{sec:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
     \\
     Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sec:discussion-edf}.
 
@@ -329,6 +320,14 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
         Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         \\
+        \begin{figure}[hbt]
+        \label{fig:mape}
+        \centering
+        \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
+        \caption{
+                Conceptual architecture of the EDF\cite{cardellini}
+                }
+        \end{figure}
         The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
         While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
         \\
@@ -337,24 +336,26 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         On the lower layer Cardellini et al introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
 
         \quad The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
-        The local MAPE loop's components are split up into three further concepts;
+        The architecture utilizes as many operator managers as there are operators.
+        The operator manager consists of three further concepts;
         \\
         The \textit{operator monitor}, which is responsible for the monitoring the resource usage and performance of the operator.
         \\
         The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop, by first analyzing the collected information 
         from the monitoring component, followed by planning the adaptation, which can either be a scale-in our scale-out, 
         as shown in figure \ref{fig:sps_parallel_normal} adaptation for the operator.
-        Once the local reconfiguration manner has decided that a local adaptation is appropriate it will file an operator adaptation request to the higher layer.
+        Once the local reconfiguration manager has decided that a local adaptation is appropriate it will file an operator adaptation request to the higher layer.
         \\
         If the higher level control structur deems the reconfiguration request reasonable, it will notify the lower level's \textit{reconfiguration actuator}, which will then 
         perform the scaling-in or -out operation.
 
         \quad The node manager is an entity that manages a single node, whose task it is, to oversee the computing environment of said node.
+        There are as many node managers as there are nodes.
         Its ultimate goal is to prevent overuse of available resources.
         Similar to the operator manager it utilizes a singular local MAPE loop to control the adaptation, 
         which can be a migration of a hosted replicated operator to a neighboring node. 
         \\
-        Analogous to the operator manager, it also consists of three further entities;
+        Analogous to the operator manager, it also consists of three further components;
         \\
         The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage.
         The collected data is then passed to the \textit{local reconfiguration manager}, which, similarly to the operator manager's local reconfiguration manager, then
@@ -362,30 +363,26 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \\
         Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogous to the operator manager, the \textit{reconfiguration actuator} will perform
         the adaptation if the higher layer authorizes the reconfiguration.
-        % Present architecture + diagram
-        % -> Single MAPE loop is bottleneck and bad for scalability [p. 4]&[cheng et al]
-        %    -> As per wayns et al [ref. 39] (patterns for multiple loops??)
-        % -> Organized according to hierarchical pattern for decentralized control
-        %   ->  Higher-level mape components control subordinate MAPE components (? Noch nicht so ganz klar)
-        % -> at lower level & faster time-scale: operator - and node manager
-        % -> Operator manager
-        %   -> in charge of controlling adaptation of a single operator using local MAPE loop
-        %   -> Operator Monitor (M) -> Local Reconfiguration Manager (A+P) -> Reconfiguration Actuator (E)
-        %   -> possible adaptations: Scale-in scale-out
-        % -> Node manager
-        %   -> per node
-        %   -> oversees working conditions of a computing resource
-        %   -> Task is to avoid over-utilizitation of computing resource
-        %       -> Migrates tasks/hosted operator repliclas to neighbors if necessary
-        %   -> Resource Monitor (M) -> Local Reconfiguration Manager (A+P)-> Reconfiguration Actuator (E) 
-        % -> Both Managers issue a request for adaptation to higher layer
-        % -> Higher level slower time scale: Application Manager
-        % -> Centralized entity that coordinates adaptation of the whole application through global mape loop
-        %   -> Application Monitor (M) -> GLobal Reconfiguration Manager (A+P) -> Global actuator (E)
-        % -> pause-and-resume approach (erklaeren) [40]
-        % -> stateful migration protocol (erklaeren) [17]
-        %   -> Downtime 
+
+        \quad The higher layer contains a singular \textit{application manager} instance, which contains a global MAPE loop.
+        The application manager functions as a centralized entity, whose goal it is, to oversee the entire application through its loop.
+        Similar to the lower layer's operator and node managers, it is also split up into three components;
+        \\
+        The \textit{application monitor}, which supervises the application behavior on a global scale and collects data, which then gets sent to the \textit{global reconfiguration manager}.
+        The global reconfiguration manager is more complex than the local reconfiguration managers of the lower layer entities, as it not only analyzes the collected data, but 
+        also analyzes the reconfiguration requests from the lower layers. After the analysis, possible adaptations are planned.
+        \\
+        Once a decision has been reached, information is passed over to the \textit{global actuator}, who then communicates the decisions to the lower layer's managers, 
+        where the respective reconfiguration actuators perform the adaptations.
+        \\
+        In order to determine the sequence of the adaptations, Cardellini et al use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}. 
+        %Erklaerung des pause-and-resume approaches.
+        Furthermore, to remain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, which they have proposed in \cite{migrationProtocol}.
+        %Erklaerung des stateful migration protocols.
+
+
         % -> General and no internal policies yet defined
+        % ggf hier noch mehr research und krams dazu
 
 
         Explanation of the EDF, their architecture for elastic DSP apps \textbf{KERNPUNKT DER SECTION}
