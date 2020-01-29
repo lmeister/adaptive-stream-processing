@@ -374,18 +374,16 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \\
         Once a decision has been reached, information is passed over to the \textit{global actuator}, who then communicates the decisions to the lower layer's managers, 
         where the respective reconfiguration actuators perform the adaptations.
+        
+        \quad In order to determine the sequence of the adaptations, Cardellini et al use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}, 
+        which implies that the operator, that is to be adapted, will be paused while the adaptation is performed and resume its functionality after the 
+        reconfiguration has taken place. 
         \\
-        In order to determine the sequence of the adaptations, Cardellini et al use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}. 
-        %Erklaerung des pause-and-resume approaches.
-        Furthermore, to remain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, which they have proposed in \cite{migrationProtocol}.
-        %Erklaerung des stateful migration protocols.
-
-
-        % -> General and no internal policies yet defined
-        % ggf hier noch mehr research und krams dazu
-
-
-        Explanation of the EDF, their architecture for elastic DSP apps \textbf{KERNPUNKT DER SECTION}
+        Furthermore, to remain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, 
+        which they have proposed in \cite{migrationProtocol}. The protocol states that the operator's state, given that it is a stateful operator, 
+        will be saved to persistent memory, e.g. a database. During the reconfiguration any incoming data will be buffered in memory.
+        As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
+        This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
 
         \subsection{Discussion of EDF}
         \label{sec:discussion-edf}
@@ -406,7 +404,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         % possible complications
         % compare it to the reference architecture
         % refer to cheng et al in self-adaptive systems chapter
-        % 
+        % recht general, nicht zu restrictive, viele policies moeglich?
 
     \section{Some Other Architecture}
     \label{sec:soa}
