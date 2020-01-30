@@ -399,6 +399,37 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         % -> can resolve resource acquisition conflicts, limit number of reconfigs -> see section 7
         % -> Requests to it are either operator migration or operator scaling
     
+
+        % Operator policies:
+        % Threshold based: Most commonly used approach, based on cpu utilization
+        %  -> difficult to get a good threshold, especially if bursty workload
+        %  -> often times based on empirical data
+        % Reinforcement Learning (RL) approach:
+        %  -> relation between global application time and operator response time
+        % 
+        % Node policies:
+        % if utilization of node (cpu..) passes threshold, a randomly selected replica will be migrated to node in neighbor
+        % node selection:  randomized, however, no overloaded nodes included
+
+        % global policies:
+        % - should encourage local policies to reconfigure, when poor performance
+        % - promote settlin period, when not subject to changing working conditions
+        % - Simple; Prevent conflicting reconfigurations (e.g. two replica requests on same computing resource)
+        % - simple; limit overall number of granted reconfigs
+        % 3 steps: 
+        % Reconfig request prioritization
+        % - Determine most worthy reconfigs, based on given reconfig scores by the decentralized managers
+        % - sorts reconfig requests by type and then decreasing reconfig scores
+        % Conflict prevention
+        % - detect conflicts, remove the one with lower scores
+        % - conflict: using the same computing resource to allocate a new replica or migrate a new one
+        % Acceptance of requests:
+        % - decides which requests are granted
+        % -> multiple methods
+        % -> could either just accept all or somehow reduce their number
+        % - hier koennte man theoretisch noch deren token bucket based granting policy vorschlagen
+
+
         \subsection{Discussion of EDF}
         \label{sec:discussion-edf}
         % Talk about their approach to finding the architecture for geo-distributed
