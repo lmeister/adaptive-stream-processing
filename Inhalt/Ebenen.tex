@@ -385,6 +385,20 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
         This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
 
+        % Policies briefly erklären
+        % operator manager policy:
+        % -> works at single operator -> limited view on system (utilization of operator, input rate)
+        % -> implements local policy, responsible for planning scaling actions
+        % -> they propose 2 kinds; load threshold based, reinforcement learning
+        % node manager policy: 
+        % -> slightly bigger view on system -> utilization level of node + network distance to neighbor nodes
+        % -> controls replicas hosted on computing node
+        % -> sender migration policy -> see seciton 6
+        % application manager policy:
+        % -> global policy, global view
+        % -> can resolve resource acquisition conflicts, limit number of reconfigs -> see section 7
+        % -> Requests to it are either operator migration or operator scaling
+    
         \subsection{Discussion of EDF}
         \label{sec:discussion-edf}
         % Talk about their approach to finding the architecture for geo-distributed
