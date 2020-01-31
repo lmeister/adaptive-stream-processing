@@ -385,10 +385,10 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         will be saved to persistent memory, e.g. a database. During the reconfiguration any incoming data will be buffered in memory.
         As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
         This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
-
-        \quad To determine when a request for an adaptation should be granted, Cardellini et al propose policies for the lower layer's managers.
+        To determine when a request for an adaptation should be granted, Cardellini et al propose policies for the lower layer's managers.
         % \\
-        The operator manager policy utilizes the limited view on system, which only lets it access the input rate and the utilization of its operator.
+
+        \quad The operator manager policy utilizes the limited view on system, which only lets it access the input rate and the utilization of its operator.
         It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al propose two different policies.
         The first one is a threshold based policy, which the the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
         of an operator passes the threshold, a scale-out action will be planned. 
@@ -396,51 +396,27 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         The second approach makes use of reinforcement learning, where ... {nochmal nachlesen}.
         % \\ 
 
-        \quad 
+        \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
+        It utilizes its knowledge about the node's CPU utilization and its network distance to neighboring nodes.
+        The policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica will be selected 
+        randomly and then migrated to a neighboring node, which is randomly selected, with closer neighbors being preferred. 
 
-        % Policies briefly erklären
-        % operator manager policy:
-        % -> works at single operator -> limited view on system (utilization of operator, input rate)
-        % -> implements local policy, responsible for planning scaling actions
-        % -> they propose 2 kinds; load threshold based, reinforcement learning
-        % node manager policy: 
-        % -> slightly bigger view on system -> utilization level of node + network distance to neighbor nodes
-        % -> controls replicas hosted on computing node
-        % -> sender migration policy -> see seciton 6
-        % application manager policy:
-        % -> global policy, global view
-        % -> can resolve resource acquisition conflicts, limit number of reconfigs -> see section 7
-        % -> Requests to it are either operator migration or operator scaling
-    
+        \quad The application manager policy exploits its centralized position and its global view. 
+        Its responsibility lies in resolving resource acquisition conflicts as well as in limiting of reconfigurations, 
+        in order to reduce the amount of downtime. Furthermore, it should encourage the local managers to plan reconfigurations when the system 
+        is performing poorly. Conversely, when the system is not experiencing any changes in the working environment, it should promote a settling period, 
+        in which no reconfigurations should be made.
+        The policy works in 3 steps:
 
-        % Operator policies:
-        % Threshold based: Most commonly used approach, based on cpu utilization
-        %  -> difficult to get a good threshold, especially if bursty workload
-        %  -> often times based on empirical data
-        % Reinforcement Learning (RL) approach:
-        %  -> relation between global application time and operator response time
-        % 
-        % Node policies:
-        % if utilization of node (cpu..) passes threshold, a randomly selected replica will be migrated to node in neighbor
-        % node selection:  randomized, however, no overloaded nodes included
-
-        % global policies:
-        % - should encourage local policies to reconfigure, when poor performance
-        % - promote settlin period, when not subject to changing working conditions
-        % - Simple; Prevent conflicting reconfigurations (e.g. two replica requests on same computing resource)
-        % - simple; limit overall number of granted reconfigs
-        % 3 steps: 
-        % Reconfig request prioritization
-        % - Determine most worthy reconfigs, based on given reconfig scores by the decentralized managers
-        % - sorts reconfig requests by type and then decreasing reconfig scores
-        % Conflict prevention
-        % - detect conflicts, remove the one with lower scores
-        % - conflict: using the same computing resource to allocate a new replica or migrate a new one
-        % Acceptance of requests:
-        % - decides which requests are granted
-        % -> multiple methods
-        % -> could either just accept all or somehow reduce their number
-        % - hier koennte man theoretisch noch deren token bucket based granting policy vorschlagen
+        \begin{enumerate}
+            \item \textit{reconfiguration request prioritization}, during which the most worthy reconfigurations are determined by sorting the requests 
+            by type and reconfiguring score, which is given by the lower layer's decentralized managers. 
+            \item \textit{conflict prevention}, which checks for requests that are trying to use the same computing resource. If a conflict is found, the 
+            request with the lower reconfiguration is removed.
+            \item \textit{acceptance of requests}, where the remaining requests will be approved and the decision sent to their respective managers. 
+            One could either accept all remaining requests or somehow reduce the amount of requests further.
+        \end{enumerate}
+        % TODO - hier koennte man theoretisch noch deren token bucket based granting policy vorschlagen
 
 
         \subsection{Discussion of EDF}
