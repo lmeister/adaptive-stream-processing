@@ -36,7 +36,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
         \quad Most notably the data being fed into a DSMS varies greatly from the data being inserted into a DBMS; while a DBMS receives a finite predetermined amount 
         of data, a DSMS can theoretically receive an infinite continuous stream.
-        \\
+        % \\
         Secondly, DSMSs operate at a much greater speed than traditional DBMSs, because the data is processed immediately, while in the DBMS approach
         data is first saved to a disk and then queried before further processing can occur, leading to two I/O actions. This behavior, coupled with an incoming 
         high velocity stream, might lead to lags or even failure to yield accurate results\cite{StreamBookQuality}. 
@@ -45,7 +45,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         Thus the DSMS architecture is superior to the DBMS architecture when measuring latency.
         When data is stored, often only synopses are stored, in an attempt to summarize the data and utilize that knowledge in form of a \gls{state} for the queries.
         The difference in these architectures is also shown in figure \ref{fig:dbms_dsms}\cite{StreamBookQuality}.
-        \\
+        % \\
         Thirdly, similar to a DBMS a DSMS can also be queried using a streaming query language, however, queries installed on a DSMS are continuous 
         and will be executed as long as it is uninstalled and there are restrictions on which operations can be executed.
         Since the system can not assume a finite amount of data, it processes each data item as it arrives, so operators that require the entirety of a data 
@@ -96,7 +96,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         The data is fed to the system in form of streams, which are defined as an potentially infinite, countable amount of \textit{data tuples}. 
         The streams usually originate from a \texit{data source} which, for example, can be a type of sensor, e.g. a simple temperature sensor or more complex sensors, 
         such as an EEG-sensor, market orders or network traffic.
-        \\
+        % \\
         A data tuple is an object whose internal structure is defined by a \texit{data scheme}. 
         Objects of a data stream share a common structure, also called \textit{stream schema}.
         Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations.\cite{fundamentals}
@@ -105,7 +105,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         consisting of the processed tuples. Operators are able to perform various different operations, 
         as shown in \cite[p.49]{fundamentals}, some of which include: aggregation, splitting and merging streams, 
         logical and mathematical operations and custom data manipulations.
-        \\
+        % \\
         The results of a streaming application is then fed into one or multiple \textit{data sinks}, which could for example be a data visualization engine 
         or an automated stock trading engine.
         
@@ -116,12 +116,12 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         where, if computational resources allow it, an operator may be replicated in order to process data faster by
         making use of the principle of parallelity. Technically, there should be a splitting operator placed before, 
         as well as a merging operator after the replicated note. These have been left out for the sake of brevity.
-        \\
+        % \\
         An example for data adaptation would be \textit{load shedding}, a strategy where some data tuples are dropped in order to free up computational resources.
         However, one must take into consideration that one possibly sacrifices accuracy for the sake of performance, as more data generally leads to more accurate results.
         Furthermore, one must take note of the resource cost to calculate which tuples to drop in order to have the lowest impact on the quality of service.
         % TODO Maybe an example here for load shedding?
-        \\
+        % \\
         For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a stratey, in which the available computational 
         resources are constantly reassigned, so as to allocate the memory in the most efficient way. For example a node facing a high data load at the moment might 
         be allocated more RAM, GPU or CPU power in order to process its load faster. For this to work some resources have to be freed first, e.g. by deducting some
@@ -133,7 +133,7 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         
         \quad As SPSs are used as a means to process big data in a (near) real-time fashion, we will take a system that predicts changes in stock values 
         of companies based on the public's opinion, which is extracted from tweets, as an examplary application.
-        \\
+        % \\
         The application receives new \gls{tweet}s as input, then performs operations such as clustering and filtering for certain terms or company names. 
         Afterwards a sentiment analysis is performed on said tweets and a prediction for stock prices is computed and then sent 
         to an automatic stock trading application and stock traders for manual reviews.
@@ -208,15 +208,15 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     \quad Self-adaptivity however presents itself as challenging when looked at from a software engineering perspective.
     Cheng et al. illustrates some of these challenges in \cite{Cheng:2009:SES:1573856.1573858}, which we will discuss in the following paragraphs for both the 
     requirements engineering and the architecture disciplines.
-    \\
+    % \\
     As the system adapts, it changes, and with it do the requirements. This leads to the fact, that language changes in requirements engineering.
     Usually requirements are formulated in a strict manner `\textit{The system shall\ldots}`. This has to be relaxed and changed, Cheng et al. propose the following 
     option amongst others: `\textit{The system may do this\ldots or it may do that\ldots}`.
-    \\
+    % \\
     More importantly, requirements engineering must define exactly what is monitored as well as high-level goals, which need to be fulfilled at any given environmental condition.
     In addition, one must also specify under which circumstance what kind of adaptation has to be performed and how said adaptation is realized.
     Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, adding to the complexity.
-    \\
+    % \\
     One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
 
     \quad The complexity is also increased for engineers and architects, as there are new factors to consider as well.
@@ -225,10 +225,11 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     make them independent from one another.
     
     
-    \quad Architects are faced with a number of new decisions;\\
+    \quad Architects are faced with a number of new decisions;
+    % \\
     Is a centralized or decentralized architecture better to achieve one's goals? Are the control loops independent from one another?
     Is a hierarchical approach appropriate? Good practice suggests using just a single control loop\cite{accidents}, so can the amount of control loops be scaled down?
-    \\
+    % \\
     Research is needed to battle some of the issues that self-adaptive systems and control structures face, such as structural arrangements. 
     It is therefore necessary to explore more architectures, an example will be shown in \ref{sec:hierarchical}, in which a decentralized hierarchical approach was
     chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work, a possible area of research 
@@ -309,9 +310,9 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
     \label{sec:hierarchical}
     \textbf{TODO: Incorporate same structure as above}
     In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
-    \\
+    % \\
     In \ref{sec:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
-    \\
+    % \\
     Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sec:discussion-edf}.
 
 
@@ -319,9 +320,9 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \label{sec:edf}
         As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
         Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
-        \\
+        % \\
         \begin{figure}[hbt]
-        \label{fig:mape}
+        \label{fig:hierarchical}
         \centering
         \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
         \caption{
@@ -330,22 +331,22 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \end{figure}
         The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
         While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
-        \\
+        % \\
         The MAPE loops are arranged in a hierarchical pattern, where higher-level loops are in charge of the decisions proposed by the lower-level loops.
-        \\
+        % \\
         On the lower layer Cardellini et al introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
 
         \quad The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
         The architecture utilizes as many operator managers as there are operators.
         The operator manager consists of three further concepts;
-        \\
+        % \\
         The \textit{operator monitor}, which is responsible for the monitoring the resource usage and performance of the operator.
-        \\
+        % \\
         The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop, by first analyzing the collected information 
         from the monitoring component, followed by planning the adaptation, which can either be a scale-in our scale-out, 
         as shown in figure \ref{fig:sps_parallel_normal} adaptation for the operator.
         Once the local reconfiguration manager has decided that a local adaptation is appropriate it will file an operator adaptation request to the higher layer.
-        \\
+        % \\
         If the higher level control structur deems the reconfiguration request reasonable, it will notify the lower level's \textit{reconfiguration actuator}, which will then 
         perform the scaling-in or -out operation.
 
@@ -354,36 +355,48 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         Its ultimate goal is to prevent overuse of available resources.
         Similar to the operator manager it utilizes a singular local MAPE loop to control the adaptation, 
         which can be a migration of a hosted replicated operator to a neighboring node. 
-        \\
+        % \\
         Analogous to the operator manager, it also consists of three further components;
-        \\
+        % \\
         The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage.
         The collected data is then passed to the \textit{local reconfiguration manager}, which, similarly to the operator manager's local reconfiguration manager, then
         analyzes the data and, if need be, plans a migration. 
-        \\
+        % \\
         Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogous to the operator manager, the \textit{reconfiguration actuator} will perform
         the adaptation if the higher layer authorizes the reconfiguration.
 
         \quad The higher layer contains a singular \textit{application manager} instance, which contains a global MAPE loop.
         The application manager functions as a centralized entity, whose goal it is, to oversee the entire application through its loop.
         Similar to the lower layer's operator and node managers, it is also split up into three components;
-        \\
+        % \\
         The \textit{application monitor}, which supervises the application behavior on a global scale and collects data, which then gets sent to the \textit{global reconfiguration manager}.
         The global reconfiguration manager is more complex than the local reconfiguration managers of the lower layer entities, as it not only analyzes the collected data, but 
         also analyzes the reconfiguration requests from the lower layers. After the analysis, possible adaptations are planned.
-        \\
+        % \\
         Once a decision has been reached, information is passed over to the \textit{global actuator}, who then communicates the decisions to the lower layer's managers, 
         where the respective reconfiguration actuators perform the adaptations.
         
         \quad In order to determine the sequence of the adaptations, Cardellini et al use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}, 
         which implies that the operator, that is to be adapted, will be paused while the adaptation is performed and resume its functionality after the 
         reconfiguration has taken place. 
-        \\
+        % \\
         Furthermore, to remain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, 
         which they have proposed in \cite{migrationProtocol}. The protocol states that the operator's state, given that it is a stateful operator, 
         will be saved to persistent memory, e.g. a database. During the reconfiguration any incoming data will be buffered in memory.
         As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
         This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
+
+        \quad To determine when a request for an adaptation should be granted, Cardellini et al propose policies for the lower layer's managers.
+        % \\
+        The operator manager policy utilizes the limited view on system, which only lets it access the input rate and the utilization of its operator.
+        It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al propose two different policies.
+        The first one is a threshold based policy, which the the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
+        of an operator passes the threshold, a scale-out action will be planned. 
+        % \\
+        The second approach makes use of reinforcement learning, where ... {nochmal nachlesen}.
+        % \\ 
+
+        \quad 
 
         % Policies briefly erklären
         % operator manager policy:
