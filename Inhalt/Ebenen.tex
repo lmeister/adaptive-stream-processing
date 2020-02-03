@@ -370,17 +370,12 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         This approach promotes reusability of e.g. diagnosers for multiple policies and allows for easier debugging and evaluation.
         Furthermore, existing code is much easier to be maintain, as one does not have to understand a monolithic structure but instead only smaller objects.
         
-        \quad However, 
-        % -> Probleme, wenn während Resting period für evaluation ein anderes Problem auftritt?
-        % -> 
-        % -> Vergleich MAPE? TODO
-        % M: Health Manager Sympton Detector (Collects metrics)
-        % A: Health Manager Symptom Detector (Analyzes metrics, identifies symptoms) & Diagnoser (Forms diagnosis)
-        % P: Resolver (Determines necessary action)
-        % E: Resolver executes determined action
-        % Not sure if the above is correct
-        Discuss the approach and compare it to the reference architecture (Mape?)
-        \textbf{TODO: Maybe discuss how they evaluate, look at metrics relevant to architecture}
+        \quad However, if some fault occurs during the settling resting period, after which an action is evaluated by the health manager, occurs, Dhalion has no means to 
+        identify what caused the problem and might erroneously blacklist an action that might have been beneficial.
+
+        \quad The approach that Floratou et al. took can be compared to be MAPE loop. The monitor phase is being performed by the health manager's symptom detector, who collects metrics.
+        The analysis phase is done by the symptom detector, who analyzes the metrics and identifies symptons, as well as the diagnoser, who forms diagnoses.
+        The planning and execution phases are completed by the resolver, who determines the necessary action and then executes it.
 
     \section{Decentralized Self-Adaptation}
     \label{sec:hierarchical}
@@ -530,7 +525,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         % TODO compare it to the reference architecture
 
-    \section{Title??}
-    \textbf{TODO: Discuss among all of them, critical thinking..}
+    % \section{Title??}
+    % \textbf{TODO: Discuss among all of them, critical thinking..}
 
-    \textbf{TODO: If enough material compare the architecture relevant metrics of the approaches}
+    % \textbf{TODO: If enough material compare the architecture relevant metrics of the approaches}
