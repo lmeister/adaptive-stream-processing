@@ -462,8 +462,17 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al. propose two different policies.
         The first one is a threshold based policy, which is the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
         of an operator passes the threshold, a scale-out action is planned. 
+        Furthermore, once the operator manager deems a reconfiguration necessary, it calculates a reconfiguration score, based on the CPU utilization, 
+        which is passed to the global policy along with the request.
         % \\
-        The second approach makes use of reinforcement learning, where ... {TODO nochmal nachlesen}.
+        The second approach makes use of reinforcement learning, where an agent is trained to learn the optimal operator scaling strategy.
+        To do this, an agent performs an action every time the policy is evoked, looks at the operator's state and calculates a stochastic cost.
+        Further, the agent estimates the long term cost of an action a in a state s, this is called Q-function.
+        Finally, it observes the actual cost and then readjusts its calculation.
+        Its goal is to limit the amount of reconfigurations, this is done by penalizing them, keep response time within reasonable bounds and to limit the resource usage of an operator.
+        Cardellini et al propose a Q-learning algorithm and a model-based reinforcement learning algorithm.
+        Similarly to the threshold based policy, the reinforcement learning based policy also calculates a reconfiguration score. The difference, however, is that 
+        this reconfiguration score also incorporates the estimated long term cost of the proposed action.
         % \\ 
 
         \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
