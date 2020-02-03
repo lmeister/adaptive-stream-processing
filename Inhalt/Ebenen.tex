@@ -150,35 +150,35 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
         % Subsection Requirements for Stream Processing Systems
         % Should quickly go over the requirements and explain why they matter to us
-        \subsection{Requirements for Stream Processing Systems}
-        \label{sub:requirements}
-        \ifbool{final}{}{\textbf{\color{red}THIS IS NOT FINAL}
+        % \subsection{Requirements for Stream Processing Systems}
+        % \label{sub:requirements}
+        % \ifbool{final}{}{\textbf{\color{red}THIS IS NOT FINAL}
         
-        }
+        % }
 
-        Notes: What are the requirements, why do they matter to us (Elaborate on this)
+        % Notes: What are the requirements, why do they matter to us (Elaborate on this)
 
-        Due to the nature of the fields in which SPS are used, there are important requirements that SPS should meet in order to be viable, 
-        which Stonebraker et al. point out in \cite{Stonebraker:2005:RRS:1107499.1107504}, of which the ones most important to us can be summarized as the following:
+        % Due to the nature of the fields in which SPS are used, there are important requirements that SPS should meet in order to be viable, 
+        % which Stonebraker et al. point out in \cite{Stonebraker:2005:RRS:1107499.1107504}, of which the ones most important to us can be summarized as the following:
         
-        % Enumeration of requirements for SPS + explanations why they matter to us
-        \begin{enumerate}
-        \label{enum:requirements}
-            \item \textbf{Keep the Data Moving:} 
-                In order to minimize latency, data must not be stored, as these are costly operations.
-            \item \textbf{Handle Stream Imperfections:} 
-                Expecting only perfect data is utopian, so one must prepare the system with built-in mechanisms for data that might be missing or out-of-order.
-            \item \textbf{Integrate Stored and Streaming Data:} 
-                For an SPS to be able to perform comparisons between "predecessor" data and current data, operators must keep an efficiently manageable state.
-            \item \textbf{Guarantee Data Safety and Availability:} 
-                Recovering from a failure is detrimental for real-time data processing, so a system must be in place to guarantee the highest availability possible.
-            \item \textbf{Process and Respond Instantaneously:} 
-                Systems must be highly optimized in order to provide (near) real-time responses.
-            \item \textbf{Partition and Scale Applications Automatically:} 
-                Systems must be able to be split across multiple machines and threads.
-                The system must also be able to automatically scale and distribute the load across the machines.
+        % % Enumeration of requirements for SPS + explanations why they matter to us
+        % \begin{enumerate}
+        % \label{enum:requirements}
+        %     \item \textbf{Keep the Data Moving:} 
+        %         In order to minimize latency, data must not be stored, as these are costly operations.
+        %     \item \textbf{Handle Stream Imperfections:} 
+        %         Expecting only perfect data is utopian, so one must prepare the system with built-in mechanisms for data that might be missing or out-of-order.
+        %     \item \textbf{Integrate Stored and Streaming Data:} 
+        %         For an SPS to be able to perform comparisons between "predecessor" data and current data, operators must keep an efficiently manageable state.
+        %     \item \textbf{Guarantee Data Safety and Availability:} 
+        %         Recovering from a failure is detrimental for real-time data processing, so a system must be in place to guarantee the highest availability possible.
+        %     \item \textbf{Process and Respond Instantaneously:} 
+        %         Systems must be highly optimized in order to provide (near) real-time responses.
+        %     \item \textbf{Partition and Scale Applications Automatically:} 
+        %         Systems must be able to be split across multiple machines and threads.
+        %         The system must also be able to automatically scale and distribute the load across the machines.
 
-        \end{enumerate}
+        % \end{enumerate}
 
     \section{Self-Adaptive Systems}
     \label{sec:self-adaptive}
@@ -312,7 +312,16 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         \label{sub:dhalion-architecture}
         Dhalion is a modular framework that allows streaming systems be come self-regulating and consists of 3 major components.
         Its architecture is shown in figure \ref{fig:dhalion}.
-        
+
+        \begin{figure}[hbt]
+            \centering
+            \includegraphics[width=0.5\textwidth]{Bilder/dhalion.png}
+            \caption{
+                Architecture of Dhalion, sitting on top of Heron. Dhalion components marked blue \cite{dhalion}.
+            }
+            \label{fig:dhalion}
+        \end{figure}
+
         \quad The biggest component of Dhalion is its \textit{health manager}, whose responsible for maintaining the health of the topology.
         The health manager periodically invokes a policy which evaluates the health of the topology. 
         The policies used by the health manager can either be noninvasive or invasive, meaning that they can either only alert the user when a particular event happens or 
@@ -339,33 +348,19 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         appropriate actions to improve the topology's health. Usually there is a 1:1 mapping between resolvers and diagnosers.
         First, the system determines the appropriate resolver by examining the diagnoses. Afterwards the designated resolver performs the topology changes.
         However, major topology changes, such as scaling up/down or restarting containers, are invoked through the scheduler, as shown in figure \ref{fig:dhalion}.
+        The Dhalion API offers end-user the possibility to create their own reolvers.
 
-        \quad 
+        \quad The system's second component is the \textit{action log}, which records the actions taken by the health manager.
+        The log can be useful for tuning or debugging policies. Each entry consists of the action that was taken, the time at which the action was taking and the diagnosis 
+        that led to the action being executed. 
+        It is noteworthy that the end-users can configure Dhalion to drop logs, once they pass a certain size or age.
 
-
-        \begin{figure}[hbt]
-            \centering
-            \includegraphics[width=0.5\textwidth]{Bilder/dhalion.png}
-            \caption{
-                Architecture of Dhalion, sitting on top of Heron. Dhalion components marked blue \cite{dhalion}.
-            }
-            \label{fig:dhalion}
-        \end{figure}
-
-        % Action Log
-        %   -> captures the actions taken by Health Manager
-        %   -> useful for tuning policies and debugging
-        %   -> each entry contains what action was taken, at what time, and which diagnosis
-        %   -> Configurable how many logs, how old .. etc kept
-        
-        % Action Blacklist
-        %   -> Diagnosis Description + actions tken that did not produce expected outcome
-        %   -> These actions will not be invoked again for a similar diagnosis
-        %   -> After each Action the Health Manager will wait, allow topology to reach a steady state and then evalute action
-        %   -> When new policy is created, evaluation method must be defined
-        %   -> Threshold for blacklisting actions. If particular action has not been beneficial for given diagnosis
-        %   -> Before invoking an action, Dhalion checks the blacklist
-        %   -> Action Blacklist is optional for policies
+        \quad The system's third, and final, component is the \textit{action blacklist}, which end-users have the ability to not use for policies.
+        After each action the health manager will wait until the topology has once again reached a steady state and then evaluate the performed action.
+        To do this, one must define an evaluation method whenever one creates a new policy. Given the evaluation method, the health manager will evaluate the action.
+        If the action has not reached the desired results, and the amount of times it was beneficial to the topology's health divided by the total amount of times it 
+        was invoked passes a pre-defined threshold, the action will be blacklisted.
+        Before a resolver can invoke a certain action, it must first check the blacklist, to see if this action has been blacklisted for a similar diagnosis.
 
         \subsection{Discussion of Dhalion}
         \label{sub:dhalion-discussion}
