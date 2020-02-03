@@ -294,6 +294,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \textbf{TODO: Diagram, explain it here}
         % Dhalion sits on top of streaming engines and allows them to become self-regulating/adapting
         % 3 major components:
+        
         % Health Manager
         %   -> Mainting the health of the running topology
         %   -> periodically invokes a policy which evaluates the status/health of topology
@@ -302,7 +303,6 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         %       -> noninvasive: No topology changes, typically a alert to the user when particular event happens
         %   -> Can execute multiple noninvasive policies at a time, but only one invasive
         %       -> So that no conflicting actions are taken, as it would cause instability 
-        
         %   -> 3 phases:
         %       -> Symptom Detection Phase
         %       >>>> Dhalion collects several metrics during this phase
@@ -333,15 +333,19 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         %       >>>> However, major topology changes are invoked through scheduler (e.g. scaling up/down, restarting container)
         
         % Action Log
-        %   -> 
-        %   ->
-        %   ->
-        %   ->
+        %   -> captures the actions taken by Health Manager
+        %   -> useful for tuning policies and debugging
+        %   -> each entry contains what action was taken, at what time, and which diagnosis
+        %   -> Configurable how many logs, how old .. etc kept
+        
         % Action Blacklist
-        %   -> 
-        %   ->
-        %   ->
-        %   ->
+        %   -> Diagnosis Description + actions tken that did not produce expected outcome
+        %   -> These actions will not be invoked again for a similar diagnosis
+        %   -> After each Action the Health Manager will wait, allow topology to reach a steady state and then evalute action
+        %   -> When new policy is created, evaluation method must be defined
+        %   -> Threshold for blacklisting actions. If particular action has not been beneficial for given diagnosis
+        %   -> Before invoking an action, Dhalion checks the blacklist
+        %   -> Action Blacklist is optional for policies
 
 
         Explanation of Dhalion's Architecture \textbf{KERNPUNKT DER SECTION DHALION}
