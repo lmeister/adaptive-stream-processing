@@ -496,13 +496,31 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         \subsection{Discussion of EDF}
         \label{sub:discussion-edf}
-        % Talk about their approach to finding the architecture for geo-distributed
-        % -> Master-slave pattern
-        %   -> Centralized Analyze & Plan component, rest decentralized and multiple instances
-        %   -> Easier design & reconfiguration [ref. 17]
-        %   -> However, centralized component is still a bottleneck, may introduce severe communication overhead when communicating with decentralized, geo-dsitributed components
+        During the development of their EDF Cardellini et al. explored two different architectural patterns: The master-slave pattern and the coordinated control pattern.
+
+        \begin{figure}[hbt]
+            \centering
+            \includegraphics[width=1.0\textwidth]{Bilder/master_coordinated.png}
+            \caption{
+                    left: master-slave pattern; right: coordinated control pattern\cite{cardellini}
+            }
+            \label{fig:master_coordinated}
+        \end{figure}
+
+        \quad The master-slave pattern has a centralized master component, which executes the analyze and planning phases, and multiple decentralized slave components, 
+        who each execute the monitor and execution phases. This pattern is shown in figure \ref{fig:master_coordinated}.
+        The master component is in charge of deciding when and how an adaptation should take place.
+        Additionally, the master component allows for the creation of a global self-adaptation policies, which are easier to design.
+        The centralized component can however still proof to be a bottleneck, especially in a geo-distributed environment, as there might be severe communication overhead, when communicating 
+        with the decentralized slave components, as all monitored data as well as all decisions must be transferred to the master component and slave components, respectively. 
+
+        \quad The coordinated control pattern, as shown in figure \ref{fig:master_coordinated}, utilizes multiple decentralized MAPE-loops, who each oversee a certain part of the system. 
+        The loops may also needs to coordinate with one another, in case they need to make joint decisions. Again, one must watch out, as to not create too big of an overhead due to too much communication.
+        However, one must also ensure that there is enough communication so that there won't be too frequent adaptations, as those may worse the application's performance.
+        Also, due to the decentralization it becomes harder to design control policies.
+        
         % -> Coordinated control pattern
-        %   ->  As previously explained even a single centralized component can be non-feasible
+        %   ->  As previously explained even a single centralized component can make controlling elasticity unfeasible
         %   ->  multiple decentralized mape loops, with each loop overseeing a certain part of system
         %   ->  loops might need to interact/coordinate with one another to reach joint decisions
         %   ->  Failure to communicate may lead to too frequent adaptation decisions
