@@ -305,7 +305,23 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         \subsection{An Outline of Heron}
         \label{sub:heron-outline}
-        Small outline of Heron, as Dhalion is built on top of Twitter's Heron.
+        Small outline of Heron, as Dhalion is built on top of Twitter's Heron. \cite{heron}
+        % Each topology is run as an Aurora job, consisting of several containers
+        % first container runs the topology master
+        % remaining containers rum stream manager, metrics manager and multile heron instances
+        % mulitple containers launched on a single physical node
+        % containers are allocated and scheduled by aurora based on resource availability across the nodes in cluster
+        % metadata for topology kept in Zookeeper
+        % one JVM per Heron instance, Heron instances written in java
+        % Apache ZooKeeper is a centralized service for distributed applications, helps managing 
+        % Topology Master (TM) responsible for managing topology
+        % TM is a gateway for topology metrics, but not involved in processing, thus not a bottle neck
+        % Stream Manager (SM) manages routing of tuples efficiently
+        % each Heron instance (HI) connects to its local SM to send and receive tuples
+        % all SM in a topology connect to each other -> better scaling, since less SM than HI
+        % TOpology backpressure mechanism: dynamically adjust the rate at which data flows through topology
+        % -> important in topologies where different components can execute at different speeds and processing speed can change over time
+        % each HI performs a single task
 
         \subsection{Dhalion's Architecture}
         
