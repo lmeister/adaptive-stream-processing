@@ -486,7 +486,18 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
             \item \textit{Acceptance of requests}, where the remaining requests are approved and the decision sent to their respective managers. 
             One could either accept all remaining requests or somehow further reduce the amount of requests.
         \end{enumerate}
-        % TODO - hier koennte man theoretisch noch deren token bucket based granting policy vorschlagen
+
+        To further reduce downtimes and improve the system's performance, Cardellini et al propose a token bucket based granting policy.
+        The granting policy's goal is to limit the amount of reconfigurations that a system might endure.
+        There are two types of tokens, H-tokens, that grant a migration or a scale-out operation and L-tokens, which grant a scale-in operation \cite{cardellini}.
+        The bucket restores the tokens and has a set capacity C. Further, once the bucket is filled, the oldest tokens are expelled and the new ones added to the bucket.
+        Furthermore, a bucket can only contain a single type of token. This means, that as soon as a bucket filled with H-tokens is given an L-token, all the previously contained tokens 
+        are popped out.
+        A reconfiguration can only be granted if there is a corresponding token in the bucket.
+        Additionally, the generation of tokens is limited. If a system is stable and performing well, less tokens should be generated. Conversely, if a system's performance 
+        is fluctuating, more tokens should be generated.
+        Also, once again one can set thresholds for the application response time. If the response time is below a low threshold, an L-token should be generated. 
+        Conversely, if the response time is above a high threshold, a new H-token should be generated.
 
 
         \subsection{Discussion of EDF}
