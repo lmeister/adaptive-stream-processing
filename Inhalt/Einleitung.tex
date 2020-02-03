@@ -1,6 +1,6 @@
 \chapter{Introduction}
 \label{cha:Introduction} % Ein Label ist optional, ermoeglicht aber die Referenzierung
-\textbf{\color{green}THIS IS FINAL}
+\ifbool{final}{}{\textbf{\color{green}THIS IS FINAL}}
 
 In this chapter we will explore the motivation and goals of this seminar thesis as well its structure.
 In order to do this, we will explain the motivation behind the topic as well as the research questions that we aim to answer in section \ref{sec:motivation-goals} \nameref{sec:motivation-goals}.
@@ -8,7 +8,7 @@ Afterwards, we will then explain the thesis's structure and contents in section 
 
 \section{Motivation and Goals}
 \label{sec:motivation-goals}
-\textbf{\color{red}THIS IS 90\% FINAL}
+\ifbool{final}{}{\textbf{\color{red}THIS IS 90\% FINAL}}
 
 This chapter delves into the motivation behind this thesis and furthermore defines research questions, which we aim to answer in the subsequent chapters.
 
@@ -38,19 +38,20 @@ responsible for a share of 30 percent of the total global datasphere by 2025, as
 \end{figure}
 
 \quad A global study led by IBM in 2012 has shown that 71 percent of the firms in the financial market use information (including big data)
-in order to achieve an advantage over their competitors, compared to 36 percent, which IBM found in an earlier study conducted in 2010. \cite[p. 1]{ibm-financial}
+in order to achieve an advantage over their competitors, compared to 36 percent, which IBM found in an earlier study conducted in 2010\cite[p. 1]{ibm-financial}.
 
 \quad As it is no longer feasible to save all the data before then analyzing it (in batches), due to computational cost and lack of storage capacity, 
 a new approach has been designed in order to handle data in a (near) real-time fashion: stream processing systems (SPS). 
 A stream processing system takes in a continuous stream of data and processes each element of said stream, and then puts out a stream of processed data.
-These systems will be further explained in \ref{sub:sps} \nameref{sub:sps}.
+These systems will be further explained in \ref{sub:sps}.
 % \\
-\quad However, the rate in which data is being streamed fluctuates, so one comes to the logical conclusion that SPSs should adapt to the velocity and volume of the stream.
-Besides the stream, the computing environment might also fluctuate, e.g. a resource failing in a distributed computing environment, 
-and as such the system has to adapt. There are many different techniques of adaptation such a system might utilize, 
+
+\quad However, the rate (in which data is being streamed) fluctuates, so one comes to the logical conclusion that SPSs should adapt to the velocity and volume of the stream.
+Besides the stream, the computing environment's conditions may also vary, e.g. in form of a resource failing in a distributed computing environment, 
+so the system has to adapt. There are many different techniques of adaptation such a system can utilize, 
 which can impact both the stream as well as the SPS. We will elaborate on this in \ref{sub:sps} \nameref{sub:sps}.
 
-\quad In this thesis our goals are to define stream processing and to look at various adaptation techniques in stream processing. Furthermore we will clarify why
+\quad In this thesis, our goals are to define stream processing and to look at various adaptation techniques in stream processing. Furthermore, we will clarify why
 self-adaptivity is needed in stream processing and what current architectures, that enable self-adaptivity in stream processing, look like.
 We will also discuss the impact of self-adaptivity on software engineering, especially in stream processing.
 
@@ -59,21 +60,21 @@ We will also discuss the impact of self-adaptivity on software engineering, espe
 \label{sec:structure}
 \textbf{\color{green}THIS IS FINAL}
 
-In chapter \ref{cha:Introduction} we will introduce the topic, and explain the motivation and structure of the thesis.
+In chapter \ref{cha:Introduction} we will introduce the topic and explain the motivation and structure of the thesis.
 
 In chapter \ref{cha:fundamentals} we will go over the fundamental concepts regarding the general topic of stream processing and adaptive systems.
 % \\
 In section \ref{sec:stream-processing} stream processing will be explained by first clarifying data stream management systems and comparing them to database management systems 
-in \ref{sub:dsms}, afterwards we will look into steam processing systems and understand how they work and the challenges they're facing.
+in \ref{sub:dsms}, afterwards, we will look into stream processing systems and get and understanding of how they work and the challenges that they are facing.
 % \\
 % In \ref{sub:requirements} we will then discuss requirements as formulated by Stonebraker et al. and explore how they influence our decisions when designing system architectures.
 % \\
-In section \ref{sec:self-adaptive} we will then introduce the concept of self-adaptive systems and their design, including the MAPE-loop in \ref{sub:mape}. 
-Furthermore, we will discuss self-adaptivity's impact on software engineering.
+In section \ref{sec:self-adaptive} we will then introduce the concept of self-adaptive systems and their design, including the MAPE loop in \ref{sub:mape}. 
+Furthermore, we will discuss the impact of self-adaptivity on software engineering.
 % \\
-In chapter \ref{cha:approaches} we then discuss several architectural approaches in designing self-adaptive stream processing systems, starting with Dhalion in \ref{sec:dhalion}, 
+In chapter \ref{cha:approaches} we will then discuss several architectural approaches in designing self-adaptive stream processing systems, starting with Dhalion in \ref{sec:dhalion}, 
 followed by a decentralized approach by Cardellini et al. in \ref{sec:hierarchical}.
-Each subsection of this chapter will contain a thorough description of the approach's architecture followed by a discussion, 
-in which they will also be compared to their reference architecture, the MAPE-loop.
+Each subsection of this chapter will contain a thorough description of the approach's architecture, followed by a discussion, 
+in which they will also be compared to their reference architecture, the MAPE loop.
 % \\
 Chapter \ref{cha:summary} will then provide a summary of our findings and conclude the thesis.
