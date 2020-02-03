@@ -468,7 +468,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         The first one is a threshold based policy, which the the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
         of an operator passes the threshold, a scale-out action will be planned. 
         % \\
-        The second approach makes use of reinforcement learning, where ... {nochmal nachlesen}.
+        The second approach makes use of reinforcement learning, where ... {TODO nochmal nachlesen}.
         % \\ 
 
         \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
@@ -508,30 +508,27 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         \end{figure}
 
         \quad The master-slave pattern has a centralized master component, which executes the analyze and planning phases, and multiple decentralized slave components, 
-        who each execute the monitor and execution phases. This pattern is shown in figure \ref{fig:master_coordinated}.
+        who each execute the monitor and execution phases. This pattern is shown on the left in figure \ref{fig:master_coordinated}.
         The master component is in charge of deciding when and how an adaptation should take place.
         Additionally, the master component allows for the creation of a global self-adaptation policies, which are easier to design.
         The centralized component can however still proof to be a bottleneck, especially in a geo-distributed environment, as there might be severe communication overhead, when communicating 
         with the decentralized slave components, as all monitored data as well as all decisions must be transferred to the master component and slave components, respectively. 
 
-        \quad The coordinated control pattern, as shown in figure \ref{fig:master_coordinated}, utilizes multiple decentralized MAPE-loops, who each oversee a certain part of the system. 
+        \quad The coordinated control pattern, as shown on the right in figure \ref{fig:master_coordinated}, utilizes multiple decentralized MAPE-loops, who each oversee a certain part of the system. 
         The loops may also needs to coordinate with one another, in case they need to make joint decisions. Again, one must watch out, as to not create too big of an overhead due to too much communication.
-        However, one must also ensure that there is enough communication so that there won't be too frequent adaptations, as those may worse the application's performance.
+        However, one must also ensure that there is enough communication so that there won't be too frequent adaptations, as those may worsen the application's performance.
         Also, due to the decentralization it becomes harder to design control policies.
         
-        % -> Coordinated control pattern
-        %   ->  As previously explained even a single centralized component can make controlling elasticity unfeasible
-        %   ->  multiple decentralized mape loops, with each loop overseeing a certain part of system
-        %   ->  loops might need to interact/coordinate with one another to reach joint decisions
-        %   ->  Failure to communicate may lead to too frequent adaptation decisions
-        %   ->  conversely Communication too much reduces performance
-        %   ->  harder to design control policies due to decentralization
-        % -> Diagram to showcase master-slave and control pattern (MAPE loops)
-        % Talk about advantages of the architecture
-        % possible complications
-        % compare it to the reference architecture
-        % refer to cheng et al in self-adaptive systems chapter
-        % recht general, nicht zu restrictive, viele policies moeglich?
+        \quad The final EDF architecture is not too restrictive, so that the end-user can design use other internal policies and goals. 
+        One can decide to use a simple threshold based policy for the local policies or sophisticated reinforcement learning policies, which can account for various 
+        quality of service metrics. This way, the end-user can decide which metric they want to emphasize on.
+        Furthermore, a fully decentralized control solution shows to be very good in terms of performance.
+        The reinforcement learning could also be sped up by choosing more sophisticated methods, Cardellini et al. suggest bayesian decision trees and function approximation.
+
+        \quad In addition, Cardellini et al. also consider giving the global policy more influence on the lower level policies by letting the 
+        global policy adjust the parameters of the local policies or simply giving more informative feedback rather than just acceptance or denial of the adaptation request.
+
+        % TODO compare it to the reference architecture
 
     \section{Title??}
     \textbf{TODO: Discuss among all of them, critical thinking..}
