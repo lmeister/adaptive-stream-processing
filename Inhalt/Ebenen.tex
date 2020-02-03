@@ -379,119 +379,119 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
     \section{Decentralized Self-Adaptation}
     \label{sec:hierarchical}
-    In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
+    In this section, we will explore a decentralized hierarchical architecture as described by Cardellini et al. in \cite{cardellini}.
     % \\
-    In \ref{sub:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
+    In \ref{sub:edf}, we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
     % \\
-    Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sub:discussion-edf}.
+    Afterwards, we will discuss the architecture, talk about the advantages and possible complications. Further, we will compare it to its reference architecture in \ref{sub:discussion-edf}.
 
 
         \subsection{Elastic and Distributed DSP Framework}
         \label{sub:edf}
-        As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
+        As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems \cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858}.
         Cardellini et al. argue to implement multiple MAPE loops, as per Weyns et al. \cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         % \\
         \begin{figure}[hbt]
             \centering
             \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
             \caption{
-                    Conceptual architecture of the EDF\cite{cardellini}
+                    Conceptual architecture of the EDF \cite{cardellini}.
             }
             \label{fig:hierarchical}
         \end{figure}
         The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
         While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
         % \\
-        The MAPE loops are arranged in a hierarchical pattern, where higher-level loops are in charge of the decisions proposed by the lower-level loops.
+        The MAPE loops are arranged in a hierarchical pattern, in which higher-level loops are in charge of the decisions proposed by the lower-level loops.
         % \\
-        On the lower layer Cardellini et al. introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
+        On the lower layer, Cardellini et al. introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
 
         \quad The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
         The architecture utilizes as many operator managers as there are operators.
         The operator manager consists of three further concepts;
         % \\
-        The \textit{operator monitor}, which is responsible for the monitoring the resource usage and performance of the operator.
+        The \textit{operator monitor}, that is responsible for the monitoring the resource usage and performance of the operator.
         % \\
-        The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop, by first analyzing the collected information 
-        from the monitoring component, followed by planning the adaptation, which can either be a scale-in our scale-out, 
-        as shown in figure \ref{fig:sps_parallel_normal} adaptation for the operator.
-        Once the local reconfiguration manager has decided that a local adaptation is appropriate it will file an operator adaptation request to the higher layer.
+        The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop by first analyzing the collected information 
+        from the monitoring component, followed by planning the adaptation, which can either be a scale-in or scale-out adaptation, 
+        as shown in figure \ref{fig:sps_parallel_normal}.
+        Once the local reconfiguration manager has decided that a local adaptation is appropriate, it files an operator adaptation request to the higher layer.
         % \\
-        If the higher level control structur deems the reconfiguration request reasonable, it will notify the lower level's \textit{reconfiguration actuator}, which will then 
-        perform the scaling-in or -out operation.
+        If the higher level control structure deems the reconfiguration request reasonable, it notifies the lower level's \textit{reconfiguration actuator}, which then 
+        performs the scaling-in or -out operation.
 
-        \quad The node manager is an entity that manages a single node, whose task it is, to oversee the computing environment of said node.
+        \quad The node manager is an entity that manages a single node, whose task is to oversee the computing environment of said node.
         There are as many node managers as there are nodes.
-        Its ultimate goal is to prevent overuse of available resources.
-        Similar to the operator manager it utilizes a singular local MAPE loop to control the adaptation, 
+        Its ultimate goal is to prevent an overuse of available resources.
+        Similarly to the operator manager, it utilizes a singular local MAPE loop to control the adaptation, 
         which can be a migration of a hosted replicated operator to a neighboring node. 
         % \\
-        Analogous to the operator manager, it also consists of three further components;
+        Analogously to the operator manager, it also consists of three further components;
         % \\
         The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage.
         The collected data is then passed to the \textit{local reconfiguration manager}, which, similarly to the operator manager's local reconfiguration manager, then
         analyzes the data and, if need be, plans a migration. 
         % \\
-        Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogous to the operator manager, the \textit{reconfiguration actuator} will perform
+        Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogously to the operator manager, the \textit{reconfiguration actuator} performs
         the adaptation if the higher layer authorizes the reconfiguration.
 
         \quad The higher layer contains a singular \textit{application manager} instance, which contains a global MAPE loop.
-        The application manager functions as a centralized entity, whose goal it is, to oversee the entire application through its loop.
-        Similar to the lower layer's operator and node managers, it is also split up into three components;
+        The application manager functions as a centralized entity, whose goal is, to oversee the entire application through its loop.
+        Similarly to the lower layer's operator and node managers, it is also split up into three components;
         % \\
-        The \textit{application monitor}, which supervises the application behavior on a global scale and collects data, which then gets sent to the \textit{global reconfiguration manager}.
-        The global reconfiguration manager is more complex than the local reconfiguration managers of the lower layer entities, as it not only analyzes the collected data, but 
+        the \textit{application monitor}, which supervises the application behavior on a global scale and collects data, which then is sent to the \textit{global reconfiguration manager}.
+        The global reconfiguration manager is more complex than the local reconfiguration managers of the lower layer entities, as it not only analyzes the collected data but 
         also analyzes the reconfiguration requests from the lower layers. After the analysis, possible adaptations are planned.
         % \\
         Once a decision has been reached, information is passed over to the \textit{global actuator}, who then communicates the decisions to the lower layer's managers, 
         where the respective reconfiguration actuators perform the adaptations.
         
-        \quad In order to determine the sequence of the adaptations, Cardellini et al. use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}, 
-        which implies that the operator, that is to be adapted, will be paused while the adaptation is performed and resume its functionality after the 
+        \quad In order to determine the sequence of the adaptations, Cardellini et al. use a \textit{pause-and-resume approach} \cite{Heinze2014CloudbasedDS}, 
+        which implies that the operator, that is to be adapted, is paused while the adaptation is performed and resumes its functionality after the 
         reconfiguration has taken place. 
         % \\
-        Furthermore, to remain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, 
+        Furthermore, to maintain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, 
         which they have proposed in \cite{migrationProtocol}. The protocol states that the operator's state, given that it is a stateful operator, 
-        will be saved to persistent memory, e.g. a database. During the reconfiguration any incoming data will be buffered in memory.
-        As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
-        This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
+        is saved to persistent memory, e.g. a database. During the reconfiguration, any incoming data is buffered in memory.
+        As soon as the adaptation has been performed, the state is restored and the buffered data is processed.
+        This process naturally leads to bigger downtime, so it is even more important to very carefully choose whether an adaptation is made or not.
         To determine when a request for an adaptation should be granted, Cardellini et al. propose policies for the lower layer's managers.
         % \\
 
-        \quad The operator manager policy utilizes the limited view on system, which only lets it access the input rate and the utilization of its operator.
-        It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini . propose two different policies.
-        The first one is a threshold based policy, which the the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
-        of an operator passes the threshold, a scale-out action will be planned. 
+        \quad The operator manager policy utilizes its limited view on the system, which only lets it access the input rate and the utilization of its operator.
+        It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al. propose two different policies.
+        The first one is a threshold based policy, which is the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
+        of an operator passes the threshold, a scale-out action is planned. 
         % \\
         The second approach makes use of reinforcement learning, where ... {TODO nochmal nachlesen}.
         % \\ 
 
         \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
         It utilizes its knowledge about the node's CPU utilization and its network distance to neighboring nodes.
-        This policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica will be selected 
-        randomly and then migrated to a neighboring node, which is randomly selected, with closer neighbors being preferred. 
+        This policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica is selected 
+        randomly and then migrated to a neighboring node, which is selected randomly, with closer neighbors being preferred. 
 
         \quad The application manager policy exploits its centralized position and its global view. 
         Its responsibility lies in resolving resource acquisition conflicts as well as in limiting of reconfigurations, 
         in order to reduce the amount of downtime. Furthermore, it should encourage the local managers to plan reconfigurations when the system 
-        is performing poorly. Conversely, when the system is not experiencing any changes in the working environment, it should promote a settling period, 
+        is performing poorly. Conversely, when the system is not experiencing any changes in the working environment, it should promote a settling period 
         in which no reconfigurations should be made.
         The policy works in 3 steps:
 
         \begin{enumerate}
-            \item \textit{reconfiguration request prioritization}, during which the most worthy reconfigurations are determined by sorting the requests 
+            \item \textit{Reconfiguration request prioritization}, during which the most worthy reconfigurations are determined by sorting the requests 
             by type and reconfiguring score, which is given by the lower layer's decentralized managers. 
-            \item \textit{conflict prevention}, which checks for requests that are trying to use the same computing resource. If a conflict is found, the 
+            \item \textit{Conflict prevention}, which checks for requests that are trying to use the same computing resource. If a conflict is found, the 
             request with the lower reconfiguration is removed.
-            \item \textit{acceptance of requests}, where the remaining requests will be approved and the decision sent to their respective managers. 
-            One could either accept all remaining requests or somehow reduce the amount of requests further.
+            \item \textit{Acceptance of requests}, where the remaining requests are approved and the decision sent to their respective managers. 
+            One could either accept all remaining requests or somehow further reduce the amount of requests.
         \end{enumerate}
         % TODO - hier koennte man theoretisch noch deren token bucket based granting policy vorschlagen
 
 
         \subsection{Discussion of EDF}
         \label{sub:discussion-edf}
-        During the development of their EDF Cardellini et al. explored two different architectural patterns: The master-slave pattern and the coordinated control pattern.
+        During the development of their EDF, Cardellini et al. explored two different architectural patterns: The master-slave pattern and the coordinated control pattern.
 
         \begin{figure}[hbt]
             \centering
