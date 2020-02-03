@@ -188,47 +188,48 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
     Cheng et al. define self-adaptive systems as
     \begin{quotation}
         ``[\ldots] systems that are able to adjust their behaviour in response to their perception of the environment and the
-        system itself [\ldots]``\cite[p.1]{Cheng:2009:SES:1573856.1573858}.
+        system itself [\ldots]``\cite[p. 1]{Cheng:2009:SES:1573856.1573858}.
     \end{quotation}
     
-    \quad Self-adaptive systems are oftentimes based on the \nameref{sub:mape} [p.\pageref{sub:mape}] pattern.
-    Adaptive Systems have a wide variety of possible application areas: adaptable user interfaces, autonomic computing, multi-agent systems \cite{Cheng:2009:SES:1573856.1573858}, 
-    biologically inspired computing, robotics \cite{10.1007/978-3-319-59480-4_44}, streaming applications and a lot more.
+    \quad Self-adaptive systems are oftentimes based on the \nameref{sub:mape} pattern.
+    Adaptive systems have a wide variety of possible application areas: adaptable user interfaces, autonomic computing, multi-agent systems \cite{Cheng:2009:SES:1573856.1573858}, 
+    biologically inspired computing, robotics \cite{10.1007/978-3-319-59480-4_44}, streaming applications, etc.
 
-    \quad An examplary application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics 
+    \quad An example for an application would be a scenario, in which population and food capacities are given and evolving over time, due to births, deaths, changes in demographics, 
     and changes in weather and harvest respectively. A system would have to adapt to these changes in its environment in order to ration the food properly.
 
     \quad Self-adaptivity however presents itself as challenging when looked at from a software engineering perspective.
-    Cheng et al. illustrates some of these challenges in \cite{Cheng:2009:SES:1573856.1573858}, which we will discuss in the following paragraphs for both the 
+    Cheng et al. illustrate some of these challenges in \cite{Cheng:2009:SES:1573856.1573858}, which we will discuss in the following paragraphs for both the 
     requirements engineering and the architecture disciplines.
     % \\
-    As the system adapts, it changes, and with it do the requirements. This leads to the fact, that language changes in requirements engineering.
-    Usually requirements are formulated in a strict manner `\textit{The system shall\ldots}`. This has to be relaxed and changed, Cheng et al. propose the following 
+    As the system adapts, it changes, and with it, do the requirements. This leads to the fact, that language changes in requirements engineering.
+    Usually, requirements are formulated in a strict manner `\textit{The system shall\ldots}`. This has to be relaxed and changed, Cheng et al. propose the following 
     option amongst others: `\textit{The system may do this\ldots or it may do that\ldots}`.
     % \\
-    More importantly, requirements engineering must define exactly what is monitored as well as high-level goals, which need to be fulfilled at any given environmental condition.
-    In addition, one must also specify under which circumstance what kind of adaptation has to be performed and how said adaptation is realized.
-    Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, adding to the complexity.
+    More importantly, requirements engineering must define exactly what is monitored, as well as high-level goals, which need to be fulfilled under any given environmental condition.
+    In addition, one must also specify under which circumstance the kind of adaptation that has to be performed and how said adaptation is realized.
+    Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, which adds to the complexity.
     % \\
-    One must also take into account that it is nearly impossible to forecast every situation that a system may face, therefore challenging requirements engineers with incomplete information.
+    One must also take into account that it is nearly impossible to forecast every situation that a system may face. 
+    This incomplete information adds to the challenges that requirement engineers are facing.
 
     \quad The complexity is also increased for engineers and architects, as there are new factors to consider as well.
-    Single MAPE-K loops do not scale efficiently for large systems, one must find a solution, often times multiple control loops are constructed.
-    Good practice however suggests usiing just a single control loop\cite{accidents}, so one should try to minimize the amount of control loops used and
+    Single MAPE loops do not scale efficiently for large systems, one must find a better scaling solution. Often times multiple control loops are constructed.
+    Good practice, however, suggests using just a single control loop \cite{accidents}, which means that one should try to minimize the amount of control loops used and
     make them independent from one another.
     
     
     \quad Architects are faced with a number of new decisions;
     % \\
-    Is a centralized or decentralized architecture better to achieve one's goals? Are the control loops independent from one another?
-    Is a hierarchical approach appropriate? Good practice suggests using just a single control loop\cite{accidents}, so can the amount of control loops be scaled down?
+    Is a centralized or decentralized architecture better for achieving one's goals? Are the control loops independent from one another?
+    Is a hierarchical approach appropriate? Can the amount of control loops be scaled down?
     % \\
     Research is needed to battle some of the issues that self-adaptive systems and control structures face, such as structural arrangements. 
-    It is therefore necessary to explore more architectures, an example will be shown in \ref{sec:hierarchical}, in which a decentralized hierarchical approach was
-    chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work, a possible area of research 
-    would be finding a way to 'inject' self-adaptivity into pre-existing systems.
+    It is therefore necessary to explore more architectures, an example for which will be shown in \ref{sec:hierarchical}, where a decentralized hierarchical approach was
+    chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work. 
+    A possible field of research would be finding a way to 'inject' self-adaptivity into pre-existing systems.
     
-    \quad Cheng et al propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation'\cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
+    \quad Cheng et al propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation' \cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
     Furthermore, they emphasize the importance of understanding control loops as the most important tool in self-adaptive systems in order to mature the research area of self-adaptive systems.
     
     \subsection{MAPE-K Loop}
