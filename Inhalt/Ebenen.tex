@@ -1,7 +1,6 @@
 
 \chapter{Fundamental Concepts}
 \label{cha:fundamentals}
-\textbf{TODO: I -> We, no need to always say will, sometimes use passive to switch it up}
 In this chapter we lay out the fundamental concepts, which are necessary in order to understand the subsequent chapters.
 First we explain Stream Processing in \ref{sec:stream-processing}, afterwards the concept of the self-adaptive systems will be presented and explained in section \ref{sec:self-adaptive} 
 followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude this chapter.
@@ -87,7 +86,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         are capable of and give an example of a SPS. Furthermore windows will be explained and the concept of adaptation in SPSs will be laid out.
         In the end of the section we will present some of the challenges that SPSs face.
 
-        % Todo: Batch processing kurz erläutern, higher latency b/c larger amounts of data are processed at once??
         \quad Stream processing systems are systems designed to handle large amounts of data in (near) real-time fashion with low latency.
         SPSs were designed in order to fulfil the needs for fast processing, which was not solved by the previous batch processing systems.
         Batch processing systems were able to process huge amounts of data as well, however the difference that needs to be emphasized is the latency.
@@ -120,7 +118,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         An example for data adaptation would be \textit{load shedding}, a strategy where some data tuples are dropped in order to free up computational resources.
         However, one must take into consideration that one possibly sacrifices accuracy for the sake of performance, as more data generally leads to more accurate results.
         Furthermore, one must take note of the resource cost to calculate which tuples to drop in order to have the lowest impact on the quality of service.
-        % TODO Maybe an example here for load shedding?
         % \\
         For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a stratey, in which the available computational 
         resources are constantly reassigned, so as to allocate the memory in the most efficient way. For example a node facing a high data load at the moment might 
@@ -188,10 +185,6 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     
     }{}
     
-    % \textbf{TODO: Needs more; e.g why self-adaptive(already mentioned in intro), Software engineering perspective on self adaptivity, challenges}
-    % Definition of self-adaptive systems
-    % Architecture often based on mape in different patterns
-    % applied in xx industries
     Cheng et al. define self-adaptive systems as
     \begin{quotation}
         ``[\ldots] systems that are able to adjust their behaviour in response to their perception of the environment and the
@@ -299,10 +292,64 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         \subsection{Dhalion's Architecture}
         \label{sec:dhalion-architecture}
         \textbf{TODO: Diagram, explain it here}
+        % Dhalion sits on top of streaming engines and allows them to become self-regulating/adapting
+        % 3 major components:
+        % Health Manager
+        %   -> Mainting the health of the running topology
+        %   -> periodically invokes a policy which evaluates the status/health of topology
+        %   -> policies can be either invasive or noninvasive
+        %       -> invasive: takes action that adjust topology config, such as parallelism changes
+        %       -> noninvasive: No topology changes, typically a alert to the user when particular event happens
+        %   -> Can execute multiple noninvasive policies at a time, but only one invasive
+        %       -> So that no conflicting actions are taken, as it would cause instability 
+        
+        %   -> 3 phases:
+        %       -> Symptom Detection Phase
+        %       >>>> Dhalion collects several metrics during this phase
+        %       >>>> Identify symptoms that indicate that health of topology is compromised
+        %       >>>> (Backpressure (nachlesen), skew)
+        %       >>>> Identification of symptons done by Symptom Detectors, that collect appropriate metrics and form evaluations of said metrics
+        %       >>>> Symptom Detectors employ anomaly detection techniques, outliers, clustering..
+        %       >>>> Once a symptom has been identified, a Symptom description is produced, containing the symptom, the metrics and their corresponding values used to identify the symptom
+        %       >>>> API so that users can create their own Symptom Detectors
+        
+        %       -> Diagnosis Generation Phase 
+        %       >>>> Collects the symptoms generated by Sympton Detection Phase
+        %       >>>> Attempts to identify root cause of symptoms
+        %       >>>> Done via Diagnosers, who take a set of symptom descriptions of input
+        %       >>>> output is a diagnosis description based on symptoms, if possible
+        %       >>>> Diagnosis Description is respresentation of root cause, symptoms and their metrics + values that led to this diagnosis
+        %       >>>> API to create new Diagnosers
+
+        %       -> Resolution Phase
+        %       >>>> Resolve problems identified by Diagnosis Generation Phase
+        %       >>>> Done by Resolvers
+        %       >>>> Resolvers take asinput a diagnosis description
+        %       >>>> based on diagnosis description performs appropriate action to bring topology back to healthy state
+        %       >>>> Usually Diagnosers 1 : 1 Resolvers
+        %       >>>> API as well
+        %       >>>> First step: Determine appropriate Resolver by examining diagnoses
+        %       >>>> Second step: Resolver perfoms the topology changes
+        %       >>>> However, major topology changes are invoked through scheduler (e.g. scaling up/down, restarting container)
+        
+        % Action Log
+        %   -> 
+        %   ->
+        %   ->
+        %   ->
+        % Action Blacklist
+        %   -> 
+        %   ->
+        %   ->
+        %   ->
+
+
         Explanation of Dhalion's Architecture \textbf{KERNPUNKT DER SECTION DHALION}
 
         \subsection{Discussion of Dhalion}
         \label{sec:dhalion-discussion}
+        % Highly customizable as one can create own policies and great API (Diagnosers, symptom checkers, resolvers)!!!
+        % -> Modularität
         Discuss the approach and compare it to the reference architecture (Mape?)
         \textbf{TODO: Maybe discuss how they evaluate, look at metrics relevant to architecture}
 
@@ -398,7 +445,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
 
         \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
         It utilizes its knowledge about the node's CPU utilization and its network distance to neighboring nodes.
-        The policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica will be selected 
+        This policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica will be selected 
         randomly and then migrated to a neighboring node, which is randomly selected, with closer neighbors being preferred. 
 
         \quad The application manager policy exploits its centralized position and its global view. 
@@ -439,16 +486,6 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         % compare it to the reference architecture
         % refer to cheng et al in self-adaptive systems chapter
         % recht general, nicht zu restrictive, viele policies moeglich?
-
-    \section{Some Other Architecture}
-    \label{sec:soa}
-    NOTE: In this chapter I will explain another architecture/approach to self-adaption, yet to be researched
-
-
-    \section{Some Other Architecture2}
-    \label{sec:soa2}
-    NOTE: In this chapter I will explain another architecture/approach to self-adaption, yet to be researched
-
 
     \section{Title??}
     \textbf{TODO: Discuss among all of them, critical thinking..}
