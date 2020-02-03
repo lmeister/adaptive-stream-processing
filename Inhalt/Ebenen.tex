@@ -22,12 +22,13 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
         % - Sometimes access to archived data in DBMS needed, however this can be cached or efficiently accessed
 
         \begin{figure}[h]
-            \label{fig:dbms_dsms}
+            
             \centering
             \includegraphics[width=1.0\textwidth]{Bilder/dbms_dsms.png}
             \caption{
                    left: architecture of a DBMS; right: architecture of a DSMS
-                   }
+            }
+            \label{fig:dbms_dsms}
         \end{figure}
 
         A data stream management system is a tool designed to manage continuous data streams.
@@ -137,14 +138,14 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
 
         \begin{figure}[h]
-            \label{fig:sps_parallel_normal}
             \centering
             \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
             \caption{
                     Left: An example for an SPS displayed as a directed acyclic graph;
                     Right: Same SPS with introduced parallelity in one operator, also called scale-out adaptation, marked gray for visibility;
                     Circles on the left depict data sources, circled on the right depict data sinks, squares are operators/processors, and arrows are streams.
-                    }
+            }
+            \label{fig:sps_parallel_normal}
         \end{figure}
 
         % Subsection Requirements for Stream Processing Systems
@@ -241,16 +242,17 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
     % explain different "stages" (m, a, p, e)
     % Explain -K extension
     The MAPE-K Loop was introduced by IBM \cite{Kephart:2003:VAC:642194.642200} and refers to a proposed solution for self-adaptive or autonomic systems.
-    This model has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
+    This model, as shown in figure \ref{fig:mape}, has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
     The acronym MAPE-K refers to the components that make up the model:
     \begin{figure}[hbt]
-        \label{fig:mape}
         \centering
         \includegraphics[width=0.45\textwidth]{Bilder/mape.png}
         \caption{
                 Overview of the MAPE-K-Loop\cite{Kephart:2003:VAC:642194.642200}
-                }
+        }
+        \label{fig:mape}
     \end{figure}  
+
     \begin{enumerate}
     \label{enum:mape}
         \item \textbf{M}onitor: 
@@ -306,48 +308,50 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         Small outline of Heron, as Dhalion is built on top of Twitter's Heron.
 
         \subsection{Dhalion's Architecture}
+        
         \label{sub:dhalion-architecture}
-        \textbf{TODO: Diagram, explain it here}
-        % Dhalion sits on top of streaming engines and allows them to become self-regulating/adapting
-        % 3 major components:
+        Dhalion is a modular framework that allows streaming systems be come self-regulating and consists of 3 major components.
+        Its architecture is shown in figure \ref{fig:dhalion}.
         
-        % Health Manager
-        %   -> Mainting the health of the running topology
-        %   -> periodically invokes a policy which evaluates the status/health of topology
-        %   -> policies can be either invasive or noninvasive
-        %       -> invasive: takes action that adjust topology config, such as parallelism changes
-        %       -> noninvasive: No topology changes, typically a alert to the user when particular event happens
-        %   -> Can execute multiple noninvasive policies at a time, but only one invasive
-        %       -> So that no conflicting actions are taken, as it would cause instability 
-        %   -> 3 phases:
-        %       -> Symptom Detection Phase
-        %       >>>> Dhalion collects several metrics during this phase
-        %       >>>> Identify symptoms that indicate that health of topology is compromised
-        %       >>>> (Backpressure (nachlesen), skew)
-        %       >>>> Identification of symptons done by Symptom Detectors, that collect appropriate metrics and form evaluations of said metrics
-        %       >>>> Symptom Detectors employ anomaly detection techniques, outliers, clustering..
-        %       >>>> Once a symptom has been identified, a Symptom description is produced, containing the symptom, the metrics and their corresponding values used to identify the symptom
-        %       >>>> API so that users can create their own Symptom Detectors
+        \quad The biggest component of Dhalion is its \textit{health manager}, whose responsible for maintaining the health of the topology.
+        The health manager periodically invokes a policy which evaluates the health of the topology. 
+        The policies used by the health manager can either be noninvasive or invasive, meaning that they can either only alert the user when a particular event happens or 
+        perform certain adjustments to the topology's configuration, respectively.
+        Its possible to execute multiple noninvasive policies at a time, however, one can only execute one invasive policy simultaneously.
+        The health manager works in 3 phases: the \textit{symptom detection phase}, the \textit{diagnosis generation phase} and the \textit{resolution phase}.
         
-        %       -> Diagnosis Generation Phase 
-        %       >>>> Collects the symptoms generated by Sympton Detection Phase
-        %       >>>> Attempts to identify root cause of symptoms
-        %       >>>> Done via Diagnosers, who take a set of symptom descriptions of input
-        %       >>>> output is a diagnosis description based on symptoms, if possible
-        %       >>>> Diagnosis Description is respresentation of root cause, symptoms and their metrics + values that led to this diagnosis
-        %       >>>> API to create new Diagnosers
+        \quad During its first phase, the symptom detection phase, Dhalion collects several metrics, which are then used to identify symptoms, which could indicate that the 
+        topology's health is in jeopardy.
+        This identification process is done by \textit{symptom detectors} which collect appropriate metrics and form evaluations based on the collected metrics.
+        Symptom detectors employ multiple forms of anomaly detection techniques, such as outlier detection and clustering.
+        Once a sympton has been identified by a symptom detector, a symptom description will be generated. A symptom description contains the sympton, the metrics which
+        were used to identify the symptom and the corresponding values of those metric.
+        Additionaly, Dhalion's extensive API offers end-users the ability to design their own symptom detectors.
+        
+        \quad In the diagnosis generation phase the health manager collects the symptoms generated during the symptom detection phase and attemps to identify the causes 
+        of the symptoms. 
+        This is done via diagnosers. Diagnosers take a set of symptom descriptions as input and output a diagnosis description based on the symptons. 
+        A diagnosis description contains the cause, the corresponding symptoms as well as the metrics and their values that led to the diagnosis.
+        Similar to the symptom detectors, end-users are able to create their own diagnosers via Dhalion's API.
 
-        %       -> Resolution Phase
-        %       >>>> Resolve problems identified by Diagnosis Generation Phase
-        %       >>>> Done by Resolvers
-        %       >>>> Resolvers take asinput a diagnosis description
-        %       >>>> based on diagnosis description performs appropriate action to bring topology back to healthy state
-        %       >>>> Usually Diagnosers 1 : 1 Resolvers
-        %       >>>> API as well
-        %       >>>> First step: Determine appropriate Resolver by examining diagnoses
-        %       >>>> Second step: Resolver perfoms the topology changes
-        %       >>>> However, major topology changes are invoked through scheduler (e.g. scaling up/down, restarting container)
-        
+        \quad During the health managers final phase, the resolution phase, it attempts to resolve the previously diagnosed problems.
+        Resolvers, who perform the resolving process, process the diagnoses descriptions provided by the diagnosers and perform, based on the diagnoses, the 
+        appropriate actions to improve the topology's health. Usually there is a 1:1 mapping between resolvers and diagnosers.
+        First, the system determines the appropriate resolver by examining the diagnoses. Afterwards the designated resolver performs the topology changes.
+        However, major topology changes, such as scaling up/down or restarting containers, are invoked through the scheduler, as shown in figure \ref{fig:dhalion}.
+
+        \quad 
+
+
+        \begin{figure}[hbt]
+            \centering
+            \includegraphics[width=0.5\textwidth]{Bilder/dhalion.png}
+            \caption{
+                Architecture of Dhalion, sitting on top of Heron. Dhalion components marked blue \cite{dhalion}.
+            }
+            \label{fig:dhalion}
+        \end{figure}
+
         % Action Log
         %   -> captures the actions taken by Health Manager
         %   -> useful for tuning policies and debugging
@@ -363,9 +367,6 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         %   -> Before invoking an action, Dhalion checks the blacklist
         %   -> Action Blacklist is optional for policies
 
-
-        Explanation of Dhalion's Architecture \textbf{KERNPUNKT DER SECTION DHALION}
-
         \subsection{Discussion of Dhalion}
         \label{sub:dhalion-discussion}
         % Highly customizable as one can create own policies and great API (Diagnosers, symptom checkers, resolvers)!!!
@@ -375,7 +376,6 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
     \section{Decentralized Self-Adaptation}
     \label{sec:hierarchical}
-    \textbf{TODO: Incorporate same structure as above}
     In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
     % \\
     In \ref{sub:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
@@ -389,12 +389,12 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         % \\
         \begin{figure}[hbt]
-        \label{fig:hierarchical}
-        \centering
-        \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
-        \caption{
-                Conceptual architecture of the EDF\cite{cardellini}
-                }
+            \centering
+            \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
+            \caption{
+                    Conceptual architecture of the EDF\cite{cardellini}
+            }
+            \label{fig:hierarchical}
         \end{figure}
         The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
         While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
