@@ -229,7 +229,7 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
     chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work. 
     A possible field of research would be finding a way to 'inject' self-adaptivity into pre-existing systems.
     
-    \quad Cheng et al propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation' \cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
+    \quad Cheng et al. propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation' \cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
     Furthermore, they emphasize the importance of understanding control loops as the most important tool in self-adaptive systems in order to mature the research area of self-adaptive systems.
     
     \subsection{MAPE-K Loop}
@@ -277,31 +277,31 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
 \chapter{Approaches for Self-Adaptive Architectures in Stream Processing}
 \label{cha:approaches}
 % \textbf{TODO: How does it work? FOCUS ON ARCHITECTURE IN THIS CHAPTER!!}
-In this chapter we will showcase two approaches for self-adapting stream processing systems.
+In this chapter, we will showcase two approaches for self-adapting stream processing systems.
 In \ref{sec:dhalion} we will present Dhalion, a system that sits on top of streaming engines, such as Heron, and allows them to become self-regulating, as described in \cite{dhalion}.
-Furthermore, we will give an outline of Heron in \ref{sub:heron-outline} and then explain Dhalion's architecture in detail in \ref{sub:dhalion-architecture}. followed by a discussion of Dhalion in \ref{sub:dhalion-discussion}.
+Furthermore, we will give an outline of Heron in \ref{sub:heron-outline} and then explain Dhalion's architecture in detail in \ref{sub:dhalion-architecture} which we then discuss in \ref{sub:dhalion-discussion}.
 In \ref{sec:hierarchical} we will explore a decentralized hierarchical approach to self-adaptive stream processing systems, as proposed in \cite{cardellini}. Analogous to the \nameref{sec:dhalion} chapter, we will first 
 explain the proposed architecture in \ref{sub:edf} and follow it up with a discussion in \ref{sub:discussion-edf}.
 
     \section{Dhalion}
     \label{sec:dhalion}
-    Dhalion is a framework developed by Floratou et al., which sits on top of streaming engines, giving said underlying systems the ability to self-regulate.  
-    Floratou et al. define three characteristics, that a self-regulating system must be capable of:
+    Dhalion is a framework developed by Floratou et al., which is used on top of streaming engines, giving said underlying systems the ability to self-regulate.  
+    Floratou et al. define three characteristics that a self-regulating system has to be capable of:
     
-    \quad \textit{self-tuning}: A self-regulating system should be self-tuning, meaning that a self-regulating system should 
-    be able to take both the policy, which is defining the objective, and the specification of the streaming system and automatically tune 
-    its configuration parameters in a matter, that leads to the fulfilment of its service level objectives.
+    \quad \textit{Self-tuning}: A self-regulating system should be self-tuning, meaning that a self-regulating system should 
+    be able to take both the policy, which defines the objective, and the specification of the streaming system and automatically tune 
+    its configuration parameters in a matter that leads to the fulfilment of its service level objectives.
     
-    \quad \textit{self-stabilization}: As the rate of incoming streams fluctuates, a system can be faced with either over- or under-utilization of its computing resources. 
-    In order to prevent said over- or under-utilization, a self-regulating system must react to changes in the stream velocity and either acquire additional resources 
+    \quad \textit{Self-stabilization}: As the rate of incoming streams fluctuates, a system can be faced with either over- or under-utilization of its computing resources. 
+    In order to prevent these issues, a self-regulating system has to react to changes in the stream velocity and either acquire additional resources 
     or free resources and scale down.
 
-    \quad \textit{self-healing}: Due to the fact that systems can not only be affected by failures but also by reduced quality of service, 
-    e.g. a slow disk or memory constraints, self-regulating systems must have a mechanism in place to diagnose such service degradations and to adapt 
-    in order to recover from such faults.
+    \quad \textit{Self-healing}: Due to the fact that systems can not only be affected by failures but also by reduced quality of service, 
+    e.g. a slow disk or memory constraints, self-regulating systems need to have a mechanism in place to diagnose such service degradations and to adapt 
+    to recover from such faults.
 
     In order to get a deeper understanding of Dhalion, we will briefly explain Heron in \ref{sub:heron-outline}, then discuss Dhalion's architecture in \ref{sub:dhalion-architecture}, 
-    followed by a discussion of Dhalion in \ref{sub:dhalion-discussion}.
+    which we then follow with a discussion of Dhalion in \ref{sub:dhalion-discussion}.
 
         \subsection{An Outline of Heron}
         \label{sub:heron-outline}
@@ -310,7 +310,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         \subsection{Dhalion's Architecture}
         
         \label{sub:dhalion-architecture}
-        Dhalion is a modular framework that allows streaming systems be come self-regulating and consists of 3 major components.
+        Dhalion is a modular framework that allows streaming systems to become self-regulating and consists of 3 major components.
         Its architecture is shown in figure \ref{fig:dhalion}.
 
         \begin{figure}[hbt]
@@ -322,45 +322,45 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
             \label{fig:dhalion}
         \end{figure}
 
-        \quad The biggest component of Dhalion is its \textit{health manager}, whose responsible for maintaining the health of the topology.
+        \quad The biggest component of Dhalion is its \textit{health manager}, who is responsible for maintaining the health of the topology.
         The health manager periodically invokes a policy which evaluates the health of the topology. 
-        The policies used by the health manager can either be noninvasive or invasive, meaning that they can either only alert the user when a particular event happens or 
+        The policies used by the health manager can either be noninvasive or invasive, meaning that they can either only alert the user when a particular event occurs or 
         perform certain adjustments to the topology's configuration, respectively.
-        Its possible to execute multiple noninvasive policies at a time, however, one can only execute one invasive policy simultaneously.
+        Its possible to execute multiple noninvasive policies at a time, however, one can only execute one invasive policy at a time.
         The health manager works in 3 phases: the \textit{symptom detection phase}, the \textit{diagnosis generation phase} and the \textit{resolution phase}.
         
-        \quad During its first phase, the symptom detection phase, Dhalion collects several metrics, which are then used to identify symptoms, which could indicate that the 
+        \quad During its first phase, the symptom detection phase, Dhalion collects several metrics, which are then used to identify symptoms, that could indicate that the 
         topology's health is in jeopardy.
-        This identification process is done by \textit{symptom detectors} which collect appropriate metrics and form evaluations based on the collected metrics.
+        This identification process is performed by \textit{symptom detectors}, which collect appropriate metrics and form evaluations based on the collected metrics.
         Symptom detectors employ multiple forms of anomaly detection techniques, such as outlier detection and clustering.
         Once a sympton has been identified by a symptom detector, a symptom description will be generated. A symptom description contains the sympton, the metrics which
-        were used to identify the symptom and the corresponding values of those metric.
-        Additionaly, Dhalion's extensive API offers end-users the ability to design their own symptom detectors.
+        were used to identify the symptom, and the corresponding values of those metrics.
+        Additionally, Dhalion's extensive API offers end-users the ability to design their own symptom detectors.
         
-        \quad In the diagnosis generation phase the health manager collects the symptoms generated during the symptom detection phase and attemps to identify the causes 
+        \quad In the diagnosis generation phase, the health manager collects the symptoms generated during the symptom detection phase and attemps to identify the causes 
         of the symptoms. 
         This is done via diagnosers. Diagnosers take a set of symptom descriptions as input and output a diagnosis description based on the symptons. 
         A diagnosis description contains the cause, the corresponding symptoms as well as the metrics and their values that led to the diagnosis.
-        Similar to the symptom detectors, end-users are able to create their own diagnosers via Dhalion's API.
+        Similarly to the symptom detectors, end-users are able to create their own diagnosers via Dhalion's API.
 
         \quad During the health managers final phase, the resolution phase, it attempts to resolve the previously diagnosed problems.
-        Resolvers, who perform the resolving process, process the diagnoses descriptions provided by the diagnosers and perform, based on the diagnoses, the 
-        appropriate actions to improve the topology's health. Usually there is a 1:1 mapping between resolvers and diagnosers.
-        First, the system determines the appropriate resolver by examining the diagnoses. Afterwards the designated resolver performs the topology changes.
+        Resolvers, who perform the resolving process, process the diagnoses descriptions provided by the diagnosers and perform the 
+        appropriate actions, based on the diagnoses, to improve the topology's health. Usually, there is a 1:1 mapping between resolvers and diagnosers.
+        First, the system determines the appropriate resolver by examining the diagnoses. Afterwards, the designated resolver performs the topology changes.
         However, major topology changes, such as scaling up/down or restarting containers, are invoked through the scheduler, as shown in figure \ref{fig:dhalion}.
-        The Dhalion API offers end-user the possibility to create their own reolvers.
+        The Dhalion API offers end-users the possibility to create their own reolvers.
 
         \quad The system's second component is the \textit{action log}, which records the actions taken by the health manager.
-        The log can be useful for tuning or debugging policies. Each entry consists of the action that was taken, the time at which the action was taking and the diagnosis 
+        The log can be useful for tuning or debugging policies. Each entry consists of the action that was taken, the time at which the action took place and the diagnosis 
         that led to the action being executed. 
-        It is noteworthy that the end-users can configure Dhalion to drop logs, once they pass a certain size or age.
+        It is noteworthy that the end-users can configure Dhalion to drop logs once they pass a certain size or age.
 
-        \quad The system's third, and final, component is the \textit{action blacklist}, which end-users have the ability to not use for policies.
-        After each action the health manager will wait until the topology has once again reached a steady state and then evaluate the performed action.
-        To do this, one must define an evaluation method whenever one creates a new policy. Given the evaluation method, the health manager will evaluate the action.
-        If the action has not reached the desired results, and the amount of times it was beneficial to the topology's health divided by the total amount of times it 
+        \quad The system's third and final component is the \textit{action blacklist}, which end-users have the ability to not use for policies.
+        After each action, the health manager waits until the topology has once again reached a steady state and then evaluate the performed action.
+        To do this, one must define an evaluation method whenever one creates a new policy. Given the evaluation method, the health manager evaluates the action.
+        If the action does not reach the desired results, and the amount of times it was beneficial to the topology's health divided by the total amount of times it 
         was invoked passes a pre-defined threshold, the action will be blacklisted.
-        Before a resolver can invoke a certain action, it must first check the blacklist, to see if this action has been blacklisted for a similar diagnosis.
+        Before a resolver can invoke a certain action, it must first check the blacklist to see if this action has been blacklisted for a similar diagnosis.
 
         \subsection{Discussion of Dhalion}
         \label{sub:dhalion-discussion}
@@ -389,7 +389,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         \subsection{Elastic and Distributed DSP Framework}
         \label{sub:edf}
         As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
-        Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
+        Cardellini et al. argue to implement multiple MAPE loops, as per Weyns et al. \cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         % \\
         \begin{figure}[hbt]
             \centering
@@ -404,7 +404,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         % \\
         The MAPE loops are arranged in a hierarchical pattern, where higher-level loops are in charge of the decisions proposed by the lower-level loops.
         % \\
-        On the lower layer Cardellini et al introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
+        On the lower layer Cardellini et al. introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
 
         \quad The operator manager is in charge of controlling the adaptation of a single operator by utilizing a local MAPE loop.
         The architecture utilizes as many operator managers as there are operators.
@@ -446,7 +446,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         Once a decision has been reached, information is passed over to the \textit{global actuator}, who then communicates the decisions to the lower layer's managers, 
         where the respective reconfiguration actuators perform the adaptations.
         
-        \quad In order to determine the sequence of the adaptations, Cardellini et al use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}, 
+        \quad In order to determine the sequence of the adaptations, Cardellini et al. use a \textit{pause-and-resume approach}\cite{Heinze2014CloudbasedDS}, 
         which implies that the operator, that is to be adapted, will be paused while the adaptation is performed and resume its functionality after the 
         reconfiguration has taken place. 
         % \\
@@ -455,11 +455,11 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         will be saved to persistent memory, e.g. a database. During the reconfiguration any incoming data will be buffered in memory.
         As soon as the adaptation has been performed, the state will be restored and the buffered data will be processed.
         This process, of course, leads to bigger downtime, so it is even more important to very carefully choose, whether an adaptation is made or not.
-        To determine when a request for an adaptation should be granted, Cardellini et al propose policies for the lower layer's managers.
+        To determine when a request for an adaptation should be granted, Cardellini et al. propose policies for the lower layer's managers.
         % \\
 
         \quad The operator manager policy utilizes the limited view on system, which only lets it access the input rate and the utilization of its operator.
-        It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al propose two different policies.
+        It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini . propose two different policies.
         The first one is a threshold based policy, which the the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
         of an operator passes the threshold, a scale-out action will be planned. 
         % \\
