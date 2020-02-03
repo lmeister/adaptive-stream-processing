@@ -364,8 +364,21 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         \subsection{Discussion of Dhalion}
         \label{sub:dhalion-discussion}
-        % Highly customizable as one can create own policies and great API (Diagnosers, symptom checkers, resolvers)!!!
-        % -> Modularität
+        Due to Dhalion's extensive API end-users are able to create their own policies and thus expand Dhalion to fulfill their needs. 
+        The modularity offered by Dhalion's policy architecture allows for the creation of many different objects, e.g. diagnosers, resolvers or symptom detectors, 
+        instead of having to create monolithic objects.
+        This approach promotes reusability of e.g. diagnosers for multiple policies and allows for easier debugging and evaluation.
+        Furthermore, existing code is much easier to be maintain, as one does not have to understand a monolithic structure but instead only smaller objects.
+        
+        \quad However, 
+        % -> Probleme, wenn während Resting period für evaluation ein anderes Problem auftritt?
+        % -> 
+        % -> Vergleich MAPE? TODO
+        % M: Health Manager Sympton Detector (Collects metrics)
+        % A: Health Manager Symptom Detector (Analyzes metrics, identifies symptoms) & Diagnoser (Forms diagnosis)
+        % P: Resolver (Determines necessary action)
+        % E: Resolver executes determined action
+        % Not sure if the above is correct
         Discuss the approach and compare it to the reference architecture (Mape?)
         \textbf{TODO: Maybe discuss how they evaluate, look at metrics relevant to architecture}
 
