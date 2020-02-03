@@ -242,8 +242,8 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
     % explain different "stages" (m, a, p, e)
     % Explain -K extension
     The MAPE-K Loop was introduced by IBM \cite{Kephart:2003:VAC:642194.642200} and refers to a proposed solution for self-adaptive or autonomic systems.
-    This model, as shown in figure \ref{fig:mape}, has since become the basis or reference architectural pattern for many self adaptive systems, which I will show in the third chapter.
-    The acronym MAPE-K refers to the components that make up the model:
+    This model, as shown in figure \ref{fig:mape}, has since become the basis or reference architectural pattern for many self adaptive systems, which we will show in the third chapter.
+    The acronym \textit{MAPE-K} refers to the components that constitute the model:
     \begin{figure}[hbt]
         \centering
         \includegraphics[width=0.45\textwidth]{Bilder/mape.png}
@@ -256,10 +256,10 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
     \begin{enumerate}
     \label{enum:mape}
         \item \textbf{M}onitor: 
-            The \textit{Monitor} component gathers data about the system and its environment, aggregates and filters it.
+            The \textit{Monitor} component gathers data about the system and its environment, aggregates, and filters it.
         \item \textbf{A}nalyze: 
             The \textit{Analyze} component analyzes the previously gathered data and determines whether or not an adaptation should be performed.
-            The decision is made based on performance or cost gain and should include the adaptation cost as well.
+            The decision is based on performance or cost gain and should include the adaptation cost as well.
             This component's analysis is influenced by the \textit{Knowledge} base.
         \item \textbf{P}lan: 
             If the choice to adapt the system has been made, the \textit{Plan} component then decides how to reconfigure the system.
