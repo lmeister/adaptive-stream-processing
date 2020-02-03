@@ -274,23 +274,39 @@ followed by a brief explanation of the MAPE-K loop in \ref{sub:mape} to conclude
 
 \chapter{Approaches for Self-Adaptive Architectures in Stream Processing}
 \label{cha:approaches}
-\textbf{TODO: How does it work? FOCUS ON ARCHITECTURE IN THIS CHAPTER!!}
-Explain that this chapter showcases a few select strategies, which are then elaborated on further in the subchapters
-Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control pattern (Both MAPE based)?
-\textbf{Add and explain a few more MAPE Based architectures}
+% \textbf{TODO: How does it work? FOCUS ON ARCHITECTURE IN THIS CHAPTER!!}
+In this chapter we will showcase two approaches for self-adapting stream processing systems.
+In \ref{sec:dhalion} we will present Dhalion, a system that sits on top of streaming engines, such as Heron, and allows them to become self-regulating, as described in \cite{dhalion}.
+Furthermore, we will give an outline of Heron in \ref{sub:heron-outline} and then explain Dhalion's architecture in detail in \ref{sub:dhalion-architecture}. followed by a discussion of Dhalion in \ref{sub:dhalion-discussion}.
+In \ref{sec:hierarchical} we will explore a decentralized hierarchical approach to self-adaptive stream processing systems, as proposed in \cite{cardellini}. Analogous to the \nameref{sec:dhalion} chapter, we will first 
+explain the proposed architecture in \ref{sub:edf} and follow it up with a discussion in \ref{sub:discussion-edf}.
 
     \section{Dhalion}
     \label{sec:dhalion}
-    In this section we will explain Dhalion \cite{dhalion}
-    Quick Introduction to Dhalion, this chapter will deal with the Dhalion paper.
-    NOTE: Explain what Dhalion is, where its used
+    Dhalion is a framework developed by Floratou et al., which sits on top of streaming engines, giving said underlying systems the ability to self-regulate.  
+    Floratou et al. define three characteristics, that a self-regulating system must be capable of:
+    
+    \quad \textit{self-tuning}: A self-regulating system should be self-tuning, meaning that a self-regulating system should 
+    be able to take both the policy, which is defining the objective, and the specification of the streaming system and automatically tune 
+    its configuration parameters in a matter, that leads to the fulfilment of its service level objectives.
+    
+    \quad \textit{self-stabilization}: As the rate of incoming streams fluctuates, a system can be faced with either over- or under-utilization of its computing resources. 
+    In order to prevent said over- or under-utilization, a self-regulating system must react to changes in the stream velocity and either acquire additional resources 
+    or free resources and scale down.
+
+    \quad \textit{self-healing}: Due to the fact that systems can not only be affected by failures but also by reduced quality of service, 
+    e.g. a slow disk or memory constraints, self-regulating systems must have a mechanism in place to diagnose such service degradations and to adapt 
+    in order to recover from such faults.
+
+    In order to get a deeper understanding of Dhalion, we will briefly explain Heron in \ref{sub:heron-outline}, then discuss Dhalion's architecture in \ref{sub:dhalion-architecture}, 
+    followed by a discussion of Dhalion in \ref{sub:dhalion-discussion}.
 
         \subsection{An Outline of Heron}
         \label{sub:heron-outline}
         Small outline of Heron, as Dhalion is built on top of Twitter's Heron.
 
         \subsection{Dhalion's Architecture}
-        \label{sec:dhalion-architecture}
+        \label{sub:dhalion-architecture}
         \textbf{TODO: Diagram, explain it here}
         % Dhalion sits on top of streaming engines and allows them to become self-regulating/adapting
         % 3 major components:
@@ -351,7 +367,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
         Explanation of Dhalion's Architecture \textbf{KERNPUNKT DER SECTION DHALION}
 
         \subsection{Discussion of Dhalion}
-        \label{sec:dhalion-discussion}
+        \label{sub:dhalion-discussion}
         % Highly customizable as one can create own policies and great API (Diagnosers, symptom checkers, resolvers)!!!
         % -> Modularität
         Discuss the approach and compare it to the reference architecture (Mape?)
@@ -362,13 +378,13 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
     \textbf{TODO: Incorporate same structure as above}
     In this section we will explore a decentralized hierarchical architecture as described by Cardellini et al in \cite{cardellini}.
     % \\
-    In \ref{sec:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
+    In \ref{sub:edf} we will present the proposed architecture, as shown in figure \ref{fig:hierarchical}, and elaborate on its functionality in greater detail.
     % \\
-    Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sec:discussion-edf}.
+    Afterwards we will discuss the architecture, talk about the advantages and possible complications. Further we will compare it to its reference architecture in \ref{sub:discussion-edf}.
 
 
         \subsection{Elastic and Distributed DSP Framework}
-        \label{sec:edf}
+        \label{sub:edf}
         As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems\cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858},
         Cardellini et al argue to implement multiple MAPE loops, as per Weyns et al\cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         % \\
@@ -471,7 +487,7 @@ Question: Even more approaches? e.g. Master-Slave pattern or Coordinated Control
 
 
         \subsection{Discussion of EDF}
-        \label{sec:discussion-edf}
+        \label{sub:discussion-edf}
         % Talk about their approach to finding the architecture for geo-distributed
         % -> Master-slave pattern
         %   -> Centralized Analyze & Plan component, rest decentralized and multiple instances
