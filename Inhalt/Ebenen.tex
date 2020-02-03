@@ -82,57 +82,57 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
         % TODO Challenges, die SPSs facen
 
         % Topical sentence
-        In this section we will define stream processing systems, expound what data looks like in SPS. We also explain what SPSs
-        are capable of and give an example of a SPS. Furthermore windows will be explained and the concept of adaptation in SPSs will be laid out.
-        In the end of the section we will present some of the challenges that SPSs face.
+        In this section, we will define stream processing systems, expound what data looks like in SPSs. We will also explain what SPSs
+        are capable of and give an example of an SPS. Furthermore, windows will be explained and the concept of adaptation in SPSs will be laid out.
+        At the end of the section, we will present some of the challenges that SPSs face.
 
         \quad Stream processing systems are systems designed to handle large amounts of data in (near) real-time fashion with low latency.
-        SPSs were designed in order to fulfil the needs for fast processing, which was not solved by the previous batch processing systems.
-        Batch processing systems were able to process huge amounts of data as well, however the difference that needs to be emphasized is the latency.
-        Stream processing systems complete their tasks faster, by processing each element as it arrives as opposed to the batch system, which collects elements 
+        SPSs were designed in order to fulfill the needs for fast processing, which was not solved by the previous batch processing systems.
+        Batch processing systems were able to process huge amounts of data as well. However, the difference, that needs to be emphasized, lies in the latency.
+        Stream processing systems complete their tasks faster by processing each element as it arrives, as opposed to the batch system, which collects elements 
         and then processes the data in batches.
-        The data is fed to the system in form of streams, which are defined as an potentially infinite, countable amount of \textit{data tuples}. 
+        The data is fed to the system in form of streams, which are defined as a potentially infinite, countable amount of \textit{data tuples}. 
         The streams usually originate from a \texit{data source} which, for example, can be a type of sensor, e.g. a simple temperature sensor or more complex sensors, 
         such as an EEG-sensor, market orders or network traffic.
         % \\
         A data tuple is an object whose internal structure is defined by a \texit{data scheme}. 
         Objects of a data stream share a common structure, also called \textit{stream schema}.
-        Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations.\cite{fundamentals}
+        Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations \cite{fundamentals}.
         Each individual data tuple is processed by one or more \textit{operators}.
         An operator is fed tuples from incoming streams through its input port, performs an operation and generates an output stream through its output port, 
         consisting of the processed tuples. Operators are able to perform various different operations, 
-        as shown in \cite[p.49]{fundamentals}, some of which include: aggregation, splitting and merging streams, 
+        as shown in \cite[p. 49]{fundamentals}, some of which include: aggregation, splitting and merging streams, 
         logical and mathematical operations and custom data manipulations.
         % \\
-        The results of a streaming application is then fed into one or multiple \textit{data sinks}, which could for example be a data visualization engine 
+        The results of a streaming application are then fed into one or multiple \textit{data sinks}, which could, for example, be a data visualization engine 
         or an automated stock trading engine.
         
-        \quad In order for a SPS to perform as fast as possible, it should have the ability to adapt to situations.
-        There are many strategies of adaptation, which can be broken down into three subcategories; \textit{processing-}, \textit{data-} and 
-        \textit{resource adaptation} \cite[p.8 f.]{QIN20191}. 
-        An examplary resource adaptation would be a \textit{processing scaling} adaptation, as shown in figure \ref{fig:sps_parallel_normal}, 
-        where, if computational resources allow it, an operator may be replicated in order to process data faster by
-        making use of the principle of parallelity. Technically, there should be a splitting operator placed before, 
-        as well as a merging operator after the replicated note. These have been left out for the sake of brevity.
+        \quad In order for an SPS to perform as fast as possible, it should have the ability to adapt to situations.
+        There are many strategies of adaptation, which can be divided into three subcategories: \textit{processing-}, \textit{data-} and 
+        \textit{resource adaptation} \cite[p. 8 f.]{QIN20191}. 
+        An exemplary resource adaptation would be a \textit{processing scaling} adaptation, as shown in figure \ref{fig:sps_parallel_normal}, 
+        where, if computational resources allow it, an operator can be replicated in order to process data faster by
+        making use of the principle of parallelity. Technically, there should be a splitting operator placed before the replicated operator, 
+        as well as a merging operator after the replicated operator. These have been left out for the sake of brevity.
         % \\
-        An example for data adaptation would be \textit{load shedding}, a strategy where some data tuples are dropped in order to free up computational resources.
+        An example for data adaptation would be \textit{load shedding}, a strategy in which some data tuples are dropped in order to free up computational resources.
         However, one must take into consideration that one possibly sacrifices accuracy for the sake of performance, as more data generally leads to more accurate results.
-        Furthermore, one must take note of the resource cost to calculate which tuples to drop in order to have the lowest impact on the quality of service.
+        Furthermore, one must take note of the resource cost that is needed to calculate which tuples to drop, in order to have the lowest impact on the quality of service.
         % \\
-        For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a stratey, in which the available computational 
-        resources are constantly reassigned, so as to allocate the memory in the most efficient way. For example a node facing a high data load at the moment might 
-        be allocated more RAM, GPU or CPU power in order to process its load faster. For this to work some resources have to be freed first, e.g. by deducting some
+        For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a strategy, in which the available computational 
+        resources are constantly reassigned, to allocate the memory in the most efficient way possible. For example, a node facing a high data load at the moment can 
+        be allocated more RAM, GPU, or CPU power in order to process its load faster. For this to work, some resources have to be freed first, e.g. by deducting some
         computational power from a node facing less input at the time. With this strategy, one must take into consideration the resources and time spent calculating 
         the optimal allocation of resources.
 
         % Challenges
-        \quad By virtue of the fields in which stream processing is applied, SPSs face a series of challenges.
+        \quad By nature of the fields in which stream processing is applied, SPSs face a series of challenges.
         
         \quad As SPSs are used as a means to process big data in a (near) real-time fashion, we will take a system that predicts changes in stock values 
         of companies based on the public's opinion, which is extracted from tweets, as an examplary application.
         % \\
         The application receives new \gls{tweet}s as input, then performs operations such as clustering and filtering for certain terms or company names. 
-        Afterwards a sentiment analysis is performed on said tweets and a prediction for stock prices is computed and then sent 
+        Afterwards, a sentiment analysis is performed on said tweets and a prediction for stock prices is computed and then sent 
         to an automatic stock trading application and stock traders for manual reviews.
 
 
@@ -140,9 +140,9 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
             \centering
             \includegraphics[width=1.0\textwidth]{Bilder/sps_parallel_normal.png}
             \caption{
-                    Left: An example for an SPS displayed as a directed acyclic graph;
-                    Right: Same SPS with introduced parallelity in one operator, also called scale-out adaptation, marked gray for visibility;
-                    Circles on the left depict data sources, circled on the right depict data sinks, squares are operators/processors, and arrows are streams.
+                    left: An example for an SPS displayed as a directed acyclic graph;
+                    right: Same SPS with introduced parallelity in one operator, also called scale-out adaptation, marked gray for visibility;
+                    Circles on the left depict data sources, circles on the right depict data sinks, squares are operators/processors, and arrows are streams.
             }
             \label{fig:sps_parallel_normal}
         \end{figure}
