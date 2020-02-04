@@ -91,20 +91,20 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
         Batch processing systems were able to process huge amounts of data as well. However, the difference, that needs to be emphasized, lies in the latency.
         Stream processing systems complete their tasks faster by processing each element as it arrives, as opposed to the batch system, which collects elements 
         and then processes the data in batches.
-        The data is fed to the system in form of streams, which are defined as a potentially infinite, countable amount of \textit{data tuples}. 
-        The streams usually originate from a \texit{data source} which, for example, can be a type of sensor, e.g. a simple temperature sensor or more complex sensors, 
+        The data is fed to the system in form of streams, which are defined as a potentially infinite, countable amount of \textit{data tuples} \cite[p. 95]{Panigati2015}. 
+        The streams usually originate from a \texit{data source} \cite[p. 45]{fundamentals} which, for example, can be a type of sensor, e.g. a simple temperature sensor or more complex sensors, 
         such as an EEG-sensor, market orders or network traffic.
         % \\
-        A data tuple is an object whose internal structure is defined by a \texit{data scheme}. 
-        Objects of a data stream share a common structure, also called \textit{stream schema}.
-        Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations \cite{fundamentals}.
+        A data tuple is an object whose internal structure is defined by a \texit{data schema} \cite[p. 46]{fundamentals}. 
+        Objects of a data stream share a common structure, also called \textit{stream schema} \cite[p. 46]{fundamentals}.
+        Tuples consist of a set of typed attributes and their respective values. One can imagine a tuple as a java object without any operations \cite[p. 46]{fundamentals}.
         Each individual data tuple is processed by one or more \textit{operators}.
         An operator is fed tuples from incoming streams through its input port, performs an operation and generates an output stream through its output port, 
-        consisting of the processed tuples. Operators are able to perform various different operations, 
+        consisting of the processed tuples \cite[p. 50]{fundamentals}. Operators are able to perform various different operations, 
         as shown in \cite[p. 49]{fundamentals}, some of which include: aggregation, splitting and merging streams, 
-        logical and mathematical operations and custom data manipulations.
+        logical and mathematical operations and custom data manipulations \cite[p. 49]{fundamentals}.
         % \\
-        The results of a streaming application are then fed into one or multiple \textit{data sinks}, which could, for example, be a data visualization engine 
+        The results of a streaming application are then fed into one or multiple \textit{data sinks} \cite[p. 45]{fundamentals}, which could, for example, be a data visualization engine 
         or an automated stock trading engine.
         
         \quad In order for an SPS to perform as fast as possible, it should have the ability to adapt to situations.
@@ -129,7 +129,7 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
         \quad By nature of the fields in which stream processing is applied, SPSs face a series of challenges.
         
         \quad As SPSs are used as a means to process big data in a (near) real-time fashion, we will take a system that predicts changes in stock values 
-        of companies based on the public's opinion, which is extracted from tweets, as an examplary application.
+        of companies based on the public's opinion, which is extracted from tweets, as an example for an application.
         % \\
         The application receives new \gls{tweet}s as input, then performs operations such as clustering and filtering for certain terms or company names. 
         Afterwards, a sentiment analysis is performed on said tweets and a prediction for stock prices is computed and then sent 
