@@ -305,24 +305,30 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         \subsection{An Outline of Heron}
         \label{sub:heron-outline}
-        Small outline of Heron, as Dhalion is built on top of Twitter's Heron. \cite{heron}
-        % Each topology is run as an Aurora job, consisting of several containers
-        % first container runs the topology master
-        % remaining containers rum stream manager, metrics manager and multile heron instances
-        % mulitple containers launched on a single physical node
-        % containers are allocated and scheduled by aurora based on resource availability across the nodes in cluster
-        % metadata for topology kept in Zookeeper
-        % one JVM per Heron instance, Heron instances written in java
-        % Apache ZooKeeper is a centralized service for distributed applications, helps managing 
-        % Topology Master (TM) responsible for managing topology
-        % TM is a gateway for topology metrics, but not involved in processing, thus not a bottle neck
-        % Stream Manager (SM) manages routing of tuples efficiently
-        % each Heron instance (HI) connects to its local SM to send and receive tuples
-        % all SM in a topology connect to each other -> better scaling, since less SM than HI
-        % TOpology backpressure mechanism: dynamically adjust the rate at which data flows through topology
-        % -> important in topologies where different components can execute at different speeds and processing speed can change over time
-        % each HI performs a single task
+        Heron is a stream processing system that was designed and built by Kulkarni et al. in 2015 for the company Twitter.
+        It was conceptualized after running into multiple issues with the previously used Apache Storm, such as debugging, lack of backpressure mechanisms \cite[p. 241]{heron} and the necessity for dedicated cluster resources \cite[p. 239]{heron}. 
+        The motivation behind Heron was to create a system, which can handle the issues that Storm faced and to guarantee an easy migration. 
+        In order to make the migration easier, Heron was designed to be API-compatible to Apache Storm \cite[p. 239]{heron}.
+        
+        \quad Heron runs on a scheduling framework, such as Twitter's Aurora \cite{dhalion}. 
+        Each topology is run as an aurora job, which consists of several containers. The first container runs the \textit{topology master} and the remaining containers run 
+        the \textit{stream manager}, \textit{metrics manager} and several \textit{heron} instances \cite[p. 242]{heron}.
+        Multiple containers can be launched on a single physical node \cite[p. 242 f.]{heron}.
+        Aurora allocates and schedules the containers based on resource availability across the computing nodes in the cluster \cite[p. 243]{heron}.
 
+        \quad The topology manager is responsible for managing the topology and is a 'gateway' for the topology metrics \cite[p. 243]{heron}.
+        The stream manager is responsible for routing the data tuples efficiently, as each heron instance sends and receives its data from the stream manager \cite[p. 243]{heron}.
+        Stream managers within a topology are interconnected, meaning that heron instances do not have to be connected to one another. 
+        This improves performance, as there are less stream managers than heron instances as a topology, and thus, the application scales better \cite[p. 243]{heron}.
+        Every heron instance performs a single task \cite[p. 245]{heron}, thus can be seen as an operator.
+        The metrics manager collects the metrics from every component, which are then sent to the topology master, who might send them to another component \cite[p. 243]{heron}, e.g. a visualization tool.
+
+        \quad Furthermore, Heron incorporates a topology backpressure mechanism. This means, that the application can dynamically adjust speed in which the 
+        data flows through the topology \cite[p. 243]{heron}. This is extremely important when working in an environment, which features components that work at different speeds \cite[p. 243]{heron}.
+
+        \quad All in all, Kulkarni et al. have succeeded in creating a system which, according to their evaluations, performs significantly better than Storm in the Twitter environment. 
+        Evaluation has shown significant reduction in CPU utilization as well as '6-14x improvements in throughput and 5-10x reductions in tuple latencies' \cite[p. 249]{heron}.
+        
         \subsection{Dhalion's Architecture}
         
         \label{sub:dhalion-architecture}
