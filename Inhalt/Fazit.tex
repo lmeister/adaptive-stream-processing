@@ -1,19 +1,19 @@
 \chapter{Summary And Conclusion}
-In this chapter we will summarize the findings of the paper in \ref{sec:summary}, as well as draw a conclusion in \ref{sec:conclusion}.
+In this chapter, we will summarize the findings of the paper in \ref{sec:summary} as well as draw a conclusion in \ref{sec:conclusion}.
 \label{cha:summary}
 \section{Summary}
 \label{sec:summary}
 In this section we will summarize the findings per chapter.
 
-\quad In chapter \ref{cha:Introduction} we explored the motivation behind this thesis. 
-Further, in \ref{sec:motivation-goals} we declared the research questions that we aimed to answer in the following chapters.
-We explained that data generation is rising extremely fast and that stream processing is viable approach to process data in a fast manner. 
-We also explained that the rate in which data in which data is streamed can fluctuate, which is why self-adaptivity is introduced, to achieve the best performance possible.
+\quad In chapter \ref{cha:Introduction}, we explored the motivation behind this thesis. 
+Moreover, in \ref{sec:motivation-goals} we declared the research questions that we aimed to answer in the following chapters.
+We explained that data generation is rising extremely fast and that stream processing is a viable approach to process data in a fast manner. 
+We also explained that the rate in which data is streamed can fluctuate, which is why self-adaptivity is introduced, to achieve the best performance possible.
 Lastly, we explained the thesis's structure in \ref{sec:structure}.
 
-\quad In chapter \ref{cha:fundamentals} we explained fundamental concepts, that are necessary to discuss the topic. 
-First, we gave an overview of data stream management systems in \ref{sub:dsms} and compared them to database managent systems. 
-Afterwards, we explained stream processing systems in \ref{sub:sps}, where we also described what data looks like in streaming systems and where data could be generated. 
+\quad In chapter \ref{cha:fundamentals}, we explained fundamental concepts that are necessary for discussing the topic. 
+First, we gave an overview of data stream management systems in \ref{sub:dsms} and compared them to database management systems. 
+Afterwards, we explained stream processing systems in \ref{sub:sps}, where we also described what data looks like in streaming systems and what data generators can look like. 
 Furthermore, we defined some basic terminology and gave an example for an application.
 We also looked into the different kinds of adaptations that an SPS can perform and gave one example per category. 
 Additionally, we explained how adaptations can be performed autonomously and explored the field of self-adaptive systems in \ref{sec:self-adaptive}.
@@ -21,24 +21,24 @@ Here, we explained the MAPE loop, as introduced by IBM and explained in \ref{sub
 challenges that software engineers face when designing self-adaptive systems.
 Similarly, we also gave an example for a possible self-adaptive system.
 
-\quad Finally, in chapter \ref{cha:approaches} we explored two different approaches for architectures in self-adaptive 
+\quad Finally, in chapter \ref{cha:approaches}, we explored two different approaches for architectures in self-adaptive 
 stream processing systems.
-In \ref{sec:dhalion} we focused on Dhalion, a framework developed by Floratou et al. that sits on top of SPSs and allows them to self-regulate. 
+In \ref{sec:dhalion}, we focused on Dhalion, a framework developed by Floratou et al. that sits on top of SPSs and allows them to self-regulate. 
 To discuss this, we first gave some background on Heron, a SPS developed by Twitter, in \ref{sub:heron-outline}, which was the basis for Dhalion in its publication. 
-Further, we defined what self-regulation means in \ref{sub:dhalion-architecture} and then explored its architecture in greater detail.
+Moreover, we defined what self-regulation means in \ref{sub:dhalion-architecture} and then explored its architecture in greater detail.
 We described each component's functionality and established an overview of Dhalion's architecture.
-Following the description, we discussed Dhalion's architectures and identified a possible weakness as well as recognized the great features of Dhalion.
-In \ref{sec:hierarchical} we focused on the EDF, a framework developed by Cardellini et al. which is based on a hierarchical control pattern.
-We then explained the architecture starting with the lower layer's operator- and node managers, whose functionality we described in greater detail 
+Following the description, we discussed Dhalion's architectures and identified a possible weakness and illustrated the positive features of Dhalion.
+In \ref{sec:hierarchical}, we focused on the EDF, a framework developed by Cardellini et al., which is based on a hierarchical control pattern.
+We then explained the architecture starting with the lower layer's operator- and node managers, whose functionality we described in greater detail, 
 and then moved on to the higher level's control structure, the global application manager. 
 Additionally, we explained possible policies for each of the EDF's components. 
 Analogously, we also discussed the architecture and the previous drafts to their approach.
 
 \section{Conclusion}
 \label{sec:conclusion}
-All in all, this thesis showed the importance of stream processing in today's age and time, due to the 
+In conclusion, this thesis showed the importance of stream processing in today's age and time, due to the 
 growth of data generation and utilization of big data. Furthermore, it showed the benefit of well designed self-adaptive 
 systems, which increase the overall performance, reduce the cost and reduce the configuration and management efforts of stream processing applications.
-We have also seen two viable architectural approaches and believe that there are many more to come, as it is a relatively young 
-area of research with a lot of work to be done. We also believe, that the quick development in machine learning techniques and the growing computational 
+We have also seen two viable architectural approaches and predict that there are many more to come, as it is a relatively young 
+area of research with a lot of work to be done. We also expect that the quick development in machine learning techniques and the growing computational 
 power will open up new possibilities that are to be explored.

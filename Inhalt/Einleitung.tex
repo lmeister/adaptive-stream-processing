@@ -8,7 +8,7 @@ Afterwards, we will then explain the thesis's structure and contents in section 
 
 \section{Motivation and Goals}
 \label{sec:motivation-goals}
-\ifbool{final}{}{\textbf{\color{red}THIS IS 90\% FINAL}}
+\ifbool{final}{}{\textbf{\color{green}THIS IS FINAL}}
 
 This chapter delves into the motivation behind this thesis and furthermore defines research questions, which we aim to answer in the subsequent chapters.
 
@@ -20,20 +20,21 @@ It is estimated that the \gls{datasphere} will reach the size of 175 zettabytes 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{Bilder/size_global_datasphere.png}
-\caption{The Growth of the Global Datasphere \cite[p. 6]{idc-seagate-data}}
+\caption{The Growth of the Global Datasphere \cite[p. 6]{idc-seagate-data}.}
 \label{fig:growth_datasphere}
 \end{figure}
 
 % Maybe a source here?
-\quad Data has become an important factor in decision making and optimization in virtually every industry, especially in finances. \textbf{TODO: Wieso? Vllt sogar diese Section ueberarbeiten}
-The financial market is dominated by data driven decisions, with emphasis on data processing, often in a (near) real-time fashion.
+Data has become an important factor in decision making and optimization in virtually every Industry.
+Especially the financial market is dominated by data-driven decisions. Market orders are processed in a (near) real-time fashion in order to determine 
+new stock prices. Sentiment analyses of news, tweets, blog posts, etc., are constantly performed to help make decisions.
 However, real-time data is becoming increasingly important in multiple sectors; the International Data Corporation estimates that real-time data will be 
 responsible for a share of 30 percent of the total global datasphere by 2025, as shown in figure \ref{fig:growth_realtime_data}.
 % Graph showing the growing share of real-time data as part of global datasphere
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\textwidth]{Bilder/realtime_data.png}
-\caption{The growth of real-time data as part of the Global Datasphere \cite[p. 13]{idc-seagate-data}}
+\caption{The growth of real-time data as part of the Global Datasphere \cite[p. 13]{idc-seagate-data}.}
 \label{fig:growth_realtime_data}
 \end{figure}
 
@@ -50,6 +51,8 @@ These systems will be further explained in \ref{sub:sps}.
 Besides the stream, the computing environment's conditions may also vary, e.g. in form of a resource failing in a distributed computing environment, 
 so the system has to adapt. There are many different techniques of adaptation such a system can utilize, 
 which can impact both the stream as well as the SPS. We will elaborate on this in \ref{sub:sps} \nameref{sub:sps}.
+Configuring a stream processing system, however, is very time consuming and often only possible after some time has passed, as many configurations are based on evaluated 
+empirical data. This is where self-adaptivity plays a vital part and helps increase performance and minimize resource costs.
 
 \quad In this thesis, our goals are to define stream processing and to look at various adaptation techniques in stream processing. Furthermore, we will clarify why
 self-adaptivity is needed in stream processing and what current architectures, that enable self-adaptivity in stream processing, look like.
@@ -58,7 +61,7 @@ We will also discuss the impact of self-adaptivity on software engineering, espe
 
 \section{Structure}
 \label{sec:structure}
-\textbf{\color{green}THIS IS FINAL}
+\ifbool{final}{}{\textbf{\color{green}THIS IS FINAL}}
 
 In chapter \ref{cha:Introduction} we will introduce the topic and explain the motivation and structure of the thesis.
 
