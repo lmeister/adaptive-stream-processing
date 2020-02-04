@@ -37,7 +37,7 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
         of data, a DSMS can theoretically receive an infinite continuous stream.
         % \\
         Secondly, DSMSs operate at a much greater speed than traditional DBMSs, because the data is processed immediately, while in the DBMS approach
-        data is first saved to a disk and then queried before further processing can occur, leading to two I/O actions. This behavior, coupled with an incoming 
+        data is first saved to a disk and then queried before further processing can occur, leading to two I/O actions \cite{StreamBookQuality}. This behavior, coupled with an incoming 
         high velocity stream, might lead to lags or even failure to yield accurate results \cite{StreamBookQuality}. 
         However, a DSMS might want to archive certain elements from the stream. For this, there are two possibilities:
         Either data is cached in memory, yielding much faster query results, or it is archived in additional databases parallel to the streaming process.
@@ -121,7 +121,7 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
         % \\
         For resource adaptation we will look at \textit{dynamic resource allocation}. Dynamic resource allocation is a strategy, in which the available computational 
         resources are constantly reassigned, to allocate the memory in the most efficient way possible. For example, a node facing a high data load at the moment can 
-        be allocated more RAM, GPU, or CPU power in order to process its load faster. For this to work, some resources have to be freed first, e.g. by deducting some
+        be allocated more RAM, GPU, or CPU power in order to process its work load faster. For this to work, some resources have to be freed first, e.g. by deducting some
         computational power from a node facing less input at the time. With this strategy, one must take into consideration the resources and time spent calculating 
         the optimal allocation of resources.
 
@@ -339,52 +339,52 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         \end{figure}
 
         \quad The biggest component of Dhalion is its \textit{health manager}, who is responsible for maintaining the health of the topology.
-        The health manager periodically invokes a policy which evaluates the health of the topology. 
+        The health manager periodically invokes a policy which evaluates the health of the topology \cite[p. 4]{dhalion}. 
         The policies used by the health manager can either be noninvasive or invasive, meaning that they can either only alert the user when a particular event occurs or 
-        perform certain adjustments to the topology's configuration, respectively.
-        Its possible to execute multiple noninvasive policies at a time, however, one can only execute one invasive policy at a time.
+        perform certain adjustments to the topology's configuration, respectively \cite[p. 4]{dhalion}. 
+        Its possible to execute multiple noninvasive policies at a time, however, one can only execute one invasive policy at a time \cite[p. 4]{dhalion}.
         The health manager works in 3 phases: the \textit{symptom detection phase}, the \textit{diagnosis generation phase} and the \textit{resolution phase}.
         
         \quad During its first phase, the symptom detection phase, Dhalion collects several metrics, which are then used to identify symptoms, that could indicate that the 
         topology's health is in jeopardy.
-        This identification process is performed by \textit{symptom detectors}, which collect appropriate metrics and form evaluations based on the collected metrics.
-        Symptom detectors employ multiple forms of anomaly detection techniques, such as outlier detection and clustering.
+        This identification process is performed by \textit{symptom detectors}, which collect appropriate metrics and form evaluations based on the collected metrics \cite[p. 4]{dhalion}.
+        Symptom detectors employ multiple forms of anomaly detection techniques, such as outlier detection and clustering \cite[p. 4]{dhalion}.
         Once a sympton has been identified by a symptom detector, a symptom description will be generated. A symptom description contains the sympton, the metrics which
         were used to identify the symptom, and the corresponding values of those metrics.
-        Additionally, Dhalion's extensive API offers end-users the ability to design their own symptom detectors.
+        Additionally, Dhalion's extensive API offers end-users the ability to design their own symptom detectors \cite{dhalion}.
         
         \quad In the diagnosis generation phase, the health manager collects the symptoms generated during the symptom detection phase and attemps to identify the causes 
         of the symptoms. 
         This is done via diagnosers. Diagnosers take a set of symptom descriptions as input and output a diagnosis description based on the symptons. 
         A diagnosis description contains the cause, the corresponding symptoms as well as the metrics and their values that led to the diagnosis.
-        Similarly to the symptom detectors, end-users are able to create their own diagnosers via Dhalion's API.
+        Similarly to the symptom detectors, end-users are able to create their own diagnosers via Dhalion's API \cite{dhalion}.
 
         \quad During the health managers final phase, the resolution phase, it attempts to resolve the previously diagnosed problems.
         Resolvers, who perform the resolving process, process the diagnoses descriptions provided by the diagnosers and perform the 
-        appropriate actions, based on the diagnoses, to improve the topology's health. Usually, there is a 1:1 mapping between resolvers and diagnosers.
+        appropriate actions, based on the diagnoses, to improve the topology's health. Usually, there is a 1:1 mapping between resolvers and diagnosers \cite[p. 4]{dhalion}.
         First, the system determines the appropriate resolver by examining the diagnoses. Afterwards, the designated resolver performs the topology changes.
-        However, major topology changes, such as scaling up/down or restarting containers, are invoked through the scheduler, as shown in figure \ref{fig:dhalion}.
-        The Dhalion API offers end-users the possibility to create their own reolvers.
+        However, major topology changes, such as scaling up/down or restarting containers, are invoked through the scheduler \cite[p. 5]{dhalion}, as shown in figure \ref{fig:dhalion}.
+        The Dhalion API offers end-users the possibility to create their own reolvers \cite{dhalion}.
 
         \quad The system's second component is the \textit{action log}, which records the actions taken by the health manager.
         The log can be useful for tuning or debugging policies. Each entry consists of the action that was taken, the time at which the action took place and the diagnosis 
         that led to the action being executed. 
-        It is noteworthy that the end-users can configure Dhalion to drop logs once they pass a certain size or age.
+        It is noteworthy that the end-users can configure Dhalion to drop logs once they pass a certain size or age \cite[p. 5]{dhalion}.
 
-        \quad The system's third and final component is the \textit{action blacklist}, which end-users have the ability to not use for policies.
-        After each action, the health manager waits until the topology has once again reached a steady state and then evaluate the performed action.
-        To do this, one must define an evaluation method whenever one creates a new policy. Given the evaluation method, the health manager evaluates the action.
+        \quad The system's third and final component is the \textit{action blacklist}, which end-users have the ability to disable for policies.
+        After each action, the health manager waits until the topology has once again reached a steady state and then evaluates the performed action \cite[p. 5]{dhalion}.
+        To do this, one must define an evaluation method whenever one creates a new policy \cite[p. 5]{dhalion}. Given the evaluation method, the health manager evaluates the action.
         If the action does not reach the desired results, and the amount of times it was beneficial to the topology's health divided by the total amount of times it 
-        was invoked passes a pre-defined threshold, the action will be blacklisted.
-        Before a resolver can invoke a certain action, it must first check the blacklist to see if this action has been blacklisted for a similar diagnosis.
+        was invoked passes a pre-defined threshold, the action will be blacklisted \cite[p. 5]{dhalion}.
+        Before a resolver can invoke a certain action, it must first check the blacklist to see if this action has been blacklisted for a similar diagnosis \cite[p. 5]{dhalion}.
 
         \subsection{Discussion of Dhalion}
         \label{sub:dhalion-discussion}
         Due to Dhalion's extensive API, end-users are able to create their own policies and thus, expand Dhalion to fulfill their needs. 
         The modularity offered by Dhalion's policy architecture allows for the creation of many different objects, e.g. diagnosers, resolvers or symptom detectors, 
         instead of having to create monolithic objects.
-        This approach promotes reusability of e.g. diagnosers for multiple policies and allows for easier debugging and evaluation.
-        Furthermore, existing code is much easier to maintain, as one does not have to understand a monolithic structure but instead only smaller objects.
+        This approach promotes reusability of e.g. diagnosers for multiple policies and allows for easier debugging and evaluation  \cite[p. 5]{dhalion}.
+        Furthermore, existing code is much easier to maintain \cite[p. 5]{dhalion}, as one does not have to understand a monolithic structure but instead only smaller objects.
         
         \quad However, if some fault occurs during the settling resting period, after which an action is evaluated by the health manager, occurs, Dhalion has no means to 
         identify what caused the problem and might erroneously blacklist an action that might have been beneficial.
@@ -404,8 +404,8 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
 
         \subsection{Elastic and Distributed DSP Framework}
         \label{sub:edf}
-        As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems \cite{cardellini}\cite{Cheng:2009:SES:1573856.1573858}.
-        Cardellini et al. argue to implement multiple MAPE loops, as per Weyns et al. \cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
+        As previously mentioned, a single MAPE loop often poses as a threat to become a bottleneck and does not scale well in larger systems \cite{cardellini}.
+        Cardellini et al. propose implementing multiple MAPE loops, as per Weyns et al. \cite{Weyns2013}, which are organized in a hierarchical pattern to achieve decentralized control.
         % \\
         \begin{figure}[hbt]
             \centering
@@ -415,10 +415,10 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
             }
             \label{fig:hierarchical}
         \end{figure}
-        The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns. 
-        While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale.
+        The proposed architecture makes use of two different abstraction layers, allowing a separation of concerns \cite[p. 175]{cardellini}. 
+        While the higher abstraction layer works on a slower time scale, the lower abstraction layer works on a faster time scale \cite[p. 175]{cardellini}.
         % \\
-        The MAPE loops are arranged in a hierarchical pattern, in which higher-level loops are in charge of the decisions proposed by the lower-level loops.
+        The MAPE loops are arranged in a hierarchical pattern, in which higher-level loops are in charge of the decisions proposed by the lower-level loops \cite[p. 175]{cardellini}.
         % \\
         On the lower layer, Cardellini et al. introduce two new concepts; the \textit{operator manager} and the \textit{node manager}.
 
@@ -429,30 +429,30 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         The \textit{operator monitor}, that is responsible for the monitoring the resource usage and performance of the operator.
         % \\
         The \textit{local reconfiguration manager}, which manages the analysis and planning phase of the MAPE loop by first analyzing the collected information 
-        from the monitoring component, followed by planning the adaptation, which can either be a scale-in or scale-out adaptation, 
-        as shown in figure \ref{fig:sps_parallel_normal}.
-        Once the local reconfiguration manager has decided that a local adaptation is appropriate, it files an operator adaptation request to the higher layer.
+        from the monitoring component, followed by planning the adaptation, which can either be a scale-in or scale-out adaptation \cite[p. 175]{cardellini}, 
+        as demonstrated in figure \ref{fig:sps_parallel_normal}.
+        Once the local reconfiguration manager has decided that a local adaptation is appropriate, it files an operator adaptation request to the higher layer \cite[p. 175]{cardellini}.
         % \\
-        If the higher level control structure deems the reconfiguration request reasonable, it notifies the lower level's \textit{reconfiguration actuator}, which then 
+        If the higher level control structure deems the reconfiguration request reasonable, it notifies the lower level's \textit{reconfiguration actuator} \cite[p. 176]{cardellini}, which then 
         performs the scaling-in or -out operation.
 
-        \quad The node manager is an entity that manages a single node, whose task is to oversee the computing environment of said node.
-        There are as many node managers as there are nodes.
+        \quad The node manager is an entity that manages a single node, whose task is to oversee the computing environment of said node \cite[p. 175]{cardellini}.
+        There are as many node managers as there are nodes \cite[p. 175]{cardellini}.
         Its ultimate goal is to prevent an overuse of available resources.
         Similarly to the operator manager, it utilizes a singular local MAPE loop to control the adaptation, 
-        which can be a migration of a hosted replicated operator to a neighboring node. 
+        which can be a migration of a hosted replicated operator to a neighboring node \cite[p. 175]{cardellini}. 
         % \\
         Analogously to the operator manager, it also consists of three further components;
         % \\
-        The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage.
+        The monitoring component of the operator manager's loop is handled by the \textit{resource monitor}, which collects data about the node's resource usage \cite[p. 176]{cardellini}.
         The collected data is then passed to the \textit{local reconfiguration manager}, which, similarly to the operator manager's local reconfiguration manager, then
-        analyzes the data and, if need be, plans a migration. 
+        analyzes the data and, if need be, plans a migration \cite[p. 176]{cardellini}. 
         % \\
-        Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer. Analogously to the operator manager, the \textit{reconfiguration actuator} performs
+        Once a decision has been made by the local reconfiguration manager, it then sends a request to the higher layer \cite[p. 176]{cardellini}. Analogously to the operator manager, the \textit{reconfiguration actuator} performs
         the adaptation if the higher layer authorizes the reconfiguration.
 
         \quad The higher layer contains a singular \textit{application manager} instance, which contains a global MAPE loop.
-        The application manager functions as a centralized entity, whose goal is, to oversee the entire application through its loop.
+        The application manager functions as a centralized entity, whose goal is, to oversee the entire application through its loop \cite[p. 176]{cardellini}.
         Similarly to the lower layer's operator and node managers, it is also split up into three components;
         % \\
         the \textit{application monitor}, which supervises the application behavior on a global scale and collects data, which then is sent to the \textit{global reconfiguration manager}.
@@ -469,39 +469,39 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         Furthermore, to maintain integrity of the stream while adaptations are made, they make use of the \textit{stateful migration protocol}, 
         which they have proposed in \cite{migrationProtocol}. The protocol states that the operator's state, given that it is a stateful operator, 
         is saved to persistent memory, e.g. a database. During the reconfiguration, any incoming data is buffered in memory.
-        As soon as the adaptation has been performed, the state is restored and the buffered data is processed.
+        As soon as the adaptation has been performed, the state is restored and the buffered data is processed \cite[p. 176]{cardellini}.
         This process naturally leads to bigger downtime, so it is even more important to very carefully choose whether an adaptation is made or not.
         To determine when a request for an adaptation should be granted, Cardellini et al. propose policies for the lower layer's managers.
         % \\
 
-        \quad The operator manager policy utilizes its limited view on the system, which only lets it access the input rate and the utilization of its operator.
+        \quad The operator manager policy utilizes its limited view on the system, which only lets it access the input rate and the utilization of its operator \cite[p. 176]{cardellini}.
         It implements a local policy, which is responsible for planning the scaling-in and scaling-out actions. Cardellini et al. propose two different policies.
-        The first one is a threshold based policy, which is the most commonly used technique. The threshold is usually based on empiric data. Once the CPU utilization 
+        The first one is a threshold based policy, which is the most commonly used technique \cite[p. 177]{cardellini}. The threshold is usually based on empirical data. Once the CPU utilization 
         of an operator passes the threshold, a scale-out action is planned. 
         Furthermore, once the operator manager deems a reconfiguration necessary, it calculates a reconfiguration score, based on the CPU utilization, 
-        which is passed to the global policy along with the request.
+        which is passed to the global policy along with the request \cite[p. 177]{cardellini}.
         % \\
-        The second approach makes use of reinforcement learning, where an agent is trained to learn the optimal operator scaling strategy.
-        To do this, an agent performs an action every time the policy is evoked, looks at the operator's state and calculates a stochastic cost.
+        The second approach makes use of reinforcement learning, where an agent is trained to learn the optimal operator scaling strategy  \cite[p. 177]{cardellini}.
+        To do this, an agent performs an action every time the policy is evoked, looks at the operator's state and calculates a stochastic cost \cite[p. 177]{cardellini}. 
         Further, the agent estimates the long term cost of an action a in a state s, this is called Q-function.
         Finally, it observes the actual cost and then readjusts its calculation.
-        Its goal is to limit the amount of reconfigurations, this is done by penalizing them, keep response time within reasonable bounds and to limit the resource usage of an operator.
-        Cardellini et al propose a Q-learning algorithm and a model-based reinforcement learning algorithm.
+        Its goal is to limit the amount of reconfigurations, this is done by penalizing them, keep response time within reasonable bounds and to limit the resource usage of an operator \cite[p. 177]{cardellini}.
+        Cardellini et al propose a Q-learning algorithm and a model-based reinforcement learning algorithm \cite[p. 178]{cardellini}.
         Similarly to the threshold based policy, the reinforcement learning based policy also calculates a reconfiguration score. The difference, however, is that 
-        this reconfiguration score also incorporates the estimated long term cost of the proposed action.
+        this reconfiguration score also incorporates the estimated long term cost of the proposed action \cite[p. 178]{cardellini}.
         % \\ 
 
-        \quad The node manager policy is in place to avoid over utilization of a node's computing resources. 
+        \quad The node manager policy is in place to avoid over utilization of a node's computing resources \cite[p. 179]{cardellini}. 
         It utilizes its knowledge about the node's CPU utilization and its network distance to neighboring nodes.
         This policy uses a threshold based approach, too. As soon as the CPU utilization passes the threshold, a hosted replica is selected 
-        randomly and then migrated to a neighboring node, which is selected randomly, with closer neighbors being preferred. 
+        randomly and then migrated to a neighboring node, which is selected randomly, with closer neighbors being preferred \cite{cardellini}. 
 
         \quad The application manager policy exploits its centralized position and its global view. 
         Its responsibility lies in resolving resource acquisition conflicts as well as in limiting of reconfigurations, 
-        in order to reduce the amount of downtime. Furthermore, it should encourage the local managers to plan reconfigurations when the system 
+        in order to reduce the amount of downtime \cite[p. 179]{cardellini}. Furthermore, it should encourage the local managers to plan reconfigurations when the system 
         is performing poorly. Conversely, when the system is not experiencing any changes in the working environment, it should promote a settling period 
-        in which no reconfigurations should be made.
-        The policy works in 3 steps:
+        in which no reconfigurations should be made \cite[p. 179]{cardellini}.
+        The policy works in 3 steps \cite[p. 179]{cardellini}:
 
         \begin{enumerate}
             \item \textit{Reconfiguration request prioritization}, during which the most worthy reconfigurations are determined by sorting the requests 
@@ -515,25 +515,25 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         To further reduce downtimes and improve the system's performance, Cardellini et al propose a token bucket based granting policy.
         The granting policy's goal is to limit the amount of reconfigurations that a system might endure.
         There are two types of tokens, H-tokens, that grant a migration or a scale-out operation and L-tokens, which grant a scale-in operation \cite{cardellini}.
-        The bucket restores the tokens and has a set capacity C. Further, once the bucket is filled, the oldest tokens are expelled and the new ones added to the bucket.
+        The bucket restores the tokens and has a set capacity C. Further, once the bucket is filled, the oldest tokens are expelled and the new ones added to the bucket \cite[p. 179]{cardellini}.
         Furthermore, a bucket can only contain a single type of token. This means, that as soon as a bucket filled with H-tokens is given an L-token, all the previously contained tokens 
-        are popped out.
+        are popped out\cite[p. 179]{cardellini}.
         A reconfiguration can only be granted if there is a corresponding token in the bucket.
         Additionally, the generation of tokens is limited. If a system is stable and performing well, less tokens should be generated. Conversely, if a system's performance 
         is fluctuating, more tokens should be generated.
-        Also, once again one can set thresholds for the application response time. If the response time is below a low threshold, an L-token should be generated. 
-        Conversely, if the response time is above a high threshold, a new H-token should be generated.
+        Also, once again one can set thresholds for the application response time. If the response time is below a low threshold, an L-token should be generated \cite[p. 179]{cardellini}. 
+        Conversely, if the response time is above a high threshold, a new H-token should be generated \cite[p. 179]{cardellini}.
 
 
         \subsection{Discussion of EDF}
         \label{sub:discussion-edf}
-        During the development of their EDF, Cardellini et al. explored two different architectural patterns: The master-slave pattern and the coordinated control pattern.
+        During the development of their EDF, Cardellini et al. explored two different architectural patterns: The master-slave pattern and the coordinated control pattern \cite[p. 174]{cardellini}.
 
         \begin{figure}[hbt]
             \centering
             \includegraphics[width=1.0\textwidth]{Bilder/master_coordinated.png}
             \caption{
-                    left: master-slave pattern; right: coordinated control pattern \cite{cardellini}.
+                    left: master-slave pattern; right: coordinated control pattern \cite[p. 175]{cardellini}.
             }
             \label{fig:master_coordinated}
         \end{figure}
@@ -543,21 +543,21 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
         The master component is in charge of deciding when and how an adaptation should take place.
         Additionally, the master component allows for the creation of global self-adaptation policies, which are easier to design.
         The centralized component can, however, still prove to be a bottleneck, especially in a geo-distributed environment, as there might be severe communication overhead when communicating 
-        with the decentralized slave components, as all monitored data as well as all decisions have to be transferred to the master component and slave components, respectively. 
+        with the decentralized slave components, as all monitored data as well as all decisions have to be transferred to the master component and slave components, respectively  \cite[p. 174]{cardellini}. 
 
         \quad The coordinated control pattern, as shown on the right in figure \ref{fig:master_coordinated}, utilizes multiple decentralized MAPE loops, who each oversee a designated part of the system. 
-        The loops may also need to coordinate with one another in case they need to make joint decisions. Again, has to take precaution, as to not create too big of an overhead, due to too much communication.
+        The loops may also need to coordinate with one another in case they need to make joint decisions \cite[p. 175]{cardellini}. Again, has to take precaution, as to not create too big of an overhead, due to too much communication.
         However, one must also ensure that there is enough communication so that adaptations do not occur too frequently, as those may worsen the application's performance.
-        Also, due to the decentralization, it becomes harder to design control policies.
+        Also, due to the decentralization, it becomes harder to design control policies \cite[p. 175]{cardellini}.
         
         \quad The final EDF architecture is not too restrictive, so that the end-user can design use other internal policies and goals. 
         One can decide to use a simple threshold based policy for the local policies or sophisticated reinforcement learning policies, which can account for various 
-        quality of service metrics. This way, the end-user can decide which metric they want to emphasize on.
-        Furthermore, a fully decentralized control solution shows to be very good in terms of performance.
+        quality of service metrics \cite[p. 184]{cardellini}. This way, the end-user can decide which metric they want to emphasize on.
+        Furthermore, a fully decentralized control solution shows to be very good in terms of performance \cite[p. 184]{cardellini}.
         The reinforcement learning could also be sped up by choosing more sophisticated methods, Cardellini et al. suggest bayesian decision trees and function approximation.
 
         \quad In addition, Cardellini et al. also consider giving the global policy more influence on the lower level policies by letting the 
-        global policy adjust the parameters of the local policies or simply giving more informative feedback rather than just acceptance or denial of the adaptation request.
+        global policy adjust the parameters of the local policies or simply giving more informative feedback rather than just acceptance or denial of the adaptation request \cite[p. 184]{cardellini}.
 
         % TODO compare it to the reference architecture
 
