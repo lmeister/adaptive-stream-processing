@@ -204,30 +204,30 @@ followed by a brief explanation of the MAPE loop in \ref{sub:mape} to conclude t
     % \\
     As the system adapts, it changes, and with it, do the requirements. This leads to the fact, that language changes in requirements engineering.
     Usually, requirements are formulated in a strict manner `\textit{The system shall\ldots}`. This has to be relaxed and changed, Cheng et al. propose the following 
-    option amongst others: `\textit{The system may do this\ldots or it may do that\ldots}`.
+    option amongst others: `\textit{The system may do this\ldots or it may do that\ldots}` \cite[p. 10 f.]{Cheng:2009:SES:1573856.1573858}.
     % \\
-    More importantly, requirements engineering must define exactly what is monitored, as well as high-level goals, which need to be fulfilled under any given environmental condition.
-    In addition, one must also specify under which circumstance the kind of adaptation that has to be performed and how said adaptation is realized.
-    Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, which adds to the complexity.
+    More importantly, requirements engineering must define exactly what is monitored, as well as high-level goals, which need to be fulfilled under any given environmental condition \cite[p. 9]{Cheng:2009:SES:1573856.1573858}.
+    In addition, one must also specify under which circumstance the kind of adaptation that has to be performed and how said adaptation is realized \cite[p. 9]{Cheng:2009:SES:1573856.1573858}.
+    Due to the increased amount of requirements and the everchanging nature of an adaptive system, it gets harder to trace whether requirements are fulfilled, which adds to the complexity \cite[p. 12]{Cheng:2009:SES:1573856.1573858}.
     % \\
-    One must also take into account that it is nearly impossible to forecast every situation that a system may face. 
+    One must also take into account that it is nearly impossible to forecast every situation that a system may face \cite[p. 9]{Cheng:2009:SES:1573856.1573858}. 
     This incomplete information adds to the challenges that requirement engineers are facing.
 
     \quad The complexity is also increased for engineers and architects, as there are new factors to consider as well.
-    Single MAPE loops do not scale efficiently for large systems, one must find a better scaling solution. Often times multiple control loops are constructed.
+    Single MAPE loops do not scale efficiently for large systems \cite[p. 174]{cardellini}, one must find a better scaling solution. Often times multiple control loops are constructed.
     Good practice, however, suggests using just a single control loop \cite{accidents}, which means that one should try to minimize the amount of control loops used and
     make them independent from one another.
     
     
-    \quad Architects are faced with a number of new decisions;
+    \quad Architects are faced with a number of new decisions, as described in \cite[p. 14]{Cheng:2009:SES:1573856.1573858};
     % \\
     Is a centralized or decentralized architecture better for achieving one's goals? Are the control loops independent from one another?
     Is a hierarchical approach appropriate? Can the amount of control loops be scaled down?
-    % \\
-    Research is needed to battle some of the issues that self-adaptive systems and control structures face, such as structural arrangements. 
+    
+    \quad Research is needed to battle some of the issues that self-adaptive systems and control structures face, such as structural arrangements. 
     It is therefore necessary to explore more architectures, an example for which will be shown in \ref{sec:hierarchical}, where a decentralized hierarchical approach was
     chosen to combat said issues. In addition, evolving an existing system into a self-adaptive system currently requires a lot of work. 
-    A possible field of research would be finding a way to 'inject' self-adaptivity into pre-existing systems.
+    A possible field of research would be finding a way to 'inject' self-adaptivity into pre-existing systems \cite[p. 18]{Cheng:2009:SES:1573856.1573858}.
     
     \quad Cheng et al. propose that control loops be made explicit and kept seperate so as to 'seperate the concerns of functionality from the concerns of self-adaptation' \cite[p. 16]{Cheng:2009:SES:1573856.1573858}.
     Furthermore, they emphasize the importance of understanding control loops as the most important tool in self-adaptive systems in order to mature the research area of self-adaptive systems.
@@ -290,15 +290,15 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
     
     \quad \textit{Self-tuning}: A self-regulating system should be self-tuning, meaning that a self-regulating system should 
     be able to take both the policy, which defines the objective, and the specification of the streaming system and automatically tune 
-    its configuration parameters in a matter that leads to the fulfilment of its service level objectives.
+    its configuration parameters in a matter that leads to the fulfilment of its service level objective \cite{dhalion}s.
     
     \quad \textit{Self-stabilization}: As the rate of incoming streams fluctuates, a system can be faced with either over- or under-utilization of its computing resources. 
     In order to prevent these issues, a self-regulating system has to react to changes in the stream velocity and either acquire additional resources 
-    or free resources and scale down.
+    or free resources and scale down \cite{dhalion}.
 
     \quad \textit{Self-healing}: Due to the fact that systems can not only be affected by failures but also by reduced quality of service, 
     e.g. a slow disk or memory constraints, self-regulating systems need to have a mechanism in place to diagnose such service degradations and to adapt 
-    to recover from such faults.
+    to recover from such faults \cite{dhalion}.
 
     In order to get a deeper understanding of Dhalion, we will briefly explain Heron in \ref{sub:heron-outline}, then discuss Dhalion's architecture in \ref{sub:dhalion-architecture}, 
     which we then follow with a discussion of Dhalion in \ref{sub:dhalion-discussion}.
@@ -411,7 +411,7 @@ explain the proposed architecture in \ref{sub:edf} and follow it up with a discu
             \centering
             \includegraphics[width=0.5\textwidth]{Bilder/hierarchical.png}
             \caption{
-                    Conceptual architecture of the EDF \cite{cardellini}.
+                    Conceptual architecture of the EDF \cite[p. 175]{cardellini}.
             }
             \label{fig:hierarchical}
         \end{figure}
